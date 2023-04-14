@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Image, Text, View, StyleSheet, Pressable } from 'react-native'
+import { Image, Text, View, StyleSheet, Pressable } from 'react-native'
 import * as Font from 'expo-font'
 
 export default function Landing({ navigation }: any) {
@@ -19,7 +19,7 @@ export default function Landing({ navigation }: any) {
         style={styles.button}
         onPress={() => navigation.navigate('Ping')}
       >
-        <RegularText style={styles.buttonText}>LOG IN / SIGN UP</RegularText>
+        <RegularText style={styles.buttonText}>LOG IN</RegularText>
       </Pressable>
     </View>
   )
@@ -82,28 +82,25 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-around',
-    backgroundColor: '#fde4cf',
+    backgroundColor: '#dd571c',
   },
   title: {
-    color: 'black',
+    color: 'oldlace',
     fontSize: 150,
     paddingHorizontal: 20,
   },
   mainText: {
-    color: 'black',
+    color: 'oldlace',
     fontSize: 30,
     alignSelf: 'center',
     paddingHorizontal: 20,
   },
-  buttonText: { color: 'black', fontSize: 50, alignSelf: 'center' },
+  buttonText: { color: 'oldlace', fontSize: 50, alignSelf: 'center' },
   button: {
-    backgroundColor: '#d0d9b3',
+    backgroundColor: '#161c20',
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 20,
+    paddingHorizontal: 50,
   },
   image: { width: 100, height: 100 },
 })
-
-// champagne = #fde4cf
-// yellow = #f8f8cc
-// green = #fde4cf
