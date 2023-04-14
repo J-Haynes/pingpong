@@ -2,6 +2,7 @@ import React from 'react'
 import { Text, View, StyleSheet, SectionList } from 'react-native'
 import ActiveFriend from './ActiveFriend'
 import BasicFriend from './BasicFriend'
+import Nav from './Nav'
 import { UserData } from '../common/interfaces'
 import { fetchAllFriends } from '../apis/apiClient'
 
@@ -32,6 +33,7 @@ export default function Friends() {
         )}
         keyExtractor={(item) => `basicListEntry-${item.id}`}
       />
+      <Nav />
     </View>
   )
 }
