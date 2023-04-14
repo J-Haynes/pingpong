@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Image, Text, View, StyleSheet, Pressable } from 'react-native'
+import * as Font from 'expo-font'
 
 export default function Landing({ navigation }: any) {
   return (
@@ -9,18 +10,70 @@ export default function Landing({ navigation }: any) {
         source={require('../assets/ball.png')}
       ></Image>
       <View>
-        <Text style={styles.title}>PINGPONG</Text>
-        <Text style={styles.mainText}>
-          taking the media out of social media
-        </Text>
+        <MediumText style={styles.title}>P I N G P O N G</MediumText>
+        <RegularText style={styles.mainText}>
+          Taking the media out of social media.
+        </RegularText>
       </View>
       <Pressable
         style={styles.button}
         onPress={() => navigation.navigate('Ping')}
       >
-        <Text style={styles.buttonText}>LOG IN / SIGN UP</Text>
+        <RegularText style={styles.buttonText}>LOG IN / SIGN UP</RegularText>
       </Pressable>
     </View>
+  )
+}
+
+const MediumText = (props: any) => {
+  const [fontLoaded, setFontLoaded] = useState(false)
+
+  useEffect(() => {
+    async function loadFont() {
+      await Font.loadAsync({
+        'medium-font': require('../assets/fonts/BlueScreens/Medium-Italic.ttf'),
+      })
+
+      setFontLoaded(true)
+    }
+
+    loadFont()
+  }, [])
+
+  if (!fontLoaded) {
+    return <Text>Loading...</Text>
+  }
+
+  return (
+    <Text style={{ ...props.style, fontFamily: 'medium-font' }}>
+      {props.children}
+    </Text>
+  )
+}
+
+const RegularText = (props: any) => {
+  const [fontLoaded, setFontLoaded] = useState(false)
+
+  useEffect(() => {
+    async function loadFont() {
+      await Font.loadAsync({
+        'reg-font': require('../assets/fonts/BlueScreens/Regular.ttf'),
+      })
+
+      setFontLoaded(true)
+    }
+
+    loadFont()
+  }, [])
+
+  if (!fontLoaded) {
+    return <Text>Loading...</Text>
+  }
+
+  return (
+    <Text style={{ ...props.style, fontFamily: 'reg-font' }}>
+      {props.children}
+    </Text>
   )
 }
 
@@ -31,9 +84,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     backgroundColor: '#fde4cf',
   },
-  title: { color: 'black', fontSize: 50, alignSelf: 'center' },
-  mainText: { color: 'black', fontSize: 20, alignSelf: 'center' },
-  buttonText: { color: 'black', fontSize: 30, alignSelf: 'center' },
+  title: {
+    color: 'black',
+    fontSize: 150,
+    paddingHorizontal: 20,
+  },
+  mainText: {
+    color: 'black',
+    fontSize: 30,
+    alignSelf: 'center',
+    paddingHorizontal: 20,
+  },
+  buttonText: { color: 'black', fontSize: 50, alignSelf: 'center' },
   button: {
     backgroundColor: '#d0d9b3',
     padding: 10,
