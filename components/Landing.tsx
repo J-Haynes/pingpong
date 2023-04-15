@@ -2,17 +2,25 @@ import React, { useEffect, useState } from 'react'
 
 import { Image, Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import * as Font from 'expo-font'
+import { useAppDispatch } from '../hooks/redux'
+import { loadUserWithFriends } from '../redux/actions/userActions'
 
 import * as WebBrowser from 'expo-web-browser'
 import * as Google from 'expo-auth-session/providers/google'
 
 WebBrowser.maybeCompleteAuthSession()
 
+
 export default function Landing({ navigation }: any) {
+  const dispatch = useAppDispatch()
+  const userId = useEffect(() => {
+    dispatch(loadUserWithFriends('google-oauth|123456789101'))
+  }, [])
+  
+  //auth 
   const [accessToken, setAccessToken] = useState(null)
   const [user, setUser] = useState(null)
   const [request, response, promptAsync] = Google.useAuthRequest({
-    //responseType: 'id_token',
     clientId:
       '848389775127-sano44j1jrulqvrfav88g7tksok3149g.apps.googleusercontent.com',
     iosClientId:
@@ -48,7 +56,6 @@ export default function Landing({ navigation }: any) {
       )
     }
   }
-
   return (
     <View style={styles.container}>
       {user && <NavigatePing />}

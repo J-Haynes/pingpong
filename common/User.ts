@@ -4,13 +4,13 @@ export interface UserData {
   surname: string
   username: string
   birthday: string
-  ping_active: boolean
+  ping_active: boolean | number
 }
 
 export interface User extends UserData {
   id: number
 }
 
-export interface UserWithFriends extends User {
+export interface UserWithFriends extends UserData {
   friend_data: User[]
 }
