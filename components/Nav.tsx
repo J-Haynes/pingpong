@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: 'white', // Set background color of the navbar
+    backgroundColor: 'oldlace', // Set background color of the navbar
     borderRadius: 50, // Set border radius to create a pill shape
     height: 60, // Set desired height of the navbar
     paddingHorizontal: 20, // Add horizontal padding to align content
