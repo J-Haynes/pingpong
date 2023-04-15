@@ -6,7 +6,7 @@ import Nav from './Nav'
 import { UserData } from '../common/interfaces'
 import { fetchAllFriends } from '../apis/apiClient'
 
-export default function Friends() {
+export default function Friends({ navigation }: any) {
   const fakeFriends = fetchAllFriends() //add await when this becomes an api call
 
   const pingFriendList = fakeFriends.filter((friend) => friend.ping_active)
@@ -36,7 +36,7 @@ export default function Friends() {
         />
       </View>
       <View style={styles.nav}>
-        <Nav />
+        <Nav navigation={navigation} />
       </View>
     </View>
   )
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   nav: {
-    backgroundColor: 'oldlace',
+    backgroundColor: '#dd571c',
     padding: 30,
     width: '100%',
     alignContent: 'center',
