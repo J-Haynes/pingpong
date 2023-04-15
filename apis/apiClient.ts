@@ -2,22 +2,13 @@ import request from 'superagent'
 
 const route = 'http://localhost:3000'
 
-export function getAllUsers() {
+export function fetchAllFriends() {
   // return request
   //   .get(route)
   //   .then((res) => {
-  // return res.body
+  // return res.body.friend_data
   // //     })
   const arr = [
-    {
-      id: 1,
-      auth_id: 'google-oauth|123456789101',
-      name: 'jack',
-      surname: 'haynes',
-      username: 'jackhaynes',
-      birthday: '826545600000',
-      ping_active: false,
-    },
     {
       id: 2,
       auth_id: 'google-oauth|123456789102',
@@ -25,6 +16,24 @@ export function getAllUsers() {
       surname: 'haynes',
       username: 'kerrehaynes',
       birthday: '847281600000',
+      ping_active: true,
+    },
+    {
+      id: 3,
+      auth_id: 'google-oauth|123456789103',
+      name: 'matt',
+      surname: 'marano',
+      username: 'mattmarano',
+      birthday: '770904000000',
+      ping_active: false,
+    },
+    {
+      id: 4,
+      auth_id: 'google-oauth|123456789104',
+      name: 'ryan',
+      surname: 'kendrick',
+      username: 'ryankendrick',
+      birthday: '740491200000',
       ping_active: false,
     },
   ]
