@@ -13,9 +13,23 @@ const Tab = createBottomTabNavigator()
 
 export default function Friends() {
   return (
-    <View>
+    <View style={styles.container}>
       {/* <Tab items={[{ icon: 'friend' }, { icon: 'ping' }]} onPress={() => 1} /> */}
-      <Text>NAVIGATION BAR</Text>
+      <Text style={styles.text}>HOME</Text>
+      <Text style={styles.text}>|</Text>
+      <Text style={styles.text}>FRIENDS</Text>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  text: {
+    color: '#161c20',
+    fontSize: 20,
+    alignSelf: 'center',
+  },
+})

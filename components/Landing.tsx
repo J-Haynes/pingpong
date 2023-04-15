@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Image, Text, View, StyleSheet, Pressable } from 'react-native'
+import {
+  Image,
+  Text,
+  View,
+  StyleSheet,
+  Pressable,
+  TouchableOpacity,
+} from 'react-native'
 import * as Font from 'expo-font'
 
 export default function Landing({ navigation }: any) {
@@ -15,12 +22,12 @@ export default function Landing({ navigation }: any) {
           Taking the media out of social media.
         </RegularText>
       </View>
-      <Pressable
+      <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('Ping')}
       >
         <RegularText style={styles.buttonText}>LOG IN</RegularText>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -102,5 +109,5 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingHorizontal: 50,
   },
-  image: { width: 100, height: 100 },
+  image: { width: 100, height: 100, marginTop: 50 },
 })

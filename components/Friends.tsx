@@ -22,18 +22,22 @@ export default function Friends() {
 
   return (
     <View style={styles.container}>
-      <SectionList
-        sections={[
-          { title: 'Active pings', data: pingFriendList },
-          { title: 'Inactive', data: otherFriendList },
-        ]}
-        renderItem={({ item }) => renderFriends(item)}
-        renderSectionHeader={({ section }) => (
-          <Text style={styles.sectionHeader}>{section.title}</Text>
-        )}
-        keyExtractor={(item) => `basicListEntry-${item.id}`}
-      />
-      <Nav />
+      <View style={styles.userContainer}>
+        <SectionList
+          sections={[
+            { title: 'Active Pings', data: pingFriendList },
+            { title: 'Inactive', data: otherFriendList },
+          ]}
+          renderItem={({ item }) => renderFriends(item)}
+          renderSectionHeader={({ section }) => (
+            <Text style={styles.sectionHeader}>{section.title}</Text>
+          )}
+          keyExtractor={(item) => `basicListEntry-${item.id}`}
+        />
+      </View>
+      <View style={styles.nav}>
+        <Nav />
+      </View>
     </View>
   )
 }
@@ -44,12 +48,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-around',
-    backgroundColor: '#fde4cf',
+    justifyContent: 'center',
+    backgroundColor: '#dd571c',
+  },
+  userContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    backgroundColor: '#dd571c',
     paddingTop: 22,
   },
-  mainText: { color: 'black', fontSize: 20, alignSelf: 'center' },
-  image: { width: 100, height: 100 },
+  friendsHeader: {
+    backgroundColor: 'oldlace',
+    padding: 30,
+    width: '100%',
+    alignContent: 'center',
+    color: 'oldlace',
+  },
+  mainText: {
+    color: 'black',
+    fontSize: 20,
+    alignSelf: 'center',
+  },
   sectionHeader: {
     paddingTop: 2,
     paddingBottom: 2,
@@ -57,10 +78,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     backgroundColor: 'rgba(247,247,247,1.0)',
+    textAlign: 'center',
   },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
+  nav: {
+    backgroundColor: 'oldlace',
+    padding: 30,
+    width: '100%',
+    alignContent: 'center',
   },
 })
