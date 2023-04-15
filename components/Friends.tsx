@@ -6,7 +6,7 @@ import BasicFriend from './BasicFriend'
 import Nav from './Nav'
 import { UserData } from '../common/User'
 
-export default function Friends() {
+export default function Friends({ navigation }: any) {
   const userWithFriends = useAppSelector((state) => state.friends)
   const friends = userWithFriends.friend_data
 
@@ -37,7 +37,7 @@ export default function Friends() {
         />
       </View>
       <View style={styles.nav}>
-        <Nav />
+        <Nav navigation={navigation} />
       </View>
     </View>
   )
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   nav: {
-    backgroundColor: 'oldlace',
+    backgroundColor: '#dd571c',
     padding: 30,
     width: '100%',
     alignContent: 'center',
