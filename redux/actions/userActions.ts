@@ -31,7 +31,6 @@ export function loadUser(userId: string): ThunkAction {
   }
 }
 
-//
 export function loadUserWithFriends(userId: string): ThunkAction {
   return (dispatch) => {
     return fetchFriends(userId)
@@ -41,3 +40,5 @@ export function loadUserWithFriends(userId: string): ThunkAction {
       .catch((err) => console.log(err))
   }
 }
+
+// For the set ping thunk note that when false is given the route also sets the users location data to null - make sure that store location data is also wiped from the store
