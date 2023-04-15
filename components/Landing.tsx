@@ -5,7 +5,6 @@ import * as Font from 'expo-font'
 
 import * as WebBrowser from 'expo-web-browser'
 import * as Google from 'expo-auth-session/providers/google'
-import Ping from './Ping'
 
 WebBrowser.maybeCompleteAuthSession()
 
@@ -13,6 +12,7 @@ export default function Landing({ navigation }: any) {
   const [accessToken, setAccessToken] = useState(null)
   const [user, setUser] = useState(null)
   const [request, response, promptAsync] = Google.useAuthRequest({
+    //responseType: 'id_token',
     clientId:
       '848389775127-sano44j1jrulqvrfav88g7tksok3149g.apps.googleusercontent.com',
     iosClientId:
@@ -37,15 +37,21 @@ export default function Landing({ navigation }: any) {
     setUser(useInfo)
   }
 
-  const ShowUserInfo = () => {
+  const NavigatePing = () => {
     if (user) {
-      return navigation.navigate('Ping')
+      navigation.navigate('Ping')
+      return (
+        <>
+          <Text>Welcome</Text>
+          <Text>{user.given_name}</Text>
+        </>
+      )
     }
   }
 
   return (
     <View style={styles.container}>
-      {user && <ShowUserInfo />}
+      {user && <NavigatePing />}
       {user === null && (
         <>
           <Image
@@ -53,7 +59,7 @@ export default function Landing({ navigation }: any) {
             source={require('../assets/ball.png')}
           ></Image>
           <View>
-            <MediumText style={styles.title}>P I N G P O N G</MediumText>
+            <MediumText style={styles.title}> P I N G P O N G </MediumText>
             <RegularText style={styles.mainText}>
               Taking the media out of social media.
             </RegularText>
