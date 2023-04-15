@@ -19,7 +19,7 @@ export default function Ping({ navigation }: any) {
     navigation.navigate('Friends')
   }
 
-  const [text, onChangeText] = useState('Where?')
+  const [text, onChangeText] = useState('')
 
   return (
     <View style={styles.container}>
@@ -34,6 +34,8 @@ export default function Ping({ navigation }: any) {
             style={[styles.input, styles.shadow]}
             onChangeText={onChangeText}
             value={text}
+            placeholder="Where to?"
+            placeholderTextColor={'grey'}
           />
         </SafeAreaView>
         <TouchableOpacity
