@@ -8,14 +8,25 @@ import {
   TouchableOpacity,
 } from 'react-native'
 import * as Font from 'expo-font'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
+import { loadUser, loadUserWithFriends } from '../redux/actions/userActions'
 
 export default function Landing({ navigation }: any) {
+  const dispatch = useAppDispatch()
+  const userId = useEffect(() => {
+    dispatch(loadUserWithFriends('google-oauth|123456789101'))
+  }, [])
+  const user = useAppSelector((state) => state.user)
+
   return (
     <View style={styles.container}>
       <Image
         style={styles.image}
         source={require('../assets/ball.png')}
       ></Image>
+      <View>
+        <Text>{user ? user.name : 'Name would be here'}</Text>
+      </View>
       <View>
         <MediumText style={styles.title}>P I N G P O N G</MediumText>
         <RegularText style={styles.mainText}>

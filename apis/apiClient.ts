@@ -8,7 +8,10 @@ export function fetchFriends(userId: string): Promise<UserWithFriends> {
   return request
     .post(`${externalBaseUrl}/getfriends`)
     .send({ userId })
-    .then((res) => res.body)
+    .then((res) => {
+      console.log(res.body)
+      return res.body
+    })
 }
 
 export function fetchUser(userId: string): Promise<User> {

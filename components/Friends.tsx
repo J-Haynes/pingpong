@@ -1,16 +1,17 @@
 import React from 'react'
 import { Text, View, StyleSheet, SectionList } from 'react-native'
+import { useAppSelector } from '../hooks/redux'
 import ActiveFriend from './ActiveFriend'
 import BasicFriend from './BasicFriend'
 import Nav from './Nav'
-import { UserData } from '../common/Friendship'
-import { fetchAllFriends } from '../apis/apiClient'
+import { UserData } from '../common/User'
 
 export default function Friends() {
-  const fakeFriends = fetchAllFriends() //add await when this becomes an api call
+  const userWithFriends = useAppSelector((state) => state.friends)
+  const friends = userWithFriends.friend_data
 
-  const pingFriendList = fakeFriends.filter((friend) => friend.ping_active)
-  const otherFriendList = fakeFriends.filter((friend) => !friend.ping_active)
+  const pingFriendList = friends.filter((friend) => friend.ping_active)
+  const otherFriendList = friends.filter((friend) => !friend.ping_active)
 
   const renderFriends = (item: UserData) => {
     if (item.ping_active) {

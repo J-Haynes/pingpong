@@ -21,7 +21,7 @@ export function addUserWithFriendsToState(userWithFriends: UserWithFriends) {
 }
 
 // Takes a userId, calls fetchUser to get the user from the database, and then adds it to the store
-export function displayUser(userId: string): ThunkAction {
+export function loadUser(userId: string): ThunkAction {
   return (dispatch) => {
     return fetchUser(userId)
       .then((user: User) => {
@@ -32,7 +32,7 @@ export function displayUser(userId: string): ThunkAction {
 }
 
 //
-export function displayUserWithFriends(userId: string): ThunkAction {
+export function loadUserWithFriends(userId: string): ThunkAction {
   return (dispatch) => {
     return fetchFriends(userId)
       .then((userWithFriends) => {
