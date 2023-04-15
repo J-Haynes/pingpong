@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-import { UserData } from '../common/interfaces'
+import { UserData } from '../common/Friendship'
 import { capitalise } from './helpers'
 
 interface Props {
