@@ -31,7 +31,7 @@ export default function Ping({ navigation }: any) {
         {/* <RegularText style={styles.buttonText}>where?</RegularText> */}
         <SafeAreaView>
           <TextInput
-            style={styles.input}
+            style={[styles.input, styles.shadow]}
             onChangeText={onChangeText}
             value={text}
           />
@@ -44,7 +44,7 @@ export default function Ping({ navigation }: any) {
         </TouchableOpacity>
       </View>
       <View style={styles.nav}>
-        <Nav />
+        <Nav navigation={navigation} />
       </View>
     </View>
   )
@@ -93,14 +93,14 @@ const styles = StyleSheet.create({
   },
   image: { width: 200, height: 200 },
   nav: {
-    backgroundColor: 'oldlace',
+    backgroundColor: '#dd571c',
     padding: 30,
     width: '100%',
     alignContent: 'center',
   },
-  buttonText: { color: 'oldlace', fontSize: 70, alignSelf: 'center' },
+  buttonText: { color: '#161c20', fontSize: 70, alignSelf: 'center' },
   button: {
-    backgroundColor: '#161c20',
+    backgroundColor: 'oldlace',
     borderRadius: 100,
     width: 200,
     height: 200,
@@ -108,16 +108,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   shadow: {
-    shadowColor: 'black',
+    shadowColor: '#b34e24',
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 1,
-    shadowRadius: 4,
+    shadowRadius: 10,
   },
   input: {
-    height: 40,
+    height: 50,
     // margin: 12,
-    borderWidth: 1,
+    // borderWidth: 1,
     paddingVertical: 10,
-    paddingHorizontal: 70,
+    paddingHorizontal: 80,
+    backgroundColor: 'oldlace',
+    borderRadius: 50,
   },
 })
