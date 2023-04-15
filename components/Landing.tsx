@@ -7,17 +7,17 @@ import { loadUserWithFriends } from '../redux/actions/userActions'
 
 import * as WebBrowser from 'expo-web-browser'
 import * as Google from 'expo-auth-session/providers/google'
+import AutoComplete from './Autocomplete'
 
 WebBrowser.maybeCompleteAuthSession()
-
 
 export default function Landing({ navigation }: any) {
   const dispatch = useAppDispatch()
   const userId = useEffect(() => {
     dispatch(loadUserWithFriends('google-oauth|123456789101'))
   }, [])
-  
-  //auth 
+
+  //auth
   const [accessToken, setAccessToken] = useState(null)
   const [user, setUser] = useState(null)
   const [request, response, promptAsync] = Google.useAuthRequest({
@@ -71,6 +71,7 @@ export default function Landing({ navigation }: any) {
               Taking the media out of social media.
             </RegularText>
           </View>
+          <AutoComplete />
           <TouchableOpacity
             style={styles.button}
             disabled={!request}
