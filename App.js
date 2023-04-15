@@ -14,17 +14,17 @@ export default function App() {
         <Stack.Screen
           name="Landing"
           component={Landing}
-          options={{ headerShown: true }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Ping"
           component={Ping}
-          options={{ headerShown: true }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Friends"
           component={Friends}
-          options={{ headerShown: true }}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
