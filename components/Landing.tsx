@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Image, Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import * as Font from 'expo-font'
 import { useAppDispatch } from '../hooks/redux'
-import { loadUser, loadUserWithFriends } from '../redux/actions/userActions'
+import { loadUserWithFriends } from '../redux/actions/userActions'
 
 import * as WebBrowser from 'expo-web-browser'
 import * as Google from 'expo-auth-session/providers/google'
@@ -32,9 +32,6 @@ export default function Landing({ navigation }: any) {
   // Thuncctions
 
   const userId = useEffect(() => {
-    // dispatch(loadUser(user?.id))
-    // dispatch(loadUserWithFriends(user?.id))
-    dispatch(loadUser('google-oauth|123456789101'))
     dispatch(loadUserWithFriends('google-oauth|123456789101'))
   }, [user])
 
