@@ -10,14 +10,13 @@ import * as Google from 'expo-auth-session/providers/google'
 
 WebBrowser.maybeCompleteAuthSession()
 
-
 export default function Landing({ navigation }: any) {
   const dispatch = useAppDispatch()
   const userId = useEffect(() => {
     dispatch(loadUserWithFriends('google-oauth|123456789101'))
   }, [])
-  
-  //auth 
+
+  //auth
   const [accessToken, setAccessToken] = useState(null)
   const [user, setUser] = useState(null)
   const [request, response, promptAsync] = Google.useAuthRequest({
@@ -37,6 +36,11 @@ export default function Landing({ navigation }: any) {
     }
   }, [response, accessToken])
 
+  useEffect(() => {
+    console.log('user, ', user)
+    user && navigation.navigate('Ping')
+  }, [user])
+
   async function fetchUserInfo() {
     let response = await fetch('https://www.googleapis.com/userinfo/v2/me', {
       headers: { Authorization: `Bearer ${accessToken}` },
@@ -45,20 +49,8 @@ export default function Landing({ navigation }: any) {
     setUser(useInfo)
   }
 
-  const NavigatePing = () => {
-    if (user) {
-      navigation.navigate('Ping')
-      return (
-        <>
-          <Text>Welcome</Text>
-          <Text>{user.given_name}</Text>
-        </>
-      )
-    }
-  }
   return (
     <View style={styles.container}>
-      {user && <NavigatePing />}
       {user === null && (
         <>
           <Image
@@ -67,9 +59,7 @@ export default function Landing({ navigation }: any) {
           ></Image>
           <View>
             <MediumText style={styles.title}> P I N G P O N G </MediumText>
-            <RegularText style={styles.mainText}>
-              Taking the media out of social media.
-            </RegularText>
+            <RegularText style={styles.mainText}></RegularText>
           </View>
           <TouchableOpacity
             style={styles.button}
