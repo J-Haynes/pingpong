@@ -40,19 +40,19 @@ export default function Nav({ navigation, currentPage }: any) {
         {currentPage === 'Ping' && (
           <Image
             style={styles.beer}
-            source={require('../assets/cheers.png')}
+            source={require('../assets/navBeerColour.png')}
           ></Image>
         )}
         {currentPage === 'Friends' && (
           <Image
             style={styles.beer}
-            source={require('../assets/cheers-bw.png')}
+            source={require('../assets/navBeer.png')}
           ></Image>
         )}
         {currentPage === 'AddFriend' && (
           <Image
             style={styles.beer}
-            source={require('../assets/cheers-bw.png')}
+            source={require('../assets/navBeer.png')}
           ></Image>
         )}
       </TouchableOpacity>
@@ -67,7 +67,7 @@ export default function Nav({ navigation, currentPage }: any) {
         {currentPage === 'Friends' && (
           <Image
             style={styles.beer}
-            source={require('../assets/friends-black.png')}
+            source={require('../assets/friends (2).png')}
           ></Image>
         )}
         {currentPage === 'AddFriend' && (
@@ -101,5 +101,5 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 50,
   },
-  beer: { width: 65, height: 65 },
+  beer: { width: 60, height: 60 },
 })
