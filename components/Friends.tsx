@@ -60,7 +60,7 @@ export default function Friends({ navigation }: any) {
             <View style={styles.ping}>
               <Image
                 style={styles.image}
-                source={require('../assets/beer.png')}
+                source={require('../assets/activities/beer.png')}
               ></Image>
               <Text style={styles.mainText}>Oh no! No Friends...</Text>
             </View>

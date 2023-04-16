@@ -15,6 +15,8 @@ import * as Font from 'expo-font'
 import { once } from 'superagent'
 import { useAppSelector, useAppDispatch } from '../hooks/redux'
 import { changePing } from '../redux/actions/userActions'
+import ImageSwiper from './Swiper'
+import Swiper from 'react-native-swiper/src'
 
 export default function Ping({ navigation }: any) {
   const handlePress = () => {
@@ -29,40 +31,69 @@ export default function Ping({ navigation }: any) {
   const currentPage = 'Ping'
 
   return (
-    <>
-      <View style={styles.container}>
-        <View style={styles.ping}>
-          <Image
+    <View style={styles.container}>
+      <View style={styles.ping}>
+        {/* <Image
             style={styles.image}
             source={require('../assets/activities/beer.png')}
+          ></Image> */}
+        {/* <View style={styles.swipe}> */}
+
+        <View style={styles.swipecontainer}>
+          <Swiper style={styles.wrapper} showsButtons>
+            <View style={styles.slide}>
+              <Image
+                style={styles.img}
+                source={require('../assets/activities/beer.png')}
+              />
+            </View>
+            <View style={styles.slide}>
+              <Image
+                style={styles.img}
+                source={require('../assets/activities/coffee.png')}
+              />
+            </View>
+            <View style={styles.slide}>
+              <Image
+                style={styles.img}
+                source={require('../assets/activities/talk.png')}
+              />
+            </View>
+            <View style={styles.slide}>
+              <Image
+                style={styles.img}
+                source={require('../assets/activities/walk.png')}
+              />
+            </View>
+          </Swiper>
+        </View>
+
+        {/* </View> */}
+        {/* <SafeAreaView>
+          <TextInput
+            style={[styles.input, styles.shadow]}
+            onChangeText={onChangeText}
+            value={location}
+            placeholder="Where to?"
+            placeholderTextColor={'grey'}
+          />
+        </SafeAreaView> */}
+        {/* <TouchableOpacity
+          onPress={() => {
+            dispatch(changePing(userId, true, location))
+            return navigation.navigate('Friends')
+          }}
+        >
+          <Image
+            style={styles.button}
+            source={require('../assets/ball.png')}
           ></Image>
-          {/* <RegularText style={styles.buttonText}>where?</RegularText> */}
-          <SafeAreaView>
-            <TextInput
-              style={[styles.input, styles.shadow]}
-              onChangeText={onChangeText}
-              value={location}
-              placeholder="Where to?"
-              placeholderTextColor={'grey'}
-            />
-          </SafeAreaView>
-          <TouchableOpacity
-            onPress={() => {
-              dispatch(changePing(userId, true, location))
-              return navigation.navigate('Friends')
-            }}
-          >
-            <Image
-              style={styles.button}
-              source={require('../assets/ball.png')}
-            ></Image>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.nav}>
-          <Nav navigation={navigation} currentPage={currentPage} />
-        </View>
+        </TouchableOpacity> */}
       </View>
-    </>
+      {/* <View style={styles.nav}>
+        <Nav navigation={navigation} currentPage={currentPage} />
+      </View> */}
+    </View>
   )
 }
 
@@ -126,7 +157,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#dd571c',
   },
   ping: {
-    flex: 1,
+    flex: 2,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-evenly',
@@ -159,5 +190,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 70,
     backgroundColor: '#b34e24',
     borderRadius: 50,
+  },
+  wrapper: {},
+  swipecontainer: {
+    flex: 1,
+  },
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  img: {
+    width: 50,
+    height: 50,
   },
 })
