@@ -38,7 +38,7 @@ export default function Friends({ navigation }: any) {
         surname: 'haynes',
         username: 'kerrehaynes',
         birthday: '847281600000',
-        ping_active: false,
+        ping_active: true,
       },
       {
         id: 3,
@@ -75,8 +75,6 @@ export default function Friends({ navigation }: any) {
   }
 
   const currentPage = 'Friends'
-
-  console.log('friends array', friends)
 
   return (
     // one of these views should be scrollable
