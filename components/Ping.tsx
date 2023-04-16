@@ -92,6 +92,32 @@ const RegularText = (props: any) => {
   )
 }
 
+const MediumText = (props: any) => {
+  const [fontLoaded, setFontLoaded] = useState(false)
+
+  useEffect(() => {
+    async function loadFont() {
+      await Font.loadAsync({
+        'medium-font': require('../assets/fonts/BlueScreens/Medium-Italic.ttf'),
+      })
+
+      setFontLoaded(true)
+    }
+
+    loadFont()
+  }, [])
+
+  if (!fontLoaded) {
+    return <Text>Loading...</Text>
+  }
+
+  return (
+    <Text style={{ ...props.style, fontFamily: 'medium-font' }}>
+      {props.children}
+    </Text>
+  )
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -114,7 +140,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignContent: 'center',
   },
-  buttonText: { color: '#161c20', fontSize: 70, alignSelf: 'center' },
+  text: { color: 'oldlace', fontSize: 60, alignSelf: 'center' },
   button: {
     width: 150,
     height: 150,
@@ -129,11 +155,9 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 50,
-    // margin: 12,
-    // borderWidth: 1,
     paddingVertical: 10,
     paddingHorizontal: 70,
-    backgroundColor: 'oldlace',
+    backgroundColor: '#b34e24',
     borderRadius: 50,
   },
 })
