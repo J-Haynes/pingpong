@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Text, View, StyleSheet, SectionList } from 'react-native'
+import { Text, View, StyleSheet, SectionList, Image } from 'react-native'
 import { useAppSelector } from '../hooks/redux'
 import ActiveFriend from './ActiveFriend'
 import BasicFriend from './BasicFriend'
@@ -24,31 +24,52 @@ export default function Friends({ navigation }: any) {
 
   const currentPage = 'Friends'
 
+  console.log('friends array', friends)
+
   return (
     // one of these views should be scrollable
     <View style={styles.container}>
-      <View style={styles.friends}>
-        <SectionList
-          sections={[
-            { title: ' A c t i v e    P i n g s ', data: pingFriendList },
-            { title: ' A l l    F r i e n d s ', data: otherFriendList },
-          ]}
-          renderItem={({ item }) => renderFriends(item)}
-          renderSectionHeader={({ section }) => (
-            <View>
-              <Text> </Text>
-              <MediumText style={styles.sectionHeader}>
-                {section.title}
-              </MediumText>
-              <Text> </Text>
+      {friends.length != 0 ? (
+        <>
+          <View style={styles.friends}>
+            <SectionList
+              sections={[
+                { title: ' A c t i v e    P i n g s ', data: pingFriendList },
+                { title: ' A l l    F r i e n d s ', data: otherFriendList },
+              ]}
+              renderItem={({ item }) => renderFriends(item)}
+              renderSectionHeader={({ section }) => (
+                <View>
+                  <Text> </Text>
+                  <MediumText style={styles.sectionHeader}>
+                    {section.title}
+                  </MediumText>
+                  <Text> </Text>
+                </View>
+              )}
+              keyExtractor={(item) => `basicListEntry-${item.id}`}
+            />
+          </View>
+          <View style={styles.nav}>
+            <Nav navigation={navigation} currentPage={currentPage} />
+          </View>
+        </>
+      ) : (
+        <>
+          <View style={styles.container}>
+            <View style={styles.ping}>
+              <Image
+                style={styles.image}
+                source={require('../assets/beer.png')}
+              ></Image>
+              <Text style={styles.mainText}>Oh no! No Friends...</Text>
             </View>
-          )}
-          keyExtractor={(item) => `basicListEntry-${item.id}`}
-        />
-      </View>
-      <View style={styles.nav}>
-        <Nav navigation={navigation} currentPage={currentPage} />
-      </View>
+          </View>
+          <View style={styles.nav}>
+            <Nav navigation={navigation} currentPage={currentPage} />
+          </View>
+        </>
+      )}
     </View>
   )
 }
@@ -109,7 +130,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     backgroundColor: '#dd571c',
   },
   friendsHeader: {
@@ -136,5 +157,20 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-evenly',
     width: '100%',
+  },
+  image: { width: 200, height: 200, opacity: 0.6 },
+  mainText: {
+    color: 'oldlace',
+    fontSize: 30,
+    alignSelf: 'center',
+    paddingHorizontal: 20,
+  },
+  ping: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    backgroundColor: '#dd571c',
+    paddingTop: 22,
   },
 })
