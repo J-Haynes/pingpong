@@ -29,6 +29,13 @@ export default function Friends({ navigation }: any) {
   return (
     // one of these views should be scrollable
     <View style={styles.container}>
+      <View style={styles.topbar}>
+        <Image
+          onClick={() => navigation.navigate('AddFriend')}
+          style={styles.addfriend}
+          source={require('../assets/addfriend.png')}
+        ></Image>
+      </View>
       {friends.length != 0 ? (
         <>
           <View style={styles.friends}>
@@ -172,5 +179,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     backgroundColor: '#dd571c',
     paddingTop: 22,
+  },
+  topbar: {
+    width: '100%',
+    paddingTop: 5,
+    // flex: 1,
+    // alignItems: 'flex-end',
+    // flexDirection: 'corightlumn',
+  },
+  addfriend: {
+    width: 50,
+    height: 50,
+    position: 'relative',
+    left: 10,
   },
 })
