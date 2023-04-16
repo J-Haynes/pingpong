@@ -33,8 +33,6 @@ export default function Nav({ navigation, currentPage }: any) {
     navigation.navigate('Friends')
   }
 
-  console.log(currentPage)
-
   return (
     <View style={styles.container}>
       {/* <Tab items={[{ icon: 'friend' }, { icon: 'ping' }]} onPress={() => 1} /> */}
