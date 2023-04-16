@@ -91,5 +91,5 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 50,
   },
-  beer: { width: 65, height: 65, tintColor: '#000000' },
+  beer: { width: 65, height: 65 },
 })
