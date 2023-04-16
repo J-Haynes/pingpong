@@ -21,6 +21,8 @@ export default function Friends({ navigation }: any) {
     }
   }
 
+  const currentPage = 'Friends'
+
   return (
     <View style={styles.container}>
       <View style={styles.userContainer}>
@@ -37,7 +39,7 @@ export default function Friends({ navigation }: any) {
         />
       </View>
       <View style={styles.nav}>
-        <Nav navigation={navigation} />
+        <Nav navigation={navigation} currentPage={currentPage} />
       </View>
     </View>
   )
