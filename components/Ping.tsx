@@ -46,13 +46,15 @@ export default function Ping({ navigation }: any) {
           />
         </SafeAreaView>
         <TouchableOpacity
-          style={[styles.button, styles.shadow]}
           onPress={() => {
             dispatch(changePing(userId, true, location))
             return navigation.navigate('Friends')
           }}
         >
-          <RegularText style={styles.buttonText}>PING</RegularText>
+          <Image
+            style={styles.button}
+            source={require('../assets/ball.png')}
+          ></Image>
         </TouchableOpacity>
       </View>
       <View style={styles.nav}>
@@ -112,10 +114,8 @@ const styles = StyleSheet.create({
   },
   buttonText: { color: '#161c20', fontSize: 70, alignSelf: 'center' },
   button: {
-    backgroundColor: 'oldlace',
-    borderRadius: 100,
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     // margin: 12,
     // borderWidth: 1,
     paddingVertical: 10,
-    paddingHorizontal: 80,
+    paddingHorizontal: 70,
     backgroundColor: 'oldlace',
     borderRadius: 50,
   },

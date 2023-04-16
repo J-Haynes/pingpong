@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
-import { UserData } from '../common/Friendship'
+import { UserData } from '../common/User'
 import { capitalise, firstLetter } from './helpers'
 import * as Font from 'expo-font'
 
@@ -15,8 +15,7 @@ export default function ActiveFriend({ friend }: Props) {
       <RegularText style={styles.name}>
         {capitalise(friend.name)} {firstLetter(friend.surname)}
       </RegularText>
-      {/* <Text>{friend.user_location}</Text> */}
-      <RegularText style={styles.name}>HeyDay</RegularText>
+      <RegularText style={styles.name}>{friend.ping_location}</RegularText>
       <Image
         style={styles.image}
         source={require('../assets/ball.png')}

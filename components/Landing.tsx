@@ -34,8 +34,8 @@ export default function Landing({ navigation }: any) {
   const userId = useEffect(() => {
     // dispatch(loadUser(user?.id))
     // dispatch(loadUserWithFriends(user?.id))
-    dispatch(loadUser('google-oauth|123456789102'))
-    dispatch(loadUserWithFriends('google-oauth|123456789102'))
+    dispatch(loadUser('google-oauth|123456789101'))
+    dispatch(loadUserWithFriends('google-oauth|123456789101'))
   }, [user])
 
   useEffect(() => {
@@ -68,6 +68,7 @@ export default function Landing({ navigation }: any) {
           <View>
             <MediumText style={styles.title}> P I N G P O N G </MediumText>
             <RegularText style={styles.mainText}></RegularText>
+            {/* add tagline to above */}
           </View>
           <TouchableOpacity
             style={styles.button}
