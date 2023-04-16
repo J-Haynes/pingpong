@@ -12,7 +12,7 @@ type SimpleThunk = (dispatch: any) => Promise<any>
 
 describe('addUserToState', () => {
   it('returns the correct Action', () => {
-    const userToAdd = {
+    const user = {
       id: 1,
       auth_id: 'fake_auth_id',
       name: 'bianca',
@@ -24,15 +24,44 @@ describe('addUserToState', () => {
 
     const expected = {
       type: 'FETCH_USER',
-      payload: userToAdd,
+      payload: user,
     }
 
-    const actual = addUserToState(userToAdd)
+    const actual = addUserToState(user)
 
     expect(actual).toEqual(expected)
   })
 
-  it.todo('Thunk dispatches Action on successful API call')
+  it('Thunk dispatches Action on successful API call', async () => {
+    const user = {
+      id: 1,
+      auth_id: 'fake_auth_id',
+      name: 'bianca',
+      surname: 'patchett',
+      username: 'beepatchett',
+      birthday: '785481400000',
+      ping_active: false,
+    }
+
+    const scope = nock('https://pingpong-backend.devacademy.nz/api/v1')
+      .get('/getuser')
+      .reply(200, user)
+
+    const expected = {
+      type: 'FETCH_USER',
+      payload: user,
+    }
+
+    const actual = addUserToState(user)
+
+    const thunk = loadUser(user.auth_id) as SimpleThunk
+    const dispatch = jest.fn()
+
+    await thunk(dispatch)
+
+    expect(dispatch).toHaveBeenCalledWith(expected)
+    expect(scope.isDone()).toBe(true)
+  })
 })
 
 describe('addUserWithFriendsToState', () => {
