@@ -3,22 +3,22 @@ import React, { useEffect, useState } from 'react'
 import { Image, Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import * as Font from 'expo-font'
 import { useAppDispatch } from '../hooks/redux'
-import { loadUserWithFriends } from '../redux/actions/userActions'
+import { loadUser, loadUserWithFriends } from '../redux/actions/userActions'
 
 import * as WebBrowser from 'expo-web-browser'
 import * as Google from 'expo-auth-session/providers/google'
+
+import { createUsername } from './helpers'
+import { GoogleData } from '../common/Google'
 
 WebBrowser.maybeCompleteAuthSession()
 
 export default function Landing({ navigation }: any) {
   const dispatch = useAppDispatch()
-  const userId = useEffect(() => {
-    dispatch(loadUserWithFriends('google-oauth|123456789101'))
-  }, [])
 
   //auth
+  const [user, setUser] = useState(null as GoogleData | null)
   const [accessToken, setAccessToken] = useState(null)
-  const [user, setUser] = useState(null)
   const [request, response, promptAsync] = Google.useAuthRequest({
     clientId:
       '848389775127-sano44j1jrulqvrfav88g7tksok3149g.apps.googleusercontent.com',
@@ -29,6 +29,14 @@ export default function Landing({ navigation }: any) {
       'replace this after you get SHA-1 key @ console.cloud.google.com',
   })
 
+  // Thuncctions
+
+  const userId = useEffect(() => {
+    dispatch(loadUser(user?.id))
+    dispatch(loadUserWithFriends(user?.id))
+    // dispatch(loadUserWithFriends('google-oauth|123456789101'))
+  }, [user])
+
   useEffect(() => {
     if (response?.type === 'success') {
       setAccessToken(response.authentication.accessToken)
@@ -37,7 +45,6 @@ export default function Landing({ navigation }: any) {
   }, [response, accessToken])
 
   useEffect(() => {
-    console.log('user, ', user)
     user && navigation.navigate('Ping')
   }, [user])
 
