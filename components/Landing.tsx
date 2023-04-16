@@ -34,8 +34,8 @@ export default function Landing({ navigation }: any) {
   const userId = useEffect(() => {
     // dispatch(loadUser(user?.id))
     // dispatch(loadUserWithFriends(user?.id))
-    dispatch(loadUser('google-oauth|123456789101'))
-    dispatch(loadUserWithFriends('google-oauth|123456789101'))
+    dispatch(loadUser('google-oauth|123456789102'))
+    dispatch(loadUserWithFriends('google-oauth|123456789102'))
   }, [user])
 
   useEffect(() => {

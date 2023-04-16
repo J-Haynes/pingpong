@@ -34,6 +34,7 @@ export default function Friends({ navigation }: any) {
           renderItem={({ item }) => renderFriends(item)}
           renderSectionHeader={({ section }) => (
             <View>
+              <Text> </Text>
               <MediumText style={styles.sectionHeader}>
                 {section.title}
               </MediumText>

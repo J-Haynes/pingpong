@@ -16,7 +16,7 @@ export default function ActiveFriend({ friend }: Props) {
         {capitalise(friend.name)} {firstLetter(friend.surname)}
       </RegularText>
       {/* <Text>{friend.user_location}</Text> */}
-      <Text>HeyDay</Text>
+      <RegularText style={styles.name}>HeyDay</RegularText>
       <Image
         style={styles.image}
         source={require('../assets/ball.png')}
