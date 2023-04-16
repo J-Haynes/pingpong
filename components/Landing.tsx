@@ -30,16 +30,9 @@ export default function Landing({ navigation }: any) {
       'replace this after you get SHA-1 key @ console.cloud.google.com',
   })
 
-  // Thuncc
+  // Thuncc state
 
   const [userData, setUserData] = useState({} as UserData)
-
-  // const userId = useEffect(() => {
-  //   // dispatch(loadUser(user?.id))
-  //   // dispatch(loadUserWithFriends(user?.id))
-  //   dispatch(loadUser('google-oauth|123456789101'))
-  //   dispatch(loadUserWithFriends('google-oauth|123456789101'))
-  // }, [user])
 
   useEffect(() => {
     if (response?.type === 'success') {

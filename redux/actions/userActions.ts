@@ -54,7 +54,6 @@ export function loadUserWithFriends(userData: UserData): ThunkAction {
   return async (dispatch) => {
     return fetchFriends(userData)
       .then((userWithFriends) => {
-        console.log(userWithFriends)
         dispatch(addUserWithFriendsToState(userWithFriends))
       })
       .catch((err) => console.log(err))

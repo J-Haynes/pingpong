@@ -8,10 +8,7 @@ export function fetchFriends(userData: UserData): Promise<UserWithFriends> {
   return request
     .post(`${externalBaseUrl}/userwithfriends`)
     .send(userData)
-    .then((res) => {
-      console.log(res.body)
-      return res.body
-    })
+    .then((res) => res.body)
 }
 
 export function fetchUser(userId: string): Promise<User> {
@@ -53,8 +50,5 @@ export function changePingStatus(
   return request
     .post(`${externalBaseUrl}/setping`)
     .send({ userId, setting, location })
-    .then((res) => {
-      console.log(res.body)
-      return res.body
-    })
+    .then((res) => res.body)
 }
