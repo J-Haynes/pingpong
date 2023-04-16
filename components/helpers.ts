@@ -19,3 +19,7 @@ export function addNewUser(googleData: GoogleData): UserData {
     ping_active: false,
   }
 }
+
+export function firstLetter(word: string): string {
+  return word.substring(0, 1).toUpperCase()
+}

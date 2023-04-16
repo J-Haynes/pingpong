@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text, View, StyleSheet, SectionList } from 'react-native'
 import { useAppSelector } from '../hooks/redux'
 import ActiveFriend from './ActiveFriend'
 import BasicFriend from './BasicFriend'
 import Nav from './Nav'
 import { UserData } from '../common/User'
+import * as Font from 'expo-font'
 
 export default function Friends({ navigation }: any) {
   const userWithFriends = useAppSelector((state) => state.friends)
@@ -24,16 +25,23 @@ export default function Friends({ navigation }: any) {
   const currentPage = 'Friends'
 
   return (
+    // one of these views should be scrollable
     <View style={styles.container}>
-      <View style={styles.userContainer}>
+      <View style={styles.friends}>
         <SectionList
           sections={[
-            { title: 'Active Pings', data: pingFriendList },
-            { title: 'Inactive', data: otherFriendList },
+            { title: ' A c t i v e    P i n g s ', data: pingFriendList },
+            { title: ' A l l    F r i e n d s ', data: otherFriendList },
           ]}
           renderItem={({ item }) => renderFriends(item)}
           renderSectionHeader={({ section }) => (
-            <Text style={styles.sectionHeader}>{section.title}</Text>
+            <View>
+              <Text> </Text>
+              <MediumText style={styles.sectionHeader}>
+                {section.title}
+              </MediumText>
+              <Text> </Text>
+            </View>
           )}
           keyExtractor={(item) => `basicListEntry-${item.id}`}
         />
@@ -45,7 +53,57 @@ export default function Friends({ navigation }: any) {
   )
 }
 
-// renderItem={({ item }) => <ActiveFriend friend={item} />}
+const MediumText = (props: any) => {
+  const [fontLoaded, setFontLoaded] = useState(false)
+
+  useEffect(() => {
+    async function loadFont() {
+      await Font.loadAsync({
+        'medium-font': require('../assets/fonts/BlueScreens/Medium-Italic.ttf'),
+      })
+
+      setFontLoaded(true)
+    }
+
+    loadFont()
+  }, [])
+
+  if (!fontLoaded) {
+    return <Text>Loading...</Text>
+  }
+
+  return (
+    <Text style={{ ...props.style, fontFamily: 'medium-font' }}>
+      {props.children}
+    </Text>
+  )
+}
+
+const RegularText = (props: any) => {
+  const [fontLoaded, setFontLoaded] = useState(false)
+
+  useEffect(() => {
+    async function loadFont() {
+      await Font.loadAsync({
+        'reg-font': require('../assets/fonts/BlueScreens/Regular.ttf'),
+      })
+
+      setFontLoaded(true)
+    }
+
+    loadFont()
+  }, [])
+
+  if (!fontLoaded) {
+    return <Text>Loading...</Text>
+  }
+
+  return (
+    <Text style={{ ...props.style, fontFamily: 'reg-font' }}>
+      {props.children}
+    </Text>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -54,39 +112,29 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#dd571c',
   },
-  userContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    backgroundColor: '#dd571c',
-    paddingTop: 22,
-  },
   friendsHeader: {
     backgroundColor: 'oldlace',
-    padding: 30,
     width: '100%',
     alignContent: 'center',
     color: 'oldlace',
   },
-  mainText: {
-    color: 'black',
-    fontSize: 20,
-    alignSelf: 'center',
-  },
   sectionHeader: {
-    paddingTop: 2,
-    paddingBottom: 2,
-    paddingHorizontal: 10,
-    fontSize: 14,
-    fontWeight: 'bold',
-    backgroundColor: 'rgba(247,247,247,1.0)',
+    fontSize: 50,
+    backgroundColor: 'oldlace',
     textAlign: 'center',
+    width: '100%',
+    color: '#dd571c',
   },
   nav: {
     backgroundColor: '#dd571c',
     padding: 30,
     width: '100%',
     alignContent: 'center',
+  },
+  friends: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    width: '100%',
   },
 })

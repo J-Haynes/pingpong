@@ -68,6 +68,7 @@ export default function Landing({ navigation }: any) {
           <View>
             <MediumText style={styles.title}> P I N G P O N G </MediumText>
             <RegularText style={styles.mainText}></RegularText>
+            {/* add tagline to above */}
           </View>
           <TouchableOpacity
             style={styles.button}
