@@ -71,7 +71,6 @@ export default function Landing({ navigation }: any) {
               Taking the media out of social media.
             </RegularText>
           </View>
-          <AutoComplete />
           <TouchableOpacity
             style={styles.button}
             disabled={!request}

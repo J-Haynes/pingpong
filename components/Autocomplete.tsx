@@ -1,17 +1,24 @@
 import React from 'react'
 import { View, ScrollView } from 'react-native'
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
+import {
+  GooglePlaceData,
+  GooglePlacesAutocomplete,
+} from 'react-native-google-places-autocomplete'
+import { useRef } from 'react'
 
 export default function AutoComplete() {
+  const placesRef = useRef()
+
+  const handlePress = (data: GooglePlaceData, details = null) => {
+    console.log(data.description)
+  }
+
   return (
     <View>
       <ScrollView>
         <GooglePlacesAutocomplete
-          placeholder="Where?"
-          onPress={(data, details = null) => {
-            // 'details' is provided when fetchDetails = true
-            console.log(data, details)
-          }}
+          placeholder="Let's meet at..."
+          onPress={() => handlePress}
           fetchDetails={true}
           onFail={(error) => console.error(error)}
           query={{
@@ -19,7 +26,7 @@ export default function AutoComplete() {
           }}
           requestUrl={{
             useOnPlatform: 'web',
-            url: 'http://localhost:3000/google/',
+            url: 'http://localhost:3000/google',
           }}
         />
       </ScrollView>

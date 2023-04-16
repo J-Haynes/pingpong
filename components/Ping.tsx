@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {
   Text,
   View,
-  Pressable,
   StyleSheet,
-  Button,
   Image,
   TouchableOpacity,
   SafeAreaView,
@@ -12,7 +10,7 @@ import {
 } from 'react-native'
 import Nav from './Nav'
 import * as Font from 'expo-font'
-import { once } from 'superagent'
+import AutoComplete from './Autocomplete'
 
 export default function Ping({ navigation }: any) {
   const handlePress = () => {
@@ -30,11 +28,12 @@ export default function Ping({ navigation }: any) {
         ></Image>
         {/* <RegularText style={styles.buttonText}>where?</RegularText> */}
         <SafeAreaView>
-          <TextInput
+          {/* <TextInput
             style={[styles.input, styles.shadow]}
             onChangeText={onChangeText}
             value={text}
-          />
+          /> */}
+          <AutoComplete />
         </SafeAreaView>
         <TouchableOpacity
           style={[styles.button, styles.shadow]}
