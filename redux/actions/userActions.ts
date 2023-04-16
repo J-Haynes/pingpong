@@ -39,15 +39,15 @@ export function addLocationToState(location: string): Action {
 }
 
 // Takes a userId, calls fetchUser to get the user from the database, and then adds it to the store
-export function loadUser(userId: string): ThunkAction {
-  return (dispatch) => {
-    return fetchUser(userId)
-      .then((user: User) => {
-        dispatch(addUserToState(user))
-      })
-      .catch((err) => console.log(err))
-  }
-}
+// export function loadUser(userId: string): ThunkAction {
+//   return (dispatch) => {
+//     return fetchUser(userId)
+//       .then((user: User) => {
+//         dispatch(addUserToState(user))
+//       })
+//       .catch((err) => console.log(err))
+//   }
+// }
 
 export function loadUserWithFriends(userId: string): ThunkAction {
   return (dispatch) => {

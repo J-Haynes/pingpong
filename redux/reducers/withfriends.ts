@@ -9,6 +9,10 @@ function reducer(state = initialState, action: Action): UserWithFriends {
   switch (type) {
     case 'FETCH_FRIENDS':
       return payload
+    case 'SET_PING':
+      return { ...state, ping_active: payload }
+    case 'SET_LOCATION':
+      return { ...state, ping_location: payload }
     default:
       return state
   }
