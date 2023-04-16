@@ -9,7 +9,6 @@ export function fetchFriends(userId: string): Promise<UserWithFriends> {
     .post(`${externalBaseUrl}/getfriends`)
     .send({ userId })
     .then((res) => {
-      console.log(res.body)
       return res.body
     })
 }
@@ -47,10 +46,14 @@ export function confirmFriend(
 
 export function changePingStatus(
   userId: string,
-  trueFalse: boolean
+  setting: boolean,
+  location?: string
 ): Promise<User> {
   return request
     .post(`${externalBaseUrl}/setping`)
-    .send({ userId, setting: trueFalse })
-    .then((res) => res.body)
+    .send({ userId, setting, location })
+    .then((res) => {
+      console.log(res.body)
+      return res.body
+    })
 }
