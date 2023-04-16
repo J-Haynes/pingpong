@@ -10,14 +10,13 @@ import * as Google from 'expo-auth-session/providers/google'
 
 WebBrowser.maybeCompleteAuthSession()
 
-
 export default function Landing({ navigation }: any) {
   const dispatch = useAppDispatch()
   const userId = useEffect(() => {
     dispatch(loadUserWithFriends('google-oauth|123456789101'))
   }, [])
-  
-  //auth 
+
+  //auth
   const [accessToken, setAccessToken] = useState(null)
   const [user, setUser] = useState(null)
   const [request, response, promptAsync] = Google.useAuthRequest({
