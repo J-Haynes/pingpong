@@ -6,9 +6,6 @@ const initialState = {} as UserWithFriends
 function reducer(state = initialState, action: Action): UserWithFriends {
   const { type, payload } = action
 
-  console.log(payload)
-  console.log(type)
-
   switch (type) {
     case 'FETCH_FRIENDS':
       return payload
