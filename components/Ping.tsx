@@ -13,13 +13,18 @@ import {
 import Nav from './Nav'
 import * as Font from 'expo-font'
 import { once } from 'superagent'
+import { useAppSelector, useAppDispatch } from '../hooks/redux'
+import { changePing } from '../redux/actions/userActions'
 
 export default function Ping({ navigation }: any) {
   const handlePress = () => {
     navigation.navigate('Friends')
   }
+  const dispatch = useAppDispatch()
 
-  const [text, onChangeText] = useState('')
+  const userId = useAppSelector((state) => state.user.auth_id)
+
+  const [location, onChangeText] = useState('')
 
   return (
     <View style={styles.container}>
@@ -33,14 +38,17 @@ export default function Ping({ navigation }: any) {
           <TextInput
             style={[styles.input, styles.shadow]}
             onChangeText={onChangeText}
-            value={text}
+            value={location}
             placeholder="Where to?"
             placeholderTextColor={'grey'}
           />
         </SafeAreaView>
         <TouchableOpacity
           style={[styles.button, styles.shadow]}
-          onPress={() => navigation.navigate('Friends')}
+          onPress={() => {
+            dispatch(changePing(userId, true, location))
+            return navigation.navigate('Friends')
+          }}
         >
           <RegularText style={styles.buttonText}>PING</RegularText>
         </TouchableOpacity>
