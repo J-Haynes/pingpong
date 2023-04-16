@@ -34,7 +34,7 @@ export default function Ping({ navigation }: any) {
         <View style={styles.ping}>
           <Image
             style={styles.image}
-            source={require('../assets/beer.png')}
+            source={require('../assets/activities/beer.png')}
           ></Image>
           {/* <RegularText style={styles.buttonText}>where?</RegularText> */}
           <SafeAreaView>
