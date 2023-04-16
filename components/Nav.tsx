@@ -5,6 +5,7 @@ import {
   StyleSheet,
   SectionList,
   TouchableOpacity,
+  Image,
 } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
@@ -23,7 +24,7 @@ const Tab = createBottomTabNavigator()
 //   navigation: NavigationProp<ParamListBase>
 // }
 
-export default function Nav({ navigation }: any) {
+export default function Nav({ navigation, currentPage }: any) {
   const handlePressPing = () => {
     navigation.navigate('Ping')
   }
@@ -32,15 +33,51 @@ export default function Nav({ navigation }: any) {
     navigation.navigate('Friends')
   }
 
+  console.log(currentPage)
+
   return (
     <View style={styles.container}>
       {/* <Tab items={[{ icon: 'friend' }, { icon: 'ping' }]} onPress={() => 1} /> */}
       <TouchableOpacity style={styles.button} onPress={handlePressPing}>
-        <Text>HOME</Text>
+        {currentPage === 'Ping' && (
+          <Image
+            style={styles.beer}
+            source={require('../assets/cheers.png')}
+          ></Image>
+        )}
+        {currentPage === 'Friends' && (
+          <Image
+            style={styles.beer}
+            source={require('../assets/cheers-bw.png')}
+          ></Image>
+        )}
+        {currentPage === 'AddFriend' && (
+          <Image
+            style={styles.beer}
+            source={require('../assets/cheers-bw.png')}
+          ></Image>
+        )}
       </TouchableOpacity>
       <Text style={styles.text}>|</Text>
       <TouchableOpacity style={styles.button} onPress={handlePressFriends}>
-        <Text>FRIENDS</Text>
+        {currentPage === 'Ping' && (
+          <Image
+            style={styles.beer}
+            source={require('../assets/friends.png')}
+          ></Image>
+        )}
+        {currentPage === 'Friends' && (
+          <Image
+            style={styles.beer}
+            source={require('../assets/friends-black.png')}
+          ></Image>
+        )}
+        {currentPage === 'AddFriend' && (
+          <Image
+            style={styles.beer}
+            source={require('../assets/friends.png')}
+          ></Image>
+        )}
       </TouchableOpacity>
     </View>
   )
@@ -53,7 +90,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'oldlace', // Set background color of the navbar
     borderRadius: 50, // Set border radius to create a pill shape
-    height: 60, // Set desired height of the navbar
+    height: 75, // Set desired height of the navbar
     paddingHorizontal: 20, // Add horizontal padding to align content
     elevation: 5, // Add elevation for a floating effect on Android
   },
@@ -66,4 +103,5 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 50,
   },
+  beer: { width: 65, height: 65 },
 })
