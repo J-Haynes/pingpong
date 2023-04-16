@@ -3,23 +3,22 @@ import React, { useEffect, useState } from 'react'
 import { Image, Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import * as Font from 'expo-font'
 import { useAppDispatch } from '../hooks/redux'
-import { loadUserWithFriends } from '../redux/actions/userActions'
+import { loadUser, loadUserWithFriends } from '../redux/actions/userActions'
 
 import * as WebBrowser from 'expo-web-browser'
 import * as Google from 'expo-auth-session/providers/google'
 
-WebBrowser.maybeCompleteAuthSession()
+import { createUsername } from './helpers'
+import { GoogleData } from '../common/Google'
 
+WebBrowser.maybeCompleteAuthSession()
 
 export default function Landing({ navigation }: any) {
   const dispatch = useAppDispatch()
-  const userId = useEffect(() => {
-    dispatch(loadUserWithFriends('google-oauth|123456789101'))
-  }, [])
-  
-  //auth 
+
+  //auth
+  const [user, setUser] = useState(null as GoogleData | null)
   const [accessToken, setAccessToken] = useState(null)
-  const [user, setUser] = useState(null)
   const [request, response, promptAsync] = Google.useAuthRequest({
     clientId:
       '848389775127-sano44j1jrulqvrfav88g7tksok3149g.apps.googleusercontent.com',
@@ -30,12 +29,25 @@ export default function Landing({ navigation }: any) {
       'replace this after you get SHA-1 key @ console.cloud.google.com',
   })
 
+  // Thuncctions
+
+  const userId = useEffect(() => {
+    // dispatch(loadUser(user?.id))
+    // dispatch(loadUserWithFriends(user?.id))
+    dispatch(loadUser('google-oauth|123456789101'))
+    dispatch(loadUserWithFriends('google-oauth|123456789101'))
+  }, [user])
+
   useEffect(() => {
     if (response?.type === 'success') {
       setAccessToken(response.authentication.accessToken)
       accessToken && fetchUserInfo()
     }
   }, [response, accessToken])
+
+  useEffect(() => {
+    user && navigation.navigate('Ping')
+  }, [user])
 
   async function fetchUserInfo() {
     let response = await fetch('https://www.googleapis.com/userinfo/v2/me', {
@@ -45,20 +57,8 @@ export default function Landing({ navigation }: any) {
     setUser(useInfo)
   }
 
-  const NavigatePing = () => {
-    if (user) {
-      navigation.navigate('Ping')
-      return (
-        <>
-          <Text>Welcome</Text>
-          <Text>{user.given_name}</Text>
-        </>
-      )
-    }
-  }
   return (
     <View style={styles.container}>
-      {user && <NavigatePing />}
       {user === null && (
         <>
           <Image
@@ -67,9 +67,7 @@ export default function Landing({ navigation }: any) {
           ></Image>
           <View>
             <MediumText style={styles.title}> P I N G P O N G </MediumText>
-            <RegularText style={styles.mainText}>
-              Taking the media out of social media.
-            </RegularText>
+            <RegularText style={styles.mainText}></RegularText>
           </View>
           <TouchableOpacity
             style={styles.button}
