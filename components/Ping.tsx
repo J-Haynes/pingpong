@@ -29,41 +29,40 @@ export default function Ping({ navigation }: any) {
   const currentPage = 'Ping'
 
   return (
-    <View style={styles.container}>
-      <View style={styles.ping}>
-        <Image
-          style={styles.image}
-          source={require('../assets/activities/beer.png')}
-        ></Image>
-        {/* <RegularText style={styles.buttonText}>where?</RegularText> */}
-        <SafeAreaView>
-          <TextInput
-            style={[styles.input, styles.shadow]}
-            onChangeText={onChangeText}
-            value={location}
-            placeholder="Where to?"
-            placeholderTextColor={'grey'}
-          />
-        </SafeAreaView>
-        <MediumText style={styles.text}>
-          PRESS THE BALL TO SEND A PING
-        </MediumText>
-        <TouchableOpacity
-          onPress={() => {
-            dispatch(changePing(userId, true, location))
-            return navigation.navigate('Friends')
-          }}
-        >
+    <>
+      <View style={styles.container}>
+        <View style={styles.ping}>
           <Image
-            style={[styles.button, styles.shadow]}
-            source={require('../assets/ball.png')}
+            style={styles.image}
+            source={require('../assets/beer.png')}
           ></Image>
-        </TouchableOpacity>
+          {/* <RegularText style={styles.buttonText}>where?</RegularText> */}
+          <SafeAreaView>
+            <TextInput
+              style={[styles.input, styles.shadow]}
+              onChangeText={onChangeText}
+              value={location}
+              placeholder="Where to?"
+              placeholderTextColor={'grey'}
+            />
+          </SafeAreaView>
+          <TouchableOpacity
+            onPress={() => {
+              dispatch(changePing(userId, true, location))
+              return navigation.navigate('Friends')
+            }}
+          >
+            <Image
+              style={styles.button}
+              source={require('../assets/ball.png')}
+            ></Image>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.nav}>
+          <Nav navigation={navigation} currentPage={currentPage} />
+        </View>
       </View>
-      <View style={styles.nav}>
-        <Nav navigation={navigation} currentPage={currentPage} />
-      </View>
-    </View>
+    </>
   )
 }
 
