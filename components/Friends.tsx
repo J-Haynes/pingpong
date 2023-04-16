@@ -22,6 +22,8 @@ export default function Friends({ navigation }: any) {
     }
   }
 
+  const currentPage = 'Friends'
+
   return (
     // one of these views should be scrollable
     <View style={styles.container}>
@@ -45,7 +47,7 @@ export default function Friends({ navigation }: any) {
         />
       </View>
       <View style={styles.nav}>
-        <Nav navigation={navigation} />
+        <Nav navigation={navigation} currentPage={currentPage} />
       </View>
     </View>
   )
