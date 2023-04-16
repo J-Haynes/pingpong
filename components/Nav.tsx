@@ -51,6 +51,12 @@ export default function Nav({ navigation, currentPage }: any) {
             source={require('../assets/cheers-bw.png')}
           ></Image>
         )}
+        {currentPage === 'AddFriend' && (
+          <Image
+            style={styles.beer}
+            source={require('../assets/cheers-bw.png')}
+          ></Image>
+        )}
       </TouchableOpacity>
       <Text style={styles.text}>|</Text>
       <TouchableOpacity style={styles.button} onPress={handlePressFriends}>
@@ -64,6 +70,12 @@ export default function Nav({ navigation, currentPage }: any) {
           <Image
             style={styles.beer}
             source={require('../assets/friends-black.png')}
+          ></Image>
+        )}
+        {currentPage === 'AddFriend' && (
+          <Image
+            style={styles.beer}
+            source={require('../assets/friends.png')}
           ></Image>
         )}
       </TouchableOpacity>
