@@ -22,7 +22,7 @@ export default function Ping({ navigation }: any) {
   }
   const dispatch = useAppDispatch()
 
-  const userId = useAppSelector((state) => state.user.auth_id)
+  const userId = useAppSelector((state) => state.friends.auth_id)
 
   const [location, onChangeText] = useState('')
 

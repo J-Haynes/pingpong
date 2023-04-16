@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Image, Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import * as Font from 'expo-font'
 import { useAppDispatch } from '../hooks/redux'
-import { loadUser, loadUserWithFriends } from '../redux/actions/userActions'
+import { loadUserWithFriends } from '../redux/actions/userActions'
 
 import * as WebBrowser from 'expo-web-browser'
 import * as Google from 'expo-auth-session/providers/google'

@@ -5,7 +5,6 @@ const externalBaseUrl = 'https://pingpong-backend.devacademy.nz/api/v1'
 
 // See routes for what each function returns - functions are presented in order
 export function fetchFriends(userData: UserData): Promise<UserWithFriends> {
-  console.log(userData)
   return request
     .post(`${externalBaseUrl}/userwithfriends`)
     .send(userData)
