@@ -21,6 +21,8 @@ export default function Ping({ navigation }: any) {
 
   const [text, onChangeText] = useState('')
 
+  const currentPage = 'Ping'
+
   return (
     <View style={styles.container}>
       <View style={styles.ping}>
@@ -46,7 +48,7 @@ export default function Ping({ navigation }: any) {
         </TouchableOpacity>
       </View>
       <View style={styles.nav}>
-        <Nav navigation={navigation} />
+        <Nav navigation={navigation} currentPage={currentPage} />
       </View>
     </View>
   )
