@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import { UserData } from '../common/Friendship'
-import { capitalise } from './helpers'
+import { capitalise, firstLetter } from './helpers'
 import * as Font from 'expo-font'
 
 interface Props {
@@ -11,9 +11,9 @@ interface Props {
 export default function ActiveFriend({ friend }: Props) {
   return (
     <View style={styles.user}>
-      <Text style={styles.name}>
-        {capitalise(friend.name)} {capitalise(friend.surname)}
-      </Text>
+      <RegularText style={styles.name}>
+        {capitalise(friend.name)} {firstLetter(friend.surname)}
+      </RegularText>
       <Image
         style={styles.image}
         source={require('../assets/user-icon.png')}
@@ -87,9 +87,12 @@ const styles = StyleSheet.create({
   },
   name: {
     alignSelf: 'center',
+    fontSize: 30,
+    color: 'oldlace',
   },
   image: {
     width: 20,
     height: 20,
+    alignSelf: 'center',
   },
 })

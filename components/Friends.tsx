@@ -28,8 +28,8 @@ export default function Friends({ navigation }: any) {
       <View style={styles.friends}>
         <SectionList
           sections={[
-            { title: 'Active Pings', data: pingFriendList },
-            { title: 'All Friends', data: otherFriendList },
+            { title: ' A c t i v e    P i n g s ', data: pingFriendList },
+            { title: ' A l l    F r i e n d s ', data: otherFriendList },
           ]}
           renderItem={({ item }) => renderFriends(item)}
           renderSectionHeader={({ section }) => (
@@ -116,11 +116,11 @@ const styles = StyleSheet.create({
     color: 'oldlace',
   },
   sectionHeader: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 50,
     backgroundColor: 'oldlace',
     textAlign: 'center',
     width: '100%',
+    color: '#dd571c',
   },
   nav: {
     backgroundColor: '#dd571c',
