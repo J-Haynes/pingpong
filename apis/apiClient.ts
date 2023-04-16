@@ -4,11 +4,13 @@ import { User, UserData, UserWithFriends } from '../common/User'
 const externalBaseUrl = 'https://pingpong-backend.devacademy.nz/api/v1'
 
 // See routes for what each function returns - functions are presented in order
-export function fetchFriends(userId: string): Promise<UserWithFriends> {
+export function fetchFriends(userData: UserData): Promise<UserWithFriends> {
+  console.log(userData)
   return request
-    .post(`${externalBaseUrl}/getfriends`)
-    .send({ userId })
+    .post(`${externalBaseUrl}/userwithfriends`)
+    .send(userData)
     .then((res) => {
+      console.log(res.body)
       return res.body
     })
 }
