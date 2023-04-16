@@ -46,7 +46,7 @@ export default function Ping({ navigation }: any) {
         <TouchableOpacity
           style={[styles.button, styles.shadow]}
           onPress={() => {
-            dispatch(changePing('google-oauth|123456789101', false, 'sphfe'))
+            dispatch(changePing(userId, true, location))
             return navigation.navigate('Friends')
           }}
         >

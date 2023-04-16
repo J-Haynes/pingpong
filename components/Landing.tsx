@@ -32,9 +32,10 @@ export default function Landing({ navigation }: any) {
   // Thuncctions
 
   const userId = useEffect(() => {
-    dispatch(loadUser(user?.id))
-    dispatch(loadUserWithFriends(user?.id))
-    // dispatch(loadUserWithFriends('google-oauth|123456789101'))
+    // dispatch(loadUser(user?.id))
+    // dispatch(loadUserWithFriends(user?.id))
+    dispatch(loadUser('google-oauth|123456789101'))
+    dispatch(loadUserWithFriends('google-oauth|123456789101'))
   }, [user])
 
   useEffect(() => {
