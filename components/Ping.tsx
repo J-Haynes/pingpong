@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   TextInput,
+  Dimensions,
 } from 'react-native'
 import Nav from './Nav'
 import * as Font from 'expo-font'
@@ -16,7 +17,9 @@ import { once } from 'superagent'
 import { useAppSelector, useAppDispatch } from '../hooks/redux'
 import { changePing } from '../redux/actions/userActions'
 import ImageSwiper from './Swiper'
-import Swiper from 'react-native-swiper/src'
+// import Swiper from 'react-native-swiper/src'
+
+const { width } = Dimensions.get('window')
 
 export default function Ping({ navigation }: any) {
   const handlePress = () => {
@@ -33,14 +36,19 @@ export default function Ping({ navigation }: any) {
   return (
     <View style={styles.container}>
       <View style={styles.ping}>
-        {/* <Image
-            style={styles.image}
-            source={require('../assets/activities/beer.png')}
-          ></Image> */}
+        <Image
+          style={styles.image}
+          source={require('../assets/activities/beer.png')}
+        ></Image>
         {/* <View style={styles.swipe}> */}
 
-        <View style={styles.swipecontainer}>
-          <Swiper style={styles.wrapper} showsButtons>
+        {/* <View style={styles.swipecontainer}>
+          <Swiper
+            style={styles.wrapper}
+            showsButtons={true}
+            loop={true}
+            height={1}
+          >
             <View style={styles.slide}>
               <Image
                 style={styles.img}
@@ -66,19 +74,22 @@ export default function Ping({ navigation }: any) {
               />
             </View>
           </Swiper>
-        </View>
+        </View> */}
 
         {/* </View> */}
-        {/* <SafeAreaView>
+        <SafeAreaView>
           <TextInput
             style={[styles.input, styles.shadow]}
             onChangeText={onChangeText}
             value={location}
             placeholder="Where to?"
-            placeholderTextColor={'grey'}
+            placeholderTextColor={'oldlace'}
           />
-        </SafeAreaView> */}
-        {/* <TouchableOpacity
+        </SafeAreaView>
+        <MediumText style={styles.text}>
+          PRESS THE BALL TO SEND YOUR PING
+        </MediumText>
+        <TouchableOpacity
           onPress={() => {
             dispatch(changePing(userId, true, location))
             return navigation.navigate('Friends')
@@ -88,11 +99,11 @@ export default function Ping({ navigation }: any) {
             style={styles.button}
             source={require('../assets/ball.png')}
           ></Image>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
       </View>
-      {/* <View style={styles.nav}>
+      <View style={styles.nav}>
         <Nav navigation={navigation} currentPage={currentPage} />
-      </View> */}
+      </View>
     </View>
   )
 }
@@ -194,6 +205,7 @@ const styles = StyleSheet.create({
   wrapper: {},
   swipecontainer: {
     flex: 1,
+    width,
   },
   slide: {
     flex: 1,
@@ -201,7 +213,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   img: {
-    width: 50,
-    height: 50,
+    width: 150,
+    height: 150,
   },
 })
