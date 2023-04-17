@@ -21,6 +21,11 @@ function reducer(state = initialState, action: Action): UserWithFriends {
         return friend
       })
       return { ...state, friend_data: confirmedState }
+    case 'DENY_FRIEND':
+      const deniedState = state.friend_data.filter(
+        (friend) => friend.auth_id !== payload
+      )
+      return { ...state, friend_data: deniedState }
     default:
       return state
   }

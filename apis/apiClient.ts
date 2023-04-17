@@ -42,6 +42,16 @@ export function sendFriendConfirm(
     .then((res) => res.body)
 }
 
+export function sendFriendDeny(
+  userId: string,
+  friendId: string
+): Promise<number> {
+  return request
+    .post(`${externalBaseUrl}/deny`)
+    .send({ userId, friendId })
+    .then((res) => res.body)
+}
+
 export function changePingStatus(
   userId: string,
   setting: boolean,
