@@ -11,19 +11,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 const Tab = createBottomTabNavigator()
 
-// interface Icon {
-//   icon: 'friend' | 'ping'
-//   color: 'rgb(130, 130, 130)'
-//   activeColor: 'rgb(3, 137, 253)' // optional
-//   activeBackgroundColor: 'rgb(224, 243, 255)' // optional
-// }
-
-// import { NavigationProp, ParamListBase } from '@react-navigation/native'
-
-// type NavProps = {
-//   navigation: NavigationProp<ParamListBase>
-// }
-
 export default function Nav({ navigation, currentPage }: any) {
   const handlePressPing = () => {
     navigation.navigate('Ping')
@@ -35,7 +22,6 @@ export default function Nav({ navigation, currentPage }: any) {
 
   return (
     <View style={styles.container}>
-      {/* <Tab items={[{ icon: 'friend' }, { icon: 'ping' }]} onPress={() => 1} /> */}
       <TouchableOpacity style={styles.button} onPress={handlePressPing}>
         {currentPage === 'Ping' && (
           <Image
@@ -56,7 +42,7 @@ export default function Nav({ navigation, currentPage }: any) {
           ></Image>
         )}
       </TouchableOpacity>
-      <Text style={styles.text}>|</Text>
+      <Text style={styles.lineText}>|</Text>
       <TouchableOpacity style={styles.button} onPress={handlePressFriends}>
         {currentPage === 'Ping' && (
           <Image
@@ -86,20 +72,24 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: 'oldlace', // Set background color of the navbar
+    backgroundColor: '#FDF7ED', // Set background color of the navbar
     borderRadius: 50, // Set border radius to create a pill shape
-    height: 75, // Set desired height of the navbar
-    paddingHorizontal: 20, // Add horizontal padding to align content
+    height: 60, // Set desired height of the navbar
+    width: 350,
+    // paddingHorizontal: 20, // Add horizontal padding to align content
     elevation: 5, // Add elevation for a floating effect on Android
-  },
-  text: {
-    color: '#161c20',
-    fontSize: 20,
+    borderWidth: 3,
+    borderColor: '#F79500',
     alignSelf: 'center',
   },
   button: {
     paddingVertical: 10,
     paddingHorizontal: 50,
   },
-  beer: { width: 60, height: 60 },
+  beer: { width: 40, height: 40 },
+  lineText: {
+    color: '#0E65A3',
+    fontSize: 20,
+    alignSelf: 'center',
+  },
 })

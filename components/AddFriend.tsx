@@ -14,15 +14,22 @@ import React from 'react'
 import { useState } from 'react'
 
 import Nav from './Nav'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
+
+import { addFriendThunk } from '../redux/actions/userActions'
 
 export default function AddFriend({ navigation }: any) {
+  const dispatch = useAppDispatch()
+
   const currentPage = 'AddFriend'
 
-  const [username, onChangeText] = useState('')
+  const [searchName, setSearchName] = useState('')
 
   const handlePress = () => {
-    console.log('searched!')
+    dispatch(addFriendThunk(userId, searchName))
   }
+
+  const userId = useAppSelector((state) => state.friends.auth_id)
 
   return (
     <>
@@ -30,8 +37,8 @@ export default function AddFriend({ navigation }: any) {
         <SafeAreaView>
           <TextInput
             style={[styles.input, styles.shadow]}
-            onChangeText={onChangeText}
-            value={username}
+            onChangeText={setSearchName}
+            value={searchName}
             placeholder="Search for username"
             placeholderTextColor={'white'}
           />
