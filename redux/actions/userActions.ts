@@ -1,12 +1,18 @@
 import { User, UserData, UserWithFriends } from '../../common/User'
-import { fetchUser, fetchFriends, changePingStatus } from '../../apis/apiClient'
+import {
+  fetchFriends,
+  changePingStatus,
+  sendFriendConfirm,
+} from '../../apis/apiClient'
 import type { ThunkAction } from '../store'
+import { resolveDiscoveryAsync } from 'expo-auth-session'
 
 export type Action =
   | { type: 'FETCH_USER'; payload: User }
   | { type: 'FETCH_FRIENDS'; payload: UserWithFriends }
   | { type: 'SET_PING'; payload: boolean }
   | { type: 'SET_LOCATION'; payload: string }
+  | { type: 'CONFIRM_FRIEND'; payload: string }
 
 export function addUserToState(user: User): Action {
   return {
@@ -35,6 +41,13 @@ export function addLocationToState(location: string): Action {
   return {
     type: 'SET_LOCATION',
     payload: location,
+  }
+}
+
+export function confirmFriendInState(friendId: string): Action {
+  return {
+    type: 'CONFIRM_FRIEND',
+    payload: friendId,
   }
 }
 
@@ -82,3 +95,17 @@ export function loadUserWithFriends(userData: string): ThunkAction {
 //     })
 //   }
 // }
+
+export function confirmFriend(userId: string, friendId: string): ThunkAction {
+  return (dispatch) => {
+    return sendFriendConfirm(userId, friendId).then((response: number) => {
+      if (response > 0) {
+        dispatch(confirmFriendInState(friendId))
+      } else {
+        console.log(
+          'Friendship not confirmed, unexpected response from database'
+        )
+      }
+    })
+  }
+}
