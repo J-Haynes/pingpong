@@ -10,6 +10,7 @@ import {
 import { useAppSelector } from '../hooks/redux'
 import ActiveFriend from './ActiveFriend'
 import BasicFriend from './BasicFriend'
+import PendingFriend from './PendingFriend'
 import Nav from './Nav'
 import { UserData } from '../common/User'
 import * as Font from 'expo-font'
@@ -27,28 +28,57 @@ export default function Friends({ navigation }: any) {
     {
       id: 3,
       auth_id: 'google-oauth|123456789103',
-      name: 'matt',
-      surname: 'marano',
+      name: 'friend',
+      surname: 't',
       username: 'mattmarano',
       birthday: '770904000000',
       ping_active: true,
+      pending: false,
     },
     {
       id: 4,
       auth_id: 'google-oauth|123456789104',
-      name: 'ryan',
-      surname: 'kendrick',
+      name: 'friend',
+      surname: 'f',
       username: 'ryankendrick',
       birthday: '740491200000',
       ping_active: false,
+      pending: false,
+    },
+    {
+      id: 5,
+      auth_id: 'google-oauth|123456789104',
+      name: 'stalker',
+      surname: 'f',
+      username: 'ryankendrick',
+      birthday: '740491200000',
+      ping_active: false,
+      pending: true,
+    },
+    {
+      id: 6,
+      auth_id: 'google-oauth|123456789104',
+      name: 'stalker',
+      surname: 't',
+      username: 'ryankendrick',
+      birthday: '740491200000',
+      ping_active: true,
+      pending: true,
     }
   )
 
-  const pingFriendList = friends.filter((friend) => friend.ping_active)
-  const otherFriendList = friends.filter((friend) => !friend.ping_active)
+  const pendingFriendsList = friends.filter((friend) => friend.pending == true)
+  const pingFriendList = friends.filter(
+    (friend) => friend.ping_active && friend.pending == false
+  )
+  const otherFriendList = friends.filter(
+    (friend) => !friend.ping_active && friend.pending == false
+  )
 
   const renderFriends = (item: UserData) => {
-    if (item.ping_active) {
+    if (item.pending == true) {
+      return <PendingFriend friend={item} />
+    } else if (item.ping_active) {
       return <ActiveFriend friend={item} />
     } else {
       return <BasicFriend friend={item} />
@@ -73,6 +103,10 @@ export default function Friends({ navigation }: any) {
           <View style={styles.friends}>
             <SectionList
               sections={[
+                {
+                  title: ' F r i e n d    R e q u e s t s ',
+                  data: pendingFriendsList,
+                },
                 { title: ' A c t i v e    P i n g s ', data: pingFriendList },
                 { title: ' A l l    F r i e n d s ', data: otherFriendList },
               ]}

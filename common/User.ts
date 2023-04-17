@@ -6,7 +6,7 @@ export interface UserData {
   birthday: string
   ping_active: boolean | number
   ping_location?: string | null
-  pending?: boolean | number
+  pending?: boolean
 }
 
 export interface User extends UserData {
