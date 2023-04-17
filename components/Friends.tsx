@@ -10,6 +10,7 @@ import {
 import { useAppSelector } from '../hooks/redux'
 import ActiveFriend from './ActiveFriend'
 import BasicFriend from './BasicFriend'
+import PendingFriend from './PendingFriend'
 import Nav from './Nav'
 import { UserData } from '../common/User'
 import * as Font from 'expo-font'
@@ -39,6 +40,7 @@ export default function Friends({ navigation }: any) {
         username: 'kerrehaynes',
         birthday: '847281600000',
         ping_active: true,
+        pending: false,
       },
       {
         id: 3,
@@ -48,6 +50,7 @@ export default function Friends({ navigation }: any) {
         username: 'mattmarano',
         birthday: '770904000000',
         ping_active: false,
+        pending: false,
       },
       {
         id: 4,
@@ -57,17 +60,25 @@ export default function Friends({ navigation }: any) {
         username: 'ryankendrick',
         birthday: '740491200000',
         ping_active: false,
+        pending: true,
       },
     ],
   }
 
   const friends = userWithFriends.friend_data
 
-  const pingFriendList = friends.filter((friend) => friend.ping_active)
-  const otherFriendList = friends.filter((friend) => !friend.ping_active)
+  const pingFriendList = friends.filter(
+    (friend) => friend.ping_active && friend.pending == false
+  )
+  const otherFriendList = friends.filter(
+    (friend) => !friend.ping_active && friend.pending == false
+  )
+  const pendingFriendsList = friends.filter((friend) => friend.pending == true)
 
   const renderFriends = (item: UserData) => {
-    if (item.ping_active) {
+    if (item.pending == true) {
+      return <PendingFriend friend={item} />
+    } else if (item.ping_active) {
       return <ActiveFriend friend={item} />
     } else {
       return <BasicFriend friend={item} />
@@ -75,6 +86,8 @@ export default function Friends({ navigation }: any) {
   }
 
   const currentPage = 'Friends'
+
+  console.log(pendingFriendsList)
 
   return (
     // one of these views should be scrollable
@@ -92,6 +105,10 @@ export default function Friends({ navigation }: any) {
           <View style={styles.friends}>
             <SectionList
               sections={[
+                {
+                  title: ' F r i e n d    R e q u e s t s ',
+                  data: pendingFriendsList,
+                },
                 { title: ' A c t i v e    P i n g s ', data: pingFriendList },
                 { title: ' A l l    F r i e n d s ', data: otherFriendList },
               ]}
