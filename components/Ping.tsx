@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {
   Text,
   View,
-  Pressable,
   StyleSheet,
-  Button,
   Image,
   TouchableOpacity,
   SafeAreaView,
@@ -13,11 +11,11 @@ import {
 } from 'react-native'
 import Nav from './Nav'
 import * as Font from 'expo-font'
-// import { once } from 'superagent'
+import AutoComplete from './Autocomplete'
 import { useAppSelector, useAppDispatch } from '../hooks/redux'
 import { changePing } from '../redux/actions/userActions'
-// import ImageSwiper from './Swiper'
 import Swiper from 'react-native-swiper/src'
+import LocationDetails from '../common/Location'
 
 const { width } = Dimensions.get('window')
 
@@ -27,7 +25,7 @@ export default function Ping({ navigation }: any) {
   const userId = useAppSelector((state) => state.friends.auth_id)
   const pingStatus = useAppSelector((state) => state.friends.ping_active)
 
-  const [location, onChangeText] = useState('')
+  const [location, onChangeText] = useState({} as LocationDetails)
 
   const [ping, setPing] = useState(false)
 
@@ -81,19 +79,11 @@ export default function Ping({ navigation }: any) {
         {/* </View> */}
         {!ping ? (
           <SafeAreaView>
-            <TextInput
-              style={styles.input}
-              onChangeText={onChangeText}
-              value={location}
-              placeholder="where to?"
-              placeholderTextColor={'#FDF7ED'}
-              multiline={false}
-              maxLength={25}
-            />
+            <AutoComplete change={onChangeText} />
           </SafeAreaView>
-        ) : location ? (
+        ) : location.description ? (
           <SafeAreaView>
-            <Text style={[styles.input]}>pinging at {location}</Text>
+            <Text style={styles.input}>pinging at {location?.name}</Text>
           </SafeAreaView>
         ) : (
           <SafeAreaView>
@@ -104,9 +94,9 @@ export default function Ping({ navigation }: any) {
           <View style={styles.button}>
             <TouchableOpacity
               onPress={() => {
-                dispatch(changePing(userId, false, location))
+                dispatch(changePing(userId, false, location.description))
                 setPing(!ping)
-                onChangeText('')
+                onChangeText({} as LocationDetails)
               }}
             >
               <Image
@@ -119,7 +109,7 @@ export default function Ping({ navigation }: any) {
           <View>
             <TouchableOpacity
               onPress={() => {
-                dispatch(changePing(userId, true, location))
+                dispatch(changePing(userId, true, location.description))
                 setPing(!ping)
               }}
             >
