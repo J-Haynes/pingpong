@@ -138,12 +138,16 @@ export function addFriends(friendId: string) {
 
 // Waiting for input from Ryan
 
-export function addFriendThunk(userId: string, searchName: string) {
+export function addFriendThunk(
+  userId: string,
+  searchName: string
+): ThunkAction {
   return (dispatch) => {
     return addFriendApi(userId, searchName).then((response) => {
       if (response > 0) {
         dispatch(addFriends(userId))
       } else {
+        console.log('Unexpected response from server, try another name')
       }
     })
   }
