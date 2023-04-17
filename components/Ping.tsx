@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {
   Text,
   View,
-  Pressable,
   StyleSheet,
-  Button,
   Image,
   TouchableOpacity,
   SafeAreaView,
@@ -13,11 +11,11 @@ import {
 } from 'react-native'
 import Nav from './Nav'
 import * as Font from 'expo-font'
-// import { once } from 'superagent'
+import AutoComplete from './Autocomplete'
 import { useAppSelector, useAppDispatch } from '../hooks/redux'
 import { changePing } from '../redux/actions/userActions'
-// import ImageSwiper from './Swiper'
 import Swiper from 'react-native-swiper/src'
+import LocationDetails from '../common/Location'
 
 const { width } = Dimensions.get('window')
 
@@ -27,7 +25,7 @@ export default function Ping({ navigation }: any) {
   const userId = useAppSelector((state) => state.friends.auth_id)
   const pingStatus = useAppSelector((state) => state.friends.ping_active)
 
-  const [location, onChangeText] = useState('')
+  const [location, onChangeText] = useState({} as LocationDetails)
 
   const [ping, setPing] = useState(false)
 
@@ -42,30 +40,35 @@ export default function Ping({ navigation }: any) {
         <View style={styles.swipecontainer}>
           <Swiper
             style={styles.wrapper}
-            showsButtons={true}
-            loop={true}
+            showsButtons={false}
+            showsPagination={false}
+            loop={false}
             // nextButton={styles.swipeButton}
             // prevButton={styles.swipeButton}
           >
             <View style={styles.slide}>
+              <RegularText style={styles.text}>b e e r</RegularText>
               <Image
                 style={styles.img}
                 source={require('../assets/activities/beer.png')}
               />
             </View>
             <View style={styles.slide}>
+              <RegularText style={styles.text}>c o f f e e</RegularText>
               <Image
                 style={styles.img}
                 source={require('../assets/activities/coffee.png')}
               />
             </View>
             <View style={styles.slide}>
+              <RegularText style={styles.text}>c h a t</RegularText>
               <Image
                 style={styles.img}
                 source={require('../assets/activities/talk.png')}
               />
             </View>
             <View style={styles.slide}>
+              <RegularText style={styles.text}>w a l k</RegularText>
               <Image
                 style={styles.img}
                 source={require('../assets/activities/walk.png')}
@@ -76,32 +79,24 @@ export default function Ping({ navigation }: any) {
         {/* </View> */}
         {!ping ? (
           <SafeAreaView>
-            <TextInput
-              style={[styles.input, styles.shadow]}
-              onChangeText={onChangeText}
-              value={location}
-              placeholder="Where to?"
-              placeholderTextColor={'oldlace'}
-            />
+            <AutoComplete change={onChangeText} />
           </SafeAreaView>
-        ) : location ? (
+        ) : location.description ? (
           <SafeAreaView>
-            <Text style={[styles.input, styles.shadow]}>
-              Currently pinging at {location}
-            </Text>
+            <Text style={styles.input}>pinging at {location?.name}</Text>
           </SafeAreaView>
         ) : (
           <SafeAreaView>
-            <Text style={[styles.input, styles.shadow]}>Currently pinging</Text>
+            <Text style={[styles.input]}>currently pinging</Text>
           </SafeAreaView>
         )}
         {ping ? (
           <View style={styles.button}>
             <TouchableOpacity
               onPress={() => {
-                dispatch(changePing(userId, false, location))
+                dispatch(changePing(userId, false, location.description))
                 setPing(!ping)
-                onChangeText('')
+                onChangeText({} as LocationDetails)
               }}
             >
               <Image
@@ -114,7 +109,7 @@ export default function Ping({ navigation }: any) {
           <View>
             <TouchableOpacity
               onPress={() => {
-                dispatch(changePing(userId, true, location))
+                dispatch(changePing(userId, true, location.description))
                 setPing(!ping)
               }}
             >
@@ -190,44 +185,54 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-around',
-    backgroundColor: '#dd571c',
+    backgroundColor: '#E05A00',
+    // width: width,
   },
   ping: {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    backgroundColor: '#dd571c',
-    // paddingTop: 22,
+    backgroundColor: '#E05A00',
   },
-  // image: { width: 200, height: 200 },
   nav: {
-    backgroundColor: '#dd571c',
-    padding: 30,
+    backgroundColor: '#E05A00',
+    padding: 20,
     width: '100%',
     alignContent: 'center',
   },
-  text: { color: 'oldlace', fontSize: 60, alignSelf: 'center' },
+  text: {
+    color: '#FDF7ED',
+    fontSize: 40,
+    alignSelf: 'center',
+    paddingBottom: 20,
+    textDecorationLine: 'underline',
+    textDecorationColor: '#F79500',
+    textDecorationStyle: 'solid',
+  },
   button: {
     width: 150,
     height: 150,
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 20,
-  },
-  shadow: {
-    shadowColor: '#b34e24',
-    shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 1,
-    shadowRadius: 10,
+    marginTop: 30,
+    marginBottom: 10,
   },
   input: {
-    height: 50,
     paddingVertical: 10,
-    paddingHorizontal: 70,
-    backgroundColor: '#b34e24',
+    backgroundColor: '#0E65A3',
     borderRadius: 50,
-    marginVertical: 20,
+    marginBottom: 20,
+    fontSize: 20,
+    textAlign: 'center',
+    borderWidth: 2,
+    borderColor: '#033B55',
+    color: '#FDF7ED',
+    width: 350,
+    height: 50,
+    alignSelf: 'center',
+    letterSpacing: 2,
+    fontWeight: 'normal',
   },
   wrapper: {
     flex: 1,
@@ -238,8 +243,7 @@ const styles = StyleSheet.create({
   },
   swipecontainer: {
     flex: 1,
-    width,
-    // height: 50,
+    width: width,
   },
   slide: {
     flex: 1,
@@ -250,12 +254,12 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
   },
-  swipeButton: {
-    color: 'oldlace',
-  },
   headerText: {
-    marginTop: 20,
-    color: 'oldlace',
-    fontSize: 50,
+    marginTop: 30,
+    color: '#FDF7ED',
+    fontSize: 70,
+    textDecorationLine: 'underline',
+    textDecorationColor: '#0E65A3',
+    textDecorationStyle: 'solid',
   },
 })

@@ -7,6 +7,7 @@ import { loadUserWithFriends } from '../redux/actions/userActions'
 
 import * as WebBrowser from 'expo-web-browser'
 import * as Google from 'expo-auth-session/providers/google'
+import AutoComplete from './Autocomplete'
 
 import { translateToUserData } from './helpers'
 import { GoogleData } from '../common/Google'
