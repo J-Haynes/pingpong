@@ -13,6 +13,9 @@ function reducer(state = initialState, action: Action): UserWithFriends {
       return { ...state, ping_active: payload }
     case 'SET_LOCATION':
       return { ...state, ping_location: payload }
+    // case 'CONFIRM_FRIEND':
+    //   const friend = state.friend_data.find((friend) => friend.auth_id === payload)
+    //   return {...state, friend.pending: false}
     default:
       return state
   }

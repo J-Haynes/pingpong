@@ -49,7 +49,7 @@ export function addLocationToState(location: string): Action {
 //   }
 // }
 
-export function loadUserWithFriends(userData: UserData): ThunkAction {
+export function loadUserWithFriends(userData: string): ThunkAction {
   // console.log(userData)
   return async (dispatch) => {
     return fetchFriends(userData)
