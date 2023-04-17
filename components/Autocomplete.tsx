@@ -43,7 +43,9 @@ export default function AutoComplete({ change }: Props) {
           }}
           textInputProps={{
             style: [styles.input, styles.shadow],
-            placeholderTextColor: 'oldlace',
+            placeholderTextColor: '#FDF7ED',
+            multiline: false,
+            maxLength: 25,
             onChangeText(text) {
               console.log(text)
             },
