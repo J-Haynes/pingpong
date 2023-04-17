@@ -9,6 +9,18 @@ function reducer(state = initialState, action: Action): UserWithFriends {
   switch (type) {
     case 'FETCH_FRIENDS':
       return payload
+    case 'SET_PING':
+      return { ...state, ping_active: payload }
+    case 'SET_LOCATION':
+      return { ...state, ping_location: payload }
+    case 'CONFIRM_FRIEND':
+      const confirmedState = state.friend_data.map((friend) => {
+        if (friend.auth_id === payload) {
+          friend.pending = false
+        }
+        return friend
+      })
+      return { ...state, friend_data: confirmedState }
     default:
       return state
   }

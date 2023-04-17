@@ -9,60 +9,127 @@ import {
   TouchableOpacity,
   SafeAreaView,
   TextInput,
+  Dimensions,
 } from 'react-native'
 import Nav from './Nav'
 import * as Font from 'expo-font'
-import { once } from 'superagent'
+// import { once } from 'superagent'
 import { useAppSelector, useAppDispatch } from '../hooks/redux'
 import { changePing } from '../redux/actions/userActions'
+// import ImageSwiper from './Swiper'
+import Swiper from 'react-native-swiper/src'
+
+const { width } = Dimensions.get('window')
 
 export default function Ping({ navigation }: any) {
-  const handlePress = () => {
-    navigation.navigate('Friends')
-  }
   const dispatch = useAppDispatch()
 
-  const userId = useAppSelector((state) => state.user.auth_id)
+  const userId = useAppSelector((state) => state.friends.auth_id)
+  const pingStatus = useAppSelector((state) => state.friends.ping_active)
 
   const [location, onChangeText] = useState('')
+
+  const [ping, setPing] = useState(false)
 
   const currentPage = 'Ping'
 
   return (
-    <>
-      <View style={styles.container}>
-        <View style={styles.ping}>
-          <Image
-            style={styles.image}
-            source={require('../assets/activities/beer.png')}
-          ></Image>
-          {/* <RegularText style={styles.buttonText}>where?</RegularText> */}
+    <View style={styles.container}>
+      <MediumText style={styles.headerText}>
+        SEND A PING TO YOUR FRIENDS
+      </MediumText>
+      <View style={styles.ping}>
+        <View style={styles.swipecontainer}>
+          <Swiper
+            style={styles.wrapper}
+            showsButtons={true}
+            loop={true}
+            // nextButton={styles.swipeButton}
+            // prevButton={styles.swipeButton}
+          >
+            <View style={styles.slide}>
+              <Image
+                style={styles.img}
+                source={require('../assets/activities/beer.png')}
+              />
+            </View>
+            <View style={styles.slide}>
+              <Image
+                style={styles.img}
+                source={require('../assets/activities/coffee.png')}
+              />
+            </View>
+            <View style={styles.slide}>
+              <Image
+                style={styles.img}
+                source={require('../assets/activities/talk.png')}
+              />
+            </View>
+            <View style={styles.slide}>
+              <Image
+                style={styles.img}
+                source={require('../assets/activities/walk.png')}
+              />
+            </View>
+          </Swiper>
+        </View>
+        {/* </View> */}
+        {!ping ? (
           <SafeAreaView>
             <TextInput
               style={[styles.input, styles.shadow]}
               onChangeText={onChangeText}
               value={location}
               placeholder="Where to?"
-              placeholderTextColor={'grey'}
+              placeholderTextColor={'oldlace'}
             />
           </SafeAreaView>
-          <TouchableOpacity
-            onPress={() => {
-              dispatch(changePing(userId, true, location))
-              return navigation.navigate('Friends')
-            }}
-          >
-            <Image
-              style={styles.button}
-              source={require('../assets/ball.png')}
-            ></Image>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.nav}>
-          <Nav navigation={navigation} currentPage={currentPage} />
-        </View>
+        ) : location ? (
+          <SafeAreaView>
+            <Text style={[styles.input, styles.shadow]}>
+              Currently pinging at {location}
+            </Text>
+          </SafeAreaView>
+        ) : (
+          <SafeAreaView>
+            <Text style={[styles.input, styles.shadow]}>Currently pinging</Text>
+          </SafeAreaView>
+        )}
+        {ping ? (
+          <View style={styles.button}>
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(changePing(userId, false, location))
+                setPing(!ping)
+                onChangeText('')
+              }}
+            >
+              <Image
+                style={styles.button}
+                source={require('../assets/ball.png')}
+              ></Image>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View>
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(changePing(userId, true, location))
+                setPing(!ping)
+              }}
+            >
+              <Image
+                style={styles.button}
+                source={require('../assets/ball.png')}
+              ></Image>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
-    </>
+      <View style={styles.nav}>
+        <Nav navigation={navigation} currentPage={currentPage} />
+      </View>
+    </View>
   )
 }
 
@@ -131,9 +198,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-evenly',
     backgroundColor: '#dd571c',
-    paddingTop: 22,
+    // paddingTop: 22,
   },
-  image: { width: 200, height: 200 },
+  // image: { width: 200, height: 200 },
   nav: {
     backgroundColor: '#dd571c',
     padding: 30,
@@ -146,6 +213,7 @@ const styles = StyleSheet.create({
     height: 150,
     justifyContent: 'center',
     alignItems: 'center',
+    marginVertical: 20,
   },
   shadow: {
     shadowColor: '#b34e24',
@@ -159,5 +227,35 @@ const styles = StyleSheet.create({
     paddingHorizontal: 70,
     backgroundColor: '#b34e24',
     borderRadius: 50,
+    marginVertical: 20,
+  },
+  wrapper: {
+    flex: 1,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+  },
+  swipecontainer: {
+    flex: 1,
+    width,
+    // height: 50,
+  },
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  img: {
+    width: 150,
+    height: 150,
+  },
+  swipeButton: {
+    color: 'oldlace',
+  },
+  headerText: {
+    marginTop: 20,
+    color: 'oldlace',
+    fontSize: 50,
   },
 })

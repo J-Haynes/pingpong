@@ -9,7 +9,7 @@ export function createUsername(email: string): string {
   return email.split('@')[0]
 }
 
-export function addNewUser(googleData: GoogleData): UserData {
+export function translateToUserData(googleData: GoogleData): UserData {
   return {
     auth_id: googleData.id,
     name: googleData.given_name,
@@ -17,6 +17,7 @@ export function addNewUser(googleData: GoogleData): UserData {
     username: createUsername(googleData.email),
     birthday: new Date().toDateString(),
     ping_active: false,
+    ping_location: null,
   }
 }
 

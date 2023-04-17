@@ -1,12 +1,18 @@
-import { User, UserWithFriends } from '../../common/User'
-import { fetchUser, fetchFriends, changePingStatus } from '../../apis/apiClient'
+import { User, UserData, UserWithFriends } from '../../common/User'
+import {
+  fetchFriends,
+  changePingStatus,
+  sendFriendConfirm,
+} from '../../apis/apiClient'
 import type { ThunkAction } from '../store'
+import { resolveDiscoveryAsync } from 'expo-auth-session'
 
 export type Action =
   | { type: 'FETCH_USER'; payload: User }
   | { type: 'FETCH_FRIENDS'; payload: UserWithFriends }
   | { type: 'SET_PING'; payload: boolean }
   | { type: 'SET_LOCATION'; payload: string }
+  | { type: 'CONFIRM_FRIEND'; payload: string }
 
 export function addUserToState(user: User): Action {
   return {
@@ -38,20 +44,16 @@ export function addLocationToState(location: string): Action {
   }
 }
 
-// Takes a userId, calls fetchUser to get the user from the database, and then adds it to the store
-export function loadUser(userId: string): ThunkAction {
-  return (dispatch) => {
-    return fetchUser(userId)
-      .then((user: User) => {
-        dispatch(addUserToState(user))
-      })
-      .catch((err) => console.log(err))
+export function confirmFriendInState(friendId: string): Action {
+  return {
+    type: 'CONFIRM_FRIEND',
+    payload: friendId,
   }
 }
 
-export function loadUserWithFriends(userId: string): ThunkAction {
-  return (dispatch) => {
-    return fetchFriends(userId)
+export function loadUserWithFriends(userData: UserData): ThunkAction {
+  return async (dispatch) => {
+    return fetchFriends(userData)
       .then((userWithFriends) => {
         dispatch(addUserWithFriendsToState(userWithFriends))
       })
@@ -68,15 +70,23 @@ export function changePing(
 ): ThunkAction {
   return (dispatch) => {
     return changePingStatus(userId, setting, location).then((user) => {
-      if (setting === false) {
-        user.ping_active = false
-      } else {
-        user.ping_active = true
-      }
-      console.log(user)
-      dispatch(togglePingInState(user.ping_active))
+      dispatch(togglePingInState(Boolean(user.ping_active)))
       if (user.ping_location) {
         dispatch(addLocationToState(user.ping_location))
+      } else dispatch(addLocationToState(''))
+    })
+  }
+}
+
+export function confirmFriend(userId: string, friendId: string): ThunkAction {
+  return (dispatch) => {
+    return sendFriendConfirm(userId, friendId).then((response: number) => {
+      if (response > 0) {
+        dispatch(confirmFriendInState(friendId))
+      } else {
+        console.log(
+          'Friendship not confirmed, unexpected response from database'
+        )
       }
     })
   }

@@ -4,13 +4,11 @@ import { User, UserData, UserWithFriends } from '../common/User'
 const externalBaseUrl = 'https://pingpong-backend.devacademy.nz/api/v1'
 
 // See routes for what each function returns - functions are presented in order
-export function fetchFriends(userId: string): Promise<UserWithFriends> {
+export function fetchFriends(userData: UserData): Promise<UserWithFriends> {
   return request
-    .post(`${externalBaseUrl}/getfriends`)
-    .send({ userId })
-    .then((res) => {
-      return res.body
-    })
+    .post(`${externalBaseUrl}/userwithfriends`)
+    .send(userData)
+    .then((res) => res.body)
 }
 
 export function fetchUser(userId: string): Promise<User> {
@@ -34,7 +32,7 @@ export function sendFriendRequest(userId: string, friendId: string) {
     .then((res) => res.body)
 }
 
-export function confirmFriend(
+export function sendFriendConfirm(
   userId: string,
   friendId: string
 ): Promise<number> {
@@ -53,7 +51,7 @@ export function changePingStatus(
     .post(`${externalBaseUrl}/setping`)
     .send({ userId, setting, location })
     .then((res) => {
-      console.log(res.body)
-      return res.body
+      console.log('Api client', res.body[0])
+      return res.body[0]
     })
 }

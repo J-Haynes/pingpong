@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react'
 import { Image, Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import * as Font from 'expo-font'
 import { useAppDispatch } from '../hooks/redux'
-import { loadUser, loadUserWithFriends } from '../redux/actions/userActions'
+import { loadUserWithFriends } from '../redux/actions/userActions'
 
 import * as WebBrowser from 'expo-web-browser'
 import * as Google from 'expo-auth-session/providers/google'
 
-import { createUsername } from './helpers'
+import { translateToUserData } from './helpers'
 import { GoogleData } from '../common/Google'
+import { UserData } from '../common/User'
 
 WebBrowser.maybeCompleteAuthSession()
 
@@ -17,7 +18,7 @@ export default function Landing({ navigation }: any) {
   const dispatch = useAppDispatch()
 
   //auth
-  const [user, setUser] = useState(null as GoogleData | null)
+  const [googleUser, setGoogleUser] = useState(null as GoogleData | null)
   const [accessToken, setAccessToken] = useState(null)
   const [request, response, promptAsync] = Google.useAuthRequest({
     clientId:
@@ -29,37 +30,37 @@ export default function Landing({ navigation }: any) {
       'replace this after you get SHA-1 key @ console.cloud.google.com',
   })
 
-  // Thuncctions
+  // Thuncc state
 
-  const userId = useEffect(() => {
-    // dispatch(loadUser(user?.id))
-    // dispatch(loadUserWithFriends(user?.id))
-    dispatch(loadUser('google-oauth|123456789101'))
-    dispatch(loadUserWithFriends('google-oauth|123456789101'))
-  }, [user])
+  const [userData, setUserData] = useState({} as UserData)
 
   useEffect(() => {
     if (response?.type === 'success') {
       setAccessToken(response.authentication.accessToken)
       accessToken && fetchUserInfo()
     }
+
+    async function fetchUserInfo() {
+      let response = await fetch('https://www.googleapis.com/userinfo/v2/me', {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      const googleData = await response.json()
+      setGoogleUser(googleData)
+      setUserData(translateToUserData(googleData))
+    }
   }, [response, accessToken])
 
   useEffect(() => {
-    user && navigation.navigate('Ping')
-  }, [user])
+    dispatch(loadUserWithFriends(userData))
+  }, [userData])
 
-  async function fetchUserInfo() {
-    let response = await fetch('https://www.googleapis.com/userinfo/v2/me', {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    })
-    const useInfo = await response.json()
-    setUser(useInfo)
-  }
+  useEffect(() => {
+    googleUser && navigation.navigate('Ping')
+  }, [googleUser])
 
   return (
     <View style={styles.container}>
-      {user === null && (
+      {googleUser === null && (
         <>
           <Image
             style={styles.image}
