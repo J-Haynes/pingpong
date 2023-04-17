@@ -65,3 +65,12 @@ export function changePingStatus(
       return res.body[0]
     })
 }
+
+// Waiting for deployment
+
+export function addFriendApi(userId: string, searchName: string) {
+  return request
+    .post(`${externalBaseUrl}/searchuser`)
+    .send({ userId, searchName })
+    .then((res) => res.body)
+}

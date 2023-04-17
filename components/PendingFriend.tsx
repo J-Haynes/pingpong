@@ -32,7 +32,7 @@ export default function PendingFriend({ friend }: Props) {
 
   const handleCancel = () => {
     console.log('denied!')
-    dispatch(denyFriend(userId, friend.auth_id))
+    // dispatch(denyFriend(userId, friend.auth_id))
   }
 
   return (
