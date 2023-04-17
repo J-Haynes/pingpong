@@ -193,10 +193,7 @@ Mark the task as complete in Trello and choose your next task, marking it as in-
 
 ## API (Client - Server)
 
-| Method | Endpoint | Protected | Usage | Response |
-| --- | --- | --- | --- | --- |
-| Get | /api/TBD | TBD | TBD | TBD |
-| Post | /api/TBD | TBD | TBD | TBD |
+Clientside APIs mirror the serverside minus the Google API routes
 
 ## DB (Server Side)
   There should be TBD tables for MVP. You may want/need to add additional columns and tables.
@@ -205,15 +202,23 @@ Mark the task as complete in Trello and choose your next task, marking it as in-
 #### users
   | Column Name | Data Type |
   | --- | --- |
-  | id | Integer |
-  | TBD | TBD |
+  | id | increments |
+  | auth_id | string |
+  | name | string |
+    | surname | string |
+  | username | string |
+  | birthday | string |
+  | ping_active | boolean |
+  | ping_location | string OR null |
+
   
   #### friendships
   | Column Name | Data Type |
   | --- | --- |
-  | id | increment |
+  | id | increments |
   | user_one_id | string |
   | user_two_id | string |
+  | pending     | boolean |
 
  ---
 ## Authentication
