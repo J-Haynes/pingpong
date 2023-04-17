@@ -42,8 +42,9 @@ export default function Ping({ navigation }: any) {
         <View style={styles.swipecontainer}>
           <Swiper
             style={styles.wrapper}
-            showsButtons={true}
-            loop={true}
+            showsButtons={false}
+            showsPagination={false}
+            loop={false}
             // nextButton={styles.swipeButton}
             // prevButton={styles.swipeButton}
           >
@@ -198,6 +199,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-evenly',
     backgroundColor: '#dd571c',
+    width,
     // paddingTop: 22,
   },
   // image: { width: 200, height: 200 },
