@@ -4,12 +4,45 @@ import { Dimensions, StyleSheet } from 'react-native'
 const { width } = Dimensions.get('window')
 
 export default StyleSheet.create({
+  // global
+
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-around',
     backgroundColor: '#E05A00',
   },
+
+  // landing specific
+
+  landingTitle: {
+    color: '#FDF7ED',
+    fontSize: 150,
+    alignSelf: 'center',
+    width: '100%',
+  },
+  tagline: {
+    color: '#FDF7ED',
+    fontSize: 50,
+    textAlign: 'center',
+    paddingHorizontal: 20,
+    width: '100%',
+  },
+  logInButtonText: { color: '#FDF7ED', fontSize: 50 },
+  logInButton: {
+    backgroundColor: '#0E65A3',
+    padding: 10,
+    borderRadius: 50,
+    paddingHorizontal: 50,
+    textAlign: 'center',
+    borderWidth: 2,
+    borderColor: '#033B55',
+    width: '50%',
+  },
+  ballImg: { width: 150, height: 150, marginTop: 50 },
+
+  // ping specific
+
   ping: {
     flex: 1,
     flexDirection: 'column',
