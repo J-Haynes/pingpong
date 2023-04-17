@@ -13,10 +13,8 @@ import {
 } from 'react-native'
 import Nav from './Nav'
 import * as Font from 'expo-font'
-// import { once } from 'superagent'
 import { useAppSelector, useAppDispatch } from '../hooks/redux'
 import { changePing } from '../redux/actions/userActions'
-// import ImageSwiper from './Swiper'
 import Swiper from 'react-native-swiper/src'
 
 const { width } = Dimensions.get('window')
@@ -35,9 +33,11 @@ export default function Ping({ navigation }: any) {
 
   return (
     <View style={styles.container}>
-      <MediumText style={styles.headerText}>
-        SEND A PING TO YOUR FRIENDS
-      </MediumText>
+      <View style={styles.headingContainer}>
+        <MediumText style={styles.headerText}>SEND A </MediumText>
+        <MediumText style={styles.blueText}>PING</MediumText>
+        <MediumText style={styles.headerText}> TO YOUR FRIENDS</MediumText>
+      </View>
       <View style={styles.ping}>
         <View style={styles.swipecontainer}>
           <Swiper
@@ -196,7 +196,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     backgroundColor: '#E05A00',
-    // width: width,
   },
   ping: {
     flex: 1,
@@ -216,9 +215,6 @@ const styles = StyleSheet.create({
     fontSize: 40,
     alignSelf: 'center',
     paddingBottom: 20,
-    textDecorationLine: 'underline',
-    textDecorationColor: '#F79500',
-    textDecorationStyle: 'solid',
   },
   button: {
     width: 150,
@@ -268,8 +264,13 @@ const styles = StyleSheet.create({
     marginTop: 30,
     color: '#FDF7ED',
     fontSize: 70,
-    textDecorationLine: 'underline',
-    textDecorationColor: '#0E65A3',
-    textDecorationStyle: 'solid',
+  },
+  blueText: {
+    color: '#0E65A3',
+    fontSize: 70,
+    marginTop: 30,
+  },
+  headingContainer: {
+    flexDirection: 'row',
   },
 })
