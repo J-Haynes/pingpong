@@ -87,8 +87,6 @@ export default function Friends({ navigation }: any) {
 
   const currentPage = 'Friends'
 
-  console.log(pendingFriendsList)
-
   return (
     // one of these views should be scrollable
     <View style={styles.container}>

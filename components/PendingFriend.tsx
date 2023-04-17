@@ -11,22 +11,28 @@ import { UserData } from '../common/User'
 import { capitalise, firstLetter } from './helpers'
 import * as Font from 'expo-font'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
+import {
+  confirmFriend,
+  // Uncomment all code when Ryan's finished
+  //  denyFriend
+} from '../redux/actions/userActions'
 
 interface Props {
   friend: UserData
 }
 
 export default function PendingFriend({ friend }: Props) {
+  const userId = useAppSelector((state) => state.friends.auth_id)
+
   const dispatch = useAppDispatch()
 
   const handleConfirm = () => {
-    // dispatch(confirmFriend(userId, friendId))
-    console.log(friend)
+    dispatch(confirmFriend(userId, friend.auth_id))
   }
 
   const handleCancel = () => {
-    // dispatch(denyFriend(userId, friendId))
-    console.log('cancel')
+    console.log('denied!')
+    //dispatch(denyFriend(userId, friend.auth_id))
   }
 
   return (
