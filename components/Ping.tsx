@@ -54,7 +54,8 @@ export default function Ping({ navigation }: any) {
             style={styles.wrapper}
             showsButtons={true}
             loop={true}
-            height={1}
+            // nextButton={styles.swipeButton}
+            // prevButton={styles.swipeButton}
           >
             <View style={styles.slide}>
               <Image
@@ -189,14 +190,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#dd571c',
   },
   ping: {
-    flex: 2,
+    flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-evenly',
     backgroundColor: '#dd571c',
-    paddingTop: 22,
+    // paddingTop: 22,
   },
-  image: { width: 200, height: 200 },
+  // image: { width: 200, height: 200 },
   nav: {
     backgroundColor: '#dd571c',
     padding: 30,
@@ -222,11 +223,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 70,
     backgroundColor: '#b34e24',
     borderRadius: 50,
+    marginVertical: 20,
   },
-  wrapper: {},
+  wrapper: {
+    flex: 1,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+  },
   swipecontainer: {
     flex: 1,
     width,
+    // height: 50,
   },
   slide: {
     flex: 1,
@@ -236,5 +245,8 @@ const styles = StyleSheet.create({
   img: {
     width: 150,
     height: 150,
+  },
+  swipeButton: {
+    color: 'oldlace',
   },
 })
