@@ -15,53 +15,34 @@ import { UserData } from '../common/User'
 import * as Font from 'expo-font'
 
 export default function Friends({ navigation }: any) {
-  // const userWithFriends = useAppSelector((state) => state.friends)
+  const userWithFriends = useAppSelector((state) => state.friends)
   // const friends = userWithFriends.friend_data
 
   // const pingFriendList = friends.filter((friend) => friend.ping_active)
   // const otherFriendList = friends.filter((friend) => !friend.ping_active)
 
-  const userWithFriends = {
-    id: 1,
-    auth_id: 'google-oauth|123456789101',
-    name: 'jack',
-    surname: 'haynes',
-    username: 'jackhaynes',
-    birthday: '826545600000',
-    ping_active: true,
-    ping_location: 'ur mom',
-    friend_data: [
-      {
-        id: 2,
-        auth_id: 'google-oauth|123456789102',
-        name: 'kerre ',
-        surname: 'haynes',
-        username: 'kerrehaynes',
-        birthday: '847281600000',
-        ping_active: true,
-      },
-      {
-        id: 3,
-        auth_id: 'google-oauth|123456789103',
-        name: 'matt',
-        surname: 'marano',
-        username: 'mattmarano',
-        birthday: '770904000000',
-        ping_active: false,
-      },
-      {
-        id: 4,
-        auth_id: 'google-oauth|123456789104',
-        name: 'ryan',
-        surname: 'kendrick',
-        username: 'ryankendrick',
-        birthday: '740491200000',
-        ping_active: false,
-      },
-    ],
-  }
-
   const friends = userWithFriends.friend_data
+  // Giving YOU some fake friends
+  friends.push(
+    {
+      id: 3,
+      auth_id: 'google-oauth|123456789103',
+      name: 'matt',
+      surname: 'marano',
+      username: 'mattmarano',
+      birthday: '770904000000',
+      ping_active: true,
+    },
+    {
+      id: 4,
+      auth_id: 'google-oauth|123456789104',
+      name: 'ryan',
+      surname: 'kendrick',
+      username: 'ryankendrick',
+      birthday: '740491200000',
+      ping_active: false,
+    }
+  )
 
   const pingFriendList = friends.filter((friend) => friend.ping_active)
   const otherFriendList = friends.filter((friend) => !friend.ping_active)
