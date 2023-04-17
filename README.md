@@ -206,6 +206,8 @@ Clientside APIs mirror the serverside minus the Google API routes
 | Post | https://pingpong-backend.devacademy.nz/api/v1/deny | userId: auth_id, friendId: auth_id | 1 if the friendships entry was deleted |
 | Post | https://pingpong-backend.devacademy.nz/api/v1/setping | userId: auth_id, setting: boolean, location: optional location string for when setting is true | A user object |
 | Post | https://pingpong-backend.devacademy.nz/api/v1/searchuser | userId: auth_id, searchName: username search string | The id of the entry inserted into the friendships table if the username matches an entry in the user table |
+| Get | https://pingpong-backend.devacademy.nz/google/place/autocomplete/json? | input: search string | Locations from Google Places |
+| Get | https://pingpong-backend.devacademy.nz/google/place/details/json? | placeid: place id | Place details |
 
 ### Tables
 #### users
