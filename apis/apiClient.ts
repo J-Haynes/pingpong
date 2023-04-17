@@ -32,7 +32,7 @@ export function sendFriendRequest(userId: string, friendId: string) {
     .then((res) => res.body)
 }
 
-export function confirmFriend(
+export function sendFriendConfirm(
   userId: string,
   friendId: string
 ): Promise<number> {
