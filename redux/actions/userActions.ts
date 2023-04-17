@@ -3,6 +3,7 @@ import {
   fetchFriends,
   changePingStatus,
   sendFriendConfirm,
+  sendFriendDeny,
 } from '../../apis/apiClient'
 import type { ThunkAction } from '../store'
 import { resolveDiscoveryAsync } from 'expo-auth-session'
@@ -13,6 +14,7 @@ export type Action =
   | { type: 'SET_PING'; payload: boolean }
   | { type: 'SET_LOCATION'; payload: string }
   | { type: 'CONFIRM_FRIEND'; payload: string }
+  | { type: 'DENY_FRIEND'; payload: string }
 
 export function addUserToState(user: User): Action {
   return {
@@ -51,6 +53,12 @@ export function confirmFriendInState(friendId: string): Action {
   }
 }
 
+export function denyFriendInState(friendId: string): Action {
+  return {
+    type: 'DENY_FRIEND',
+    payload: friendId,
+  }
+}
 // Takes a userId, calls fetchUser to get the user from the database, and then adds it to the store
 // export function loadUser(userId: string): ThunkAction {
 //   return (dispatch) => {
@@ -100,6 +108,20 @@ export function confirmFriend(userId: string, friendId: string): ThunkAction {
     return sendFriendConfirm(userId, friendId).then((response: number) => {
       if (response > 0) {
         dispatch(confirmFriendInState(friendId))
+      } else {
+        console.log(
+          'Friendship not confirmed, unexpected response from database'
+        )
+      }
+    })
+  }
+}
+
+export function denyFriend(userId: string, friendId: string): ThunkAction {
+  return (dispatch) => {
+    return sendFriendDeny(userId, friendId).then((response: number) => {
+      if (response > 0) {
+        dispatch(denyFriendInState(friendId))
       } else {
         console.log(
           'Friendship not confirmed, unexpected response from database'
