@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
-import { Image, Text, View, StyleSheet, TouchableOpacity } from 'react-native'
+import { Image, Text, View, TouchableOpacity } from 'react-native'
 import * as Font from 'expo-font'
 import { useAppDispatch } from '../hooks/redux'
 import { loadUserWithFriends } from '../redux/actions/userActions'
+import StyleSheet from '../styles/styles'
 
 import * as WebBrowser from 'expo-web-browser'
 import * as Google from 'expo-auth-session/providers/google'
@@ -61,26 +62,30 @@ export default function Landing({ navigation }: any) {
   }, [googleUser])
 
   return (
-    <View style={styles.container}>
+    <View style={StyleSheet.container}>
       {googleUser === null && (
         <>
           <Image
-            style={styles.image}
+            style={StyleSheet.ballImg}
             source={require('../assets/ball.png')}
           ></Image>
           <View>
-            <MediumText style={styles.title}> P I N G P O N G </MediumText>
-            <RegularText style={styles.mainText}></RegularText>
-            {/* add tagline to above */}
+            <MediumText style={StyleSheet.landingTitle}>
+              {' '}
+              P I N G P O N G{' '}
+            </MediumText>
+            <RegularText style={StyleSheet.tagline}>
+              kill your groupchat
+            </RegularText>
           </View>
           <TouchableOpacity
-            style={styles.button}
+            style={StyleSheet.logInButton}
             disabled={!request}
             onPress={() => {
               promptAsync()
             }}
           >
-            <RegularText style={styles.buttonText}>LOG IN</RegularText>
+            <RegularText style={StyleSheet.logInButtonText}>LOG IN</RegularText>
           </TouchableOpacity>
         </>
       )}
@@ -139,31 +144,3 @@ const RegularText = (props: any) => {
     </Text>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    backgroundColor: '#dd571c',
-  },
-  title: {
-    color: 'oldlace',
-    fontSize: 150,
-    paddingHorizontal: 20,
-  },
-  mainText: {
-    color: 'oldlace',
-    fontSize: 30,
-    alignSelf: 'center',
-    paddingHorizontal: 20,
-  },
-  buttonText: { color: 'oldlace', fontSize: 50, alignSelf: 'center' },
-  button: {
-    backgroundColor: '#161c20',
-    padding: 10,
-    borderRadius: 20,
-    paddingHorizontal: 50,
-  },
-  image: { width: 100, height: 100, marginTop: 50 },
-})

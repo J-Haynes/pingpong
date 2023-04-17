@@ -11,11 +11,7 @@ import { UserData } from '../common/User'
 import { capitalise, firstLetter } from './helpers'
 import * as Font from 'expo-font'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
-import {
-  confirmFriend,
-  // Uncomment all code when Ryan's finished
-  //  denyFriend
-} from '../redux/actions/userActions'
+import { confirmFriend, denyFriend } from '../redux/actions/userActions'
 
 interface Props {
   friend: UserData
@@ -32,7 +28,7 @@ export default function PendingFriend({ friend }: Props) {
 
   const handleCancel = () => {
     console.log('denied!')
-    // dispatch(denyFriend(userId, friend.auth_id))
+    dispatch(denyFriend(userId, friend.auth_id))
   }
 
   return (

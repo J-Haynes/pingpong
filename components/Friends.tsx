@@ -17,55 +17,57 @@ import * as Font from 'expo-font'
 
 export default function Friends({ navigation }: any) {
   const userWithFriends = useAppSelector((state) => state.friends)
-  // const friends = userWithFriends.friend_data
+  const friends = userWithFriends.friend_data
+
+  console.log('userwithfriends', userWithFriends)
 
   // const pingFriendList = friends.filter((friend) => friend.ping_active)
   // const otherFriendList = friends.filter((friend) => !friend.ping_active)
 
-  const friends = userWithFriends.friend_data
-  // Giving YOU some fake friends
-  friends.push(
-    {
-      id: 3,
-      auth_id: 'google-oauth|123456789103',
-      name: 'friend',
-      surname: 't',
-      username: 'mattmarano',
-      birthday: '770904000000',
-      ping_active: true,
-      pending: false,
-    },
-    {
-      id: 4,
-      auth_id: 'google-oauth|123456789104',
-      name: 'friend',
-      surname: 'f',
-      username: 'ryankendrick',
-      birthday: '740491200000',
-      ping_active: false,
-      pending: false,
-    },
-    {
-      id: 5,
-      auth_id: 'google-oauth|123456789104',
-      name: 'stalker',
-      surname: 'f',
-      username: 'ryankendrick',
-      birthday: '740491200000',
-      ping_active: false,
-      pending: true,
-    },
-    {
-      id: 6,
-      auth_id: 'google-oauth|123456789104',
-      name: 'stalker',
-      surname: 't',
-      username: 'ryankendrick',
-      birthday: '740491200000',
-      ping_active: true,
-      pending: true,
-    }
-  )
+  // const friends = userWithFriends.friend_data
+  // // Giving YOU some fake friends
+  // friends.push(
+  //   {
+  //     id: 3,
+  //     auth_id: 'google-oauth|123456789103',
+  //     name: 'friend',
+  //     surname: 't',
+  //     username: 'mattmarano',
+  //     birthday: '770904000000',
+  //     ping_active: true,
+  //     pending: false,
+  //   },
+  //   {
+  //     id: 4,
+  //     auth_id: 'google-oauth|123456789104',
+  //     name: 'friend',
+  //     surname: 'f',
+  //     username: 'ryankendrick',
+  //     birthday: '740491200000',
+  //     ping_active: false,
+  //     pending: false,
+  //   },
+  //   {
+  //     id: 5,
+  //     auth_id: 'google-oauth|123456789104',
+  //     name: 'stalker',
+  //     surname: 'f',
+  //     username: 'ryankendrick',
+  //     birthday: '740491200000',
+  //     ping_active: false,
+  //     pending: true,
+  //   },
+  //   {
+  //     id: 6,
+  //     auth_id: 'google-oauth|123456789104',
+  //     name: 'stalker',
+  //     surname: 't',
+  //     username: 'ryankendrick',
+  //     birthday: '740491200000',
+  //     ping_active: true,
+  //     pending: true,
+  //   }
+  // )
 
   const pendingFriendsList = friends.filter((friend) => friend.pending == true)
   const pingFriendList = friends.filter(
@@ -260,3 +262,13 @@ const styles = StyleSheet.create({
     left: 10,
   },
 })
+
+// {
+// 	"auth_id": "108267169986314483935",
+// 	"name": "Olivia",
+// 	"surname": "Clarke-Edwards",
+// 	"username": "oliviaclarkeedwards",
+// 	"birthday": "Mon Apr 17 2023",
+// 	"ping_active": true,
+// 	"ping_location": "Heyday NoMad, Broadway, New York, NY, USA"
+// }
