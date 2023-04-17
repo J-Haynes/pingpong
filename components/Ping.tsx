@@ -43,6 +43,9 @@ export default function Ping({ navigation }: any) {
 
   return (
     <View style={styles.container}>
+      <MediumText style={styles.headerText}>
+        SEND A PING TO YOUR FRIENDS
+      </MediumText>
       <View style={styles.ping}>
         {/* <Image
           style={styles.image}
@@ -210,6 +213,7 @@ const styles = StyleSheet.create({
     height: 150,
     justifyContent: 'center',
     alignItems: 'center',
+    marginVertical: 20,
   },
   shadow: {
     shadowColor: '#b34e24',
@@ -248,5 +252,10 @@ const styles = StyleSheet.create({
   },
   swipeButton: {
     color: 'oldlace',
+  },
+  headerText: {
+    marginTop: 20,
+    color: 'oldlace',
+    fontSize: 50,
   },
 })
