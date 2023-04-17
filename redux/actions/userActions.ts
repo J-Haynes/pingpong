@@ -91,9 +91,7 @@ export function changePing(
 ): ThunkAction {
   return (dispatch) => {
     return changePingStatus(userId, setting, location).then((user) => {
-      if (user.ping_active) user.ping_active = true
-      else user.ping_active = false
-      dispatch(togglePingInState(user.ping_active))
+      dispatch(togglePingInState(Boolean(user.ping_active)))
       if (user.ping_location) {
         dispatch(addLocationToState(user.ping_location))
       } else dispatch(addLocationToState(''))
