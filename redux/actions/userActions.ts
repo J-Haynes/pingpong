@@ -67,7 +67,7 @@ export function changePing(
   location: string
 ): ThunkAction {
   return (dispatch) => {
-    return changePingStatus(userId, setting, location).then(([user]) => {
+    return changePingStatus(userId, setting, location).then((user) => {
       if (setting === false) {
         user.ping_active = false
       } else {
