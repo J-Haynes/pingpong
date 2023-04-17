@@ -39,7 +39,7 @@ export default function AutoComplete({ change }: Props) {
           }}
           requestUrl={{
             useOnPlatform: 'web',
-            url: 'http://localhost:3000/google',
+            url: 'https://pingpong-backend.devacademy.nz/google',
           }}
           textInputProps={{
             style: styles.input,
