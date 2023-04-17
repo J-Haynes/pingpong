@@ -9,7 +9,7 @@
 
 **Product Owner:** Olivia  
 
-**Scrum leader:** Louis
+**Scrum leader:** Louis D
 
 **Vibes watcher:** Jack  
 

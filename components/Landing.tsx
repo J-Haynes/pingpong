@@ -29,7 +29,7 @@ export default function Landing({ navigation }: any) {
       '848389775127-8t0qgj3jnm3n7fck9f0jq8a6okk410qk.apps.googleusercontent.com',
     // WAITING ON SHA-1 KEY
     androidClientId:
-      'replace this after you get SHA-1 key @ console.cloud.google.com',
+      '848389775127-3gtei0e57k9rbunl2nohkrbftese73mm.apps.googleusercontent.com',
   })
 
   // Thuncc state
