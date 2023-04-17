@@ -151,12 +151,12 @@ As a user I want to:
   ---
 
 ### Git Flow
-#### MVP & main branches require code reviews for pull requests
+#### developement & main branches require code reviews for pull requests
 #### Merge Procedure:
 1. Add, commit and push to a feature branch
 2. Ensure that the app builds and major features are functional - npm run test
 3. Use npm run lint to check for issues
-3. Navigate to the repo on GitHub and make a pull request to MVP (after MVP achieved, main)
+3. Navigate to the repo on GitHub and make a pull request to developement (after MVP achieved, main)
 4. Ask another member of the team to review your code in-person or on Slack
 5. Another member of the team reviews the code for issues such as obvious bugs, breaches of convention, or misalignment in vision
 6. If the code is good, the pull request is approved and the reviewer deletes the branch
@@ -199,7 +199,16 @@ Mark the task as complete in Trello and choose your next task, marking it as in-
 | Post | /api/TBD | TBD | TBD | TBD |
 
 ## DB (Server Side)
-  There should be TBD tables for MVP. You may want/need to add additional columns and tables.
+| Method | Endpoint | Usage | Response |
+| --- | --- | --- | --- |
+| Post | https://pingpong-backend.devacademy.nz/api/v1/userwithfriends | User object | A user object with a friend_data array of user objects, adding the user to the database if it doesn't exist |
+| Post | https://pingpong-backend.devacademy.nz/api/v1/getuser |  userId: auth_id | A user object |
+| Post | https://pingpong-backend.devacademy.nz/api/v1/add | UserData object  | A user object |
+| Post | https://pingpong-backend.devacademy.nz/api/v1/addfriend | userId: auth_id, friendId: auth_id | Id of new entry in the friendships table |
+| Post | https://pingpong-backend.devacademy.nz/api/v1/confirm | userId: auth_id, friendId: auth_id | 1 if pending was set to false for the friendship |
+| Post | https://pingpong-backend.devacademy.nz/api/v1/deny | userId: auth_id, friendId: auth_id | 1 if the friendships entry was deleted |
+| Post | https://pingpong-backend.devacademy.nz/api/v1/setping | userId: auth_id, setting: boolean, location: optional location string for when setting is true | A user object |
+| Post | https://pingpong-backend.devacademy.nz/api/v1/searchuser | userId: auth_id, searchName: username search string | The id of the entry inserted into the friendships table if the username matches an entry in the user table |
 
 ### Tables
 #### users
