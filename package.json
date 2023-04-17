@@ -32,7 +32,6 @@
     "react-native-screens": "~3.20.0",
     "react-native-svg": "^13.9.0",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-swiper": "^1.6.0-rc.3",
     "react-native-vector-icons": "^9.2.0",
     "react-native-web": "^0.18.12",
     "react-navigation": "^4.4.4",
@@ -49,11 +48,13 @@
     "@types/jest": "^29.5.0",
     "@types/react": "^18.0.35",
     "@types/react-native": "^0.71.5",
+    "@types/react-native-swiper": "^1.5.12",
     "@types/react-test-renderer": "^18.0.0",
     "@types/superagent": "^4.1.16",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
     "eslint": "^8.38.0",
+    "react-native-swiper": "^1.6.0",
     "typescript": "^5.0.4"
   },
   "private": true

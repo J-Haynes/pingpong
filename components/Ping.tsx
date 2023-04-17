@@ -22,9 +22,6 @@ import Swiper from 'react-native-swiper/src'
 const { width } = Dimensions.get('window')
 
 export default function Ping({ navigation }: any) {
-  // const handlePress = () => {
-  //   navigation.navigate('Friends')
-  // }
   const dispatch = useAppDispatch()
 
   const userId = useAppSelector((state) => state.friends.auth_id)
@@ -32,14 +29,9 @@ export default function Ping({ navigation }: any) {
 
   const [location, onChangeText] = useState('')
 
-  const [ping, changePing] = useState(pingStatus)
+  const [ping, setPing] = useState(false)
 
   const currentPage = 'Ping'
-
-  console.log(
-    userId,
-    useAppSelector((state) => state.friends)
-  )
 
   return (
     <View style={styles.container}>
@@ -47,11 +39,6 @@ export default function Ping({ navigation }: any) {
         SEND A PING TO YOUR FRIENDS
       </MediumText>
       <View style={styles.ping}>
-        {/* <Image
-          style={styles.image}
-          source={require('../assets/activities/beer.png')}
-        ></Image> */}
-        {/* <View style={styles.swipe}> */}
         <View style={styles.swipecontainer}>
           <Swiper
             style={styles.wrapper}
@@ -87,21 +74,34 @@ export default function Ping({ navigation }: any) {
           </Swiper>
         </View>
         {/* </View> */}
-        <SafeAreaView>
-          <TextInput
-            style={[styles.input, styles.shadow]}
-            onChangeText={onChangeText}
-            value={location}
-            placeholder="Where to?"
-            placeholderTextColor={'oldlace'}
-          />
-        </SafeAreaView>
+        {!ping ? (
+          <SafeAreaView>
+            <TextInput
+              style={[styles.input, styles.shadow]}
+              onChangeText={onChangeText}
+              value={location}
+              placeholder="Where to?"
+              placeholderTextColor={'oldlace'}
+            />
+          </SafeAreaView>
+        ) : location ? (
+          <SafeAreaView>
+            <Text style={[styles.input, styles.shadow]}>
+              Currently pinging at {location}
+            </Text>
+          </SafeAreaView>
+        ) : (
+          <SafeAreaView>
+            <Text style={[styles.input, styles.shadow]}>Currently pinging</Text>
+          </SafeAreaView>
+        )}
         {ping ? (
           <View style={styles.button}>
             <TouchableOpacity
               onPress={() => {
-                dispatch(changePing(userId, true, location))
-                return navigation.navigate('Friends')
+                dispatch(changePing(userId, false, location))
+                setPing(!ping)
+                onChangeText('')
               }}
             >
               <Image
@@ -114,8 +114,8 @@ export default function Ping({ navigation }: any) {
           <View>
             <TouchableOpacity
               onPress={() => {
-                dispatch(changePing(userId, false, location))
-                return navigation.navigate('Friends')
+                dispatch(changePing(userId, true, location))
+                setPing(!ping)
               }}
             >
               <Image
