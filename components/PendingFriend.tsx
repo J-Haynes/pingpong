@@ -1,14 +1,32 @@
 import React, { useEffect, useState } from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import {
+  Image,
+  StyleSheet,
+  Text,
+  Touchable,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import { UserData } from '../common/User'
 import { capitalise, firstLetter } from './helpers'
 import * as Font from 'expo-font'
+import { useAppDispatch } from '../hooks/redux'
 
 interface Props {
   friend: UserData
 }
 
 export default function PendingFriend({ friend }: Props) {
+  const dispatch = useAppDispatch()
+
+  const handleConfirm = () => {
+    console.log('confirm')
+  }
+
+  const handleCancel = () => {
+    console.log('cancel')
+  }
+
   return (
     <>
       <View style={styles.user}>
@@ -16,14 +34,18 @@ export default function PendingFriend({ friend }: Props) {
           {capitalise(friend.name)} {firstLetter(friend.surname)}
         </RegularText>
         <View style={styles.container}>
-          <Image
-            style={styles.image}
-            source={require('../assets/check.png')}
-          ></Image>
-          <Image
-            style={styles.image}
-            source={require('../assets/cross.png')}
-          ></Image>
+          <TouchableOpacity onPress={handleConfirm}>
+            <Image
+              style={styles.image}
+              source={require('../assets/check.png')}
+            ></Image>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleCancel}>
+            <Image
+              style={styles.image}
+              source={require('../assets/cross.png')}
+            ></Image>
+          </TouchableOpacity>
         </View>
       </View>
     </>
