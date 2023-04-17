@@ -15,6 +15,7 @@ import AutoComplete from './Autocomplete'
 import { useAppSelector, useAppDispatch } from '../hooks/redux'
 import { changePing } from '../redux/actions/userActions'
 import Swiper from 'react-native-swiper/src'
+import LocationDetails from '../common/Location'
 
 const { width } = Dimensions.get('window')
 
@@ -24,7 +25,7 @@ export default function Ping({ navigation }: any) {
   const userId = useAppSelector((state) => state.friends.auth_id)
   const pingStatus = useAppSelector((state) => state.friends.ping_active)
 
-  const [location, onChangeText] = useState('')
+  const [location, onChangeText] = useState({} as LocationDetails)
 
   const [ping, setPing] = useState(false)
 
@@ -73,19 +74,19 @@ export default function Ping({ navigation }: any) {
         {/* </View> */}
         {!ping ? (
           <SafeAreaView>
-            <TextInput
+            {/* <TextInput
               style={[styles.input, styles.shadow]}
               onChangeText={onChangeText}
               value={location}
               placeholder="Where to?"
               placeholderTextColor={'oldlace'}
-            />
-            <AutoComplete />
+            /> */}
+            <AutoComplete change={onChangeText} />
           </SafeAreaView>
-        ) : location ? (
+        ) : location.description ? (
           <SafeAreaView>
-            <Text style={[styles.input, styles.shadow]}>
-              Currently pinging at {location}
+            <Text style={styles.text}>
+              Currently pinging at {location?.name}
             </Text>
           </SafeAreaView>
         ) : (
@@ -97,9 +98,9 @@ export default function Ping({ navigation }: any) {
           <View style={styles.button}>
             <TouchableOpacity
               onPress={() => {
-                dispatch(changePing(userId, false, location))
+                dispatch(changePing(userId, false, location.description))
                 setPing(!ping)
-                onChangeText('')
+                onChangeText({} as LocationDetails)
               }}
             >
               <Image
@@ -112,7 +113,7 @@ export default function Ping({ navigation }: any) {
           <View>
             <TouchableOpacity
               onPress={() => {
-                dispatch(changePing(userId, true, location))
+                dispatch(changePing(userId, true, location.description))
                 setPing(!ping)
               }}
             >
