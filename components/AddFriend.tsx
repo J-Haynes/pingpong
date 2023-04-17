@@ -1,21 +1,42 @@
-import { Text, View, Image, StyleSheet } from 'react-native'
+import {
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  SafeAreaView,
+  TextInput,
+  Touchable,
+  TouchableOpacity,
+  Button,
+  Alert,
+} from 'react-native'
 import React from 'react'
+import { useState } from 'react'
 
 import Nav from './Nav'
 
 export default function AddFriend({ navigation }: any) {
   const currentPage = 'AddFriend'
 
+  const [username, onChangeText] = useState('')
+
+  const handlePress = () => {
+    console.log('searched!')
+  }
+
   return (
     <>
       <View style={styles.container}>
-        <View style={styles.ping}>
-          <Image
-            style={styles.image}
-            source={require('../assets/activities/beer.png')}
-          ></Image>
-          <Text style={styles.mainText}>Add a friend page</Text>
-        </View>
+        <SafeAreaView>
+          <TextInput
+            style={[styles.input, styles.shadow]}
+            onChangeText={onChangeText}
+            value={username}
+            placeholder="Search for username"
+            placeholderTextColor={'white'}
+          />
+        </SafeAreaView>
+        <Button title="Add friend" onPress={handlePress} />
       </View>
       <View style={styles.nav}>
         <Nav navigation={navigation} currentPage={currentPage} />
@@ -50,6 +71,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-evenly',
     backgroundColor: '#dd571c',
-    paddingTop: 22,
+    paddingTop: 20,
+  },
+  input: {
+    height: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 70,
+    backgroundColor: '#b34e24',
+    borderRadius: 50,
+  },
+  shadow: {
+    shadowColor: '#b34e24',
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 1,
+    shadowRadius: 10,
   },
 })

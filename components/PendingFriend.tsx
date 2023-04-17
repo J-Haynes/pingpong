@@ -10,7 +10,7 @@ import {
 import { UserData } from '../common/User'
 import { capitalise, firstLetter } from './helpers'
 import * as Font from 'expo-font'
-import { useAppDispatch } from '../hooks/redux'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
 
 interface Props {
   friend: UserData
@@ -20,10 +20,12 @@ export default function PendingFriend({ friend }: Props) {
   const dispatch = useAppDispatch()
 
   const handleConfirm = () => {
-    console.log('confirm')
+    // dispatch(confirmFriend(userId, friendId))
+    console.log(friend)
   }
 
   const handleCancel = () => {
+    // dispatch(denyFriend(userId, friendId))
     console.log('cancel')
   }
 

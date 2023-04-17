@@ -56,7 +56,7 @@ export default function Friends({ navigation }: any) {
       pending: true,
     },
     {
-      id: 5,
+      id: 6,
       auth_id: 'google-oauth|123456789104',
       name: 'stalker',
       surname: 't',
