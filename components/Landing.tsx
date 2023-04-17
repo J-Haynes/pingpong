@@ -51,7 +51,7 @@ export default function Landing({ navigation }: any) {
   }, [response, accessToken])
 
   useEffect(() => {
-    dispatch(loadUserWithFriends('google-oauth|123456789101'))
+    dispatch(loadUserWithFriends(userData))
   }, [userData])
 
   useEffect(() => {

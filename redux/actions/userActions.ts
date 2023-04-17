@@ -62,8 +62,7 @@ export function confirmFriendInState(friendId: string): Action {
 //   }
 // }
 
-export function loadUserWithFriends(userData: string): ThunkAction {
-  // console.log(userData)
+export function loadUserWithFriends(userData: UserData): ThunkAction {
   return async (dispatch) => {
     return fetchFriends(userData)
       .then((userWithFriends) => {
