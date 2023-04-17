@@ -1,14 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  SafeAreaView,
-  TextInput,
-  Dimensions,
-} from 'react-native'
+import { Text, View, Image, TouchableOpacity, SafeAreaView } from 'react-native'
 import Nav from './Nav'
 import * as Font from 'expo-font'
 import AutoComplete from './Autocomplete'
@@ -16,6 +7,7 @@ import { useAppSelector, useAppDispatch } from '../hooks/redux'
 import { changePing } from '../redux/actions/userActions'
 import Swiper from 'react-native-swiper/src'
 import LocationDetails from '../common/Location'
+import StyleSheet from '../styles/styles'
 
 export default function Ping({ navigation }: any) {
   const dispatch = useAppDispatch()
@@ -30,47 +22,45 @@ export default function Ping({ navigation }: any) {
   const currentPage = 'Ping'
 
   return (
-    <View style={styles.container}>
-      <View style={styles.headingContainer}>
-        <MediumText style={styles.headerText}>SEND A </MediumText>
-        <MediumText style={styles.blueText}>PING</MediumText>
-        <MediumText style={styles.headerText}> TO YOUR FRIENDS</MediumText>
+    <View style={StyleSheet.container}>
+      <View style={StyleSheet.headingContainer}>
+        <MediumText style={StyleSheet.headerText}>SEND A </MediumText>
+        <MediumText style={StyleSheet.blueText}>PING</MediumText>
+        <MediumText style={StyleSheet.headerText}> TO YOUR FRIENDS</MediumText>
       </View>
-      <View style={styles.ping}>
-        <View style={styles.swipecontainer}>
+      <View style={StyleSheet.ping}>
+        <View style={StyleSheet.swipecontainer}>
           <Swiper
-            style={styles.wrapper}
+            style={StyleSheet.wrapper}
             showsButtons={false}
             showsPagination={false}
             loop={false}
-            // nextButton={styles.swipeButton}
-            // prevButton={styles.swipeButton}
           >
-            <View style={styles.slide}>
-              <RegularText style={styles.text}>b e e r</RegularText>
+            <View style={StyleSheet.slide}>
+              <RegularText style={StyleSheet.text}>b e e r</RegularText>
               <Image
-                style={styles.img}
+                style={StyleSheet.img}
                 source={require('../assets/activities/beer.png')}
               />
             </View>
-            <View style={styles.slide}>
-              <RegularText style={styles.text}>c o f f e e</RegularText>
+            <View style={StyleSheet.slide}>
+              <RegularText style={StyleSheet.text}>c o f f e e</RegularText>
               <Image
-                style={styles.img}
+                style={StyleSheet.img}
                 source={require('../assets/activities/coffee.png')}
               />
             </View>
-            <View style={styles.slide}>
-              <RegularText style={styles.text}>c h a t</RegularText>
+            <View style={StyleSheet.slide}>
+              <RegularText style={StyleSheet.text}>c h a t</RegularText>
               <Image
-                style={styles.img}
+                style={StyleSheet.img}
                 source={require('../assets/activities/talk.png')}
               />
             </View>
-            <View style={styles.slide}>
-              <RegularText style={styles.text}>w a l k</RegularText>
+            <View style={StyleSheet.slide}>
+              <RegularText style={StyleSheet.text}>w a l k</RegularText>
               <Image
-                style={styles.img}
+                style={StyleSheet.img}
                 source={require('../assets/activities/walk.png')}
               />
             </View>
@@ -83,15 +73,15 @@ export default function Ping({ navigation }: any) {
           </SafeAreaView>
         ) : location.description ? (
           <SafeAreaView>
-            <Text style={styles.input}>pinging at {location?.name}</Text>
+            <Text style={StyleSheet.input}>pinging at {location?.name}</Text>
           </SafeAreaView>
         ) : (
           <SafeAreaView>
-            <Text style={[styles.input]}>currently pinging</Text>
+            <Text style={[StyleSheet.input]}>currently pinging</Text>
           </SafeAreaView>
         )}
         {ping ? (
-          <View style={styles.button}>
+          <View style={StyleSheet.button}>
             <TouchableOpacity
               onPress={() => {
                 dispatch(changePing(userId, false, location.description))
@@ -100,7 +90,7 @@ export default function Ping({ navigation }: any) {
               }}
             >
               <Image
-                style={styles.button}
+                style={StyleSheet.button}
                 source={require('../assets/ball.png')}
               ></Image>
             </TouchableOpacity>
@@ -114,14 +104,14 @@ export default function Ping({ navigation }: any) {
               }}
             >
               <Image
-                style={styles.button}
+                style={StyleSheet.button}
                 source={require('../assets/ball.png')}
               ></Image>
             </TouchableOpacity>
           </View>
         )}
       </View>
-      <View style={styles.nav}>
+      <View style={StyleSheet.nav}>
         <Nav navigation={navigation} currentPage={currentPage} />
       </View>
     </View>

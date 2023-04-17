@@ -1,8 +1,9 @@
+'use strict'
 import { Dimensions, StyleSheet } from 'react-native'
 
 const { width } = Dimensions.get('window')
 
-module.exports = StyleSheet.create({
+export default StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
