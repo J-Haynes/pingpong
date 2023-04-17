@@ -1,5 +1,5 @@
-import React, { Ref, useRef, useState } from 'react'
-import { View, ScrollView, StyleSheet } from 'react-native'
+import React, { useState } from 'react'
+import { View, ScrollView, StyleSheet, Dimensions } from 'react-native'
 import {
   GooglePlaceData,
   GooglePlaceDetail,
@@ -7,13 +7,13 @@ import {
 } from 'react-native-google-places-autocomplete'
 import LocationDetails from '../common/Location'
 
+const { width } = Dimensions.get('window')
+
 interface Props {
   change: (location: LocationDetails) => any
 }
 
 export default function AutoComplete({ change }: Props) {
-  const [locationDetails, setLocationDetails] = useState({} as LocationDetails)
-
   const handlePress = async (
     data: GooglePlaceData,
     details: GooglePlaceDetail | null
@@ -28,7 +28,7 @@ export default function AutoComplete({ change }: Props) {
     <View>
       <ScrollView>
         <GooglePlacesAutocomplete
-          placeholder="Let's meet at..."
+          placeholder="Where to?"
           onPress={(data, details = null) => {
             handlePress(data, details)
           }}
@@ -42,7 +42,7 @@ export default function AutoComplete({ change }: Props) {
             url: 'http://localhost:3000/google',
           }}
           textInputProps={{
-            style: [styles.input, styles.shadow],
+            style: styles.input,
             placeholderTextColor: '#FDF7ED',
             multiline: false,
             maxLength: 25,
@@ -61,44 +61,54 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-around',
-    backgroundColor: '#dd571c',
+    backgroundColor: '#E05A00',
+    // width: width,
   },
   ping: {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    backgroundColor: '#dd571c',
-    // paddingTop: 22,
+    backgroundColor: '#E05A00',
   },
-  // image: { width: 200, height: 200 },
   nav: {
-    backgroundColor: '#dd571c',
-    padding: 30,
+    backgroundColor: '#E05A00',
+    padding: 20,
     width: '100%',
     alignContent: 'center',
   },
-  text: { color: 'oldlace', fontSize: 60, alignSelf: 'center' },
+  text: {
+    color: '#FDF7ED',
+    fontSize: 40,
+    alignSelf: 'center',
+    paddingBottom: 20,
+    textDecorationLine: 'underline',
+    textDecorationColor: '#F79500',
+    textDecorationStyle: 'solid',
+  },
   button: {
     width: 150,
     height: 150,
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 20,
-  },
-  shadow: {
-    shadowColor: '#b34e24',
-    shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 1,
-    shadowRadius: 10,
+    marginTop: 30,
+    marginBottom: 10,
   },
   input: {
-    height: 50,
     paddingVertical: 10,
-    paddingHorizontal: 70,
-    backgroundColor: '#b34e24',
+    backgroundColor: '#0E65A3',
     borderRadius: 50,
-    marginVertical: 20,
+    marginBottom: 20,
+    fontSize: 20,
+    textAlign: 'center',
+    borderWidth: 2,
+    borderColor: '#033B55',
+    color: '#FDF7ED',
+    width: 350,
+    height: 50,
+    alignSelf: 'center',
+    letterSpacing: 2,
+    fontWeight: 'normal',
   },
   wrapper: {
     flex: 1,
@@ -109,8 +119,7 @@ const styles = StyleSheet.create({
   },
   swipecontainer: {
     flex: 1,
-    // width,
-    // height: 50,
+    width: width,
   },
   slide: {
     flex: 1,
@@ -121,12 +130,12 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
   },
-  swipeButton: {
-    color: 'oldlace',
-  },
   headerText: {
-    marginTop: 20,
-    color: 'oldlace',
-    fontSize: 50,
+    marginTop: 30,
+    color: '#FDF7ED',
+    fontSize: 70,
+    textDecorationLine: 'underline',
+    textDecorationColor: '#0E65A3',
+    textDecorationStyle: 'solid',
   },
 })

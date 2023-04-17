@@ -80,15 +80,6 @@ export default function Ping({ navigation }: any) {
         {!ping ? (
           <SafeAreaView>
             <AutoComplete change={onChangeText} />
-            {/* <TextInput
-              style={styles.input}
-              onChangeText={onChangeText}
-              value={location}
-              placeholder="where to?"
-              placeholderTextColor={'#FDF7ED'}
-              multiline={false}
-              maxLength={25}
-            /> */}
           </SafeAreaView>
         ) : location.description ? (
           <SafeAreaView>
