@@ -9,17 +9,18 @@ import * as WebBrowser from 'expo-web-browser'
 import * as Google from 'expo-auth-session/providers/google'
 import AutoComplete from './Autocomplete'
 
+import { translateToUserData } from './helpers'
+import { GoogleData } from '../common/Google'
+import { UserData } from '../common/User'
+
 WebBrowser.maybeCompleteAuthSession()
 
 export default function Landing({ navigation }: any) {
   const dispatch = useAppDispatch()
-  const userId = useEffect(() => {
-    dispatch(loadUserWithFriends('google-oauth|123456789101'))
-  }, [])
 
   //auth
+  const [googleUser, setGoogleUser] = useState(null as GoogleData | null)
   const [accessToken, setAccessToken] = useState(null)
-  const [user, setUser] = useState(null)
   const [request, response, promptAsync] = Google.useAuthRequest({
     clientId:
       '848389775127-sano44j1jrulqvrfav88g7tksok3149g.apps.googleusercontent.com',
@@ -30,36 +31,37 @@ export default function Landing({ navigation }: any) {
       'replace this after you get SHA-1 key @ console.cloud.google.com',
   })
 
+  // Thuncc state
+
+  const [userData, setUserData] = useState({} as UserData)
+
   useEffect(() => {
     if (response?.type === 'success') {
       setAccessToken(response.authentication.accessToken)
       accessToken && fetchUserInfo()
     }
+
+    async function fetchUserInfo() {
+      let response = await fetch('https://www.googleapis.com/userinfo/v2/me', {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      const googleData = await response.json()
+      setGoogleUser(googleData)
+      setUserData(translateToUserData(googleData))
+    }
   }, [response, accessToken])
 
-  async function fetchUserInfo() {
-    let response = await fetch('https://www.googleapis.com/userinfo/v2/me', {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    })
-    const useInfo = await response.json()
-    setUser(useInfo)
-  }
+  useEffect(() => {
+    dispatch(loadUserWithFriends(userData))
+  }, [userData])
 
-  const NavigatePing = () => {
-    if (user) {
-      navigation.navigate('Ping')
-      return (
-        <>
-          <Text>Welcome</Text>
-          <Text>{user.given_name}</Text>
-        </>
-      )
-    }
-  }
+  useEffect(() => {
+    googleUser && navigation.navigate('Ping')
+  }, [googleUser])
+
   return (
     <View style={styles.container}>
-      {user && <NavigatePing />}
-      {user === null && (
+      {googleUser === null && (
         <>
           <Image
             style={styles.image}
@@ -67,9 +69,8 @@ export default function Landing({ navigation }: any) {
           ></Image>
           <View>
             <MediumText style={styles.title}> P I N G P O N G </MediumText>
-            <RegularText style={styles.mainText}>
-              Taking the media out of social media.
-            </RegularText>
+            <RegularText style={styles.mainText}></RegularText>
+            {/* add tagline to above */}
           </View>
           <TouchableOpacity
             style={styles.button}

@@ -1,58 +1,244 @@
-import React from 'react'
-import { Text, View, StyleSheet, SectionList } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import {
+  Text,
+  View,
+  StyleSheet,
+  SectionList,
+  Image,
+  TouchableOpacity,
+} from 'react-native'
 import { useAppSelector } from '../hooks/redux'
 import ActiveFriend from './ActiveFriend'
 import BasicFriend from './BasicFriend'
+import PendingFriend from './PendingFriend'
 import Nav from './Nav'
 import { UserData } from '../common/User'
+import * as Font from 'expo-font'
 
 export default function Friends({ navigation }: any) {
   const userWithFriends = useAppSelector((state) => state.friends)
-  const friends = userWithFriends.friend_data
+  // const friends = userWithFriends.friend_data
 
-  const pingFriendList = friends.filter((friend) => friend.ping_active)
-  const otherFriendList = friends.filter((friend) => !friend.ping_active)
+  // const pingFriendList = friends.filter((friend) => friend.ping_active)
+  // const otherFriendList = friends.filter((friend) => !friend.ping_active)
+
+  const friends = userWithFriends.friend_data
+  // Giving YOU some fake friends
+  friends.push(
+    {
+      id: 3,
+      auth_id: 'google-oauth|123456789103',
+      name: 'friend',
+      surname: 't',
+      username: 'mattmarano',
+      birthday: '770904000000',
+      ping_active: true,
+      pending: false,
+    },
+    {
+      id: 4,
+      auth_id: 'google-oauth|123456789104',
+      name: 'friend',
+      surname: 'f',
+      username: 'ryankendrick',
+      birthday: '740491200000',
+      ping_active: false,
+      pending: false,
+    },
+    {
+      id: 5,
+      auth_id: 'google-oauth|123456789104',
+      name: 'stalker',
+      surname: 'f',
+      username: 'ryankendrick',
+      birthday: '740491200000',
+      ping_active: false,
+      pending: true,
+    },
+    {
+      id: 6,
+      auth_id: 'google-oauth|123456789104',
+      name: 'stalker',
+      surname: 't',
+      username: 'ryankendrick',
+      birthday: '740491200000',
+      ping_active: true,
+      pending: true,
+    }
+  )
+
+  const pendingFriendsList = friends.filter((friend) => friend.pending == true)
+  const pingFriendList = friends.filter(
+    (friend) => friend.ping_active && friend.pending == false
+  )
+  const otherFriendList = friends.filter(
+    (friend) => !friend.ping_active && friend.pending == false
+  )
 
   const renderFriends = (item: UserData) => {
-    if (item.ping_active) {
+    if (item.pending == true) {
+      return <PendingFriend friend={item} />
+    } else if (item.ping_active) {
       return <ActiveFriend friend={item} />
     } else {
       return <BasicFriend friend={item} />
     }
   }
 
+  const currentPage = 'Friends'
+
   return (
+    // one of these views should be scrollable
     <View style={styles.container}>
-      <View style={styles.userContainer}>
-        <SectionList
-          sections={[
-            { title: 'Active Pings', data: pingFriendList },
-            { title: 'Inactive', data: otherFriendList },
-          ]}
-          renderItem={({ item }) => renderFriends(item)}
-          renderSectionHeader={({ section }) => (
-            <Text style={styles.sectionHeader}>{section.title}</Text>
-          )}
-          keyExtractor={(item) => `basicListEntry-${item.id}`}
-        />
+      <View style={styles.topbar}>
+        <TouchableOpacity onPress={() => navigation.navigate('AddFriend')}>
+          <Image
+            style={styles.addfriend}
+            source={require('../assets/addfriend.png')}
+          ></Image>
+        </TouchableOpacity>
       </View>
-      <View style={styles.nav}>
-        <Nav navigation={navigation} />
-      </View>
+      {friends.length != 0 ? (
+        <>
+          <View style={styles.friends}>
+            <SectionList
+              sections={[
+                {
+                  title: ' F r i e n d    R e q u e s t s ',
+                  data: pendingFriendsList,
+                },
+                { title: ' A c t i v e    P i n g s ', data: pingFriendList },
+                { title: ' A l l    F r i e n d s ', data: otherFriendList },
+              ]}
+              renderItem={({ item }) => renderFriends(item)}
+              renderSectionHeader={({ section }) => (
+                <View>
+                  <Text> </Text>
+                  <MediumText style={styles.sectionHeader}>
+                    {section.title}
+                  </MediumText>
+                  <Text> </Text>
+                </View>
+              )}
+              keyExtractor={(item) => `basicListEntry-${item.id}`}
+            />
+          </View>
+          <View style={styles.nav}>
+            <Nav navigation={navigation} currentPage={currentPage} />
+          </View>
+        </>
+      ) : (
+        <>
+          <View style={styles.container}>
+            <View style={styles.ping}>
+              <Image
+                style={styles.image}
+                source={require('../assets/activities/beer.png')}
+              ></Image>
+              <Text style={styles.mainText}>Oh no! No Friends...</Text>
+            </View>
+          </View>
+          <View style={styles.nav}>
+            <Nav navigation={navigation} currentPage={currentPage} />
+          </View>
+        </>
+      )}
     </View>
   )
 }
 
-// renderItem={({ item }) => <ActiveFriend friend={item} />}
+const MediumText = (props: any) => {
+  const [fontLoaded, setFontLoaded] = useState(false)
+
+  useEffect(() => {
+    async function loadFont() {
+      await Font.loadAsync({
+        'medium-font': require('../assets/fonts/BlueScreens/Medium-Italic.ttf'),
+      })
+
+      setFontLoaded(true)
+    }
+
+    loadFont()
+  }, [])
+
+  if (!fontLoaded) {
+    return <Text>Loading...</Text>
+  }
+
+  return (
+    <Text style={{ ...props.style, fontFamily: 'medium-font' }}>
+      {props.children}
+    </Text>
+  )
+}
+
+const RegularText = (props: any) => {
+  const [fontLoaded, setFontLoaded] = useState(false)
+
+  useEffect(() => {
+    async function loadFont() {
+      await Font.loadAsync({
+        'reg-font': require('../assets/fonts/BlueScreens/Regular.ttf'),
+      })
+
+      setFontLoaded(true)
+    }
+
+    loadFont()
+  }, [])
+
+  if (!fontLoaded) {
+    return <Text>Loading...</Text>
+  }
+
+  return (
+    <Text style={{ ...props.style, fontFamily: 'reg-font' }}>
+      {props.children}
+    </Text>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     backgroundColor: '#dd571c',
   },
-  userContainer: {
+  friendsHeader: {
+    backgroundColor: 'oldlace',
+    width: '100%',
+    alignContent: 'center',
+    color: 'oldlace',
+  },
+  sectionHeader: {
+    fontSize: 50,
+    backgroundColor: 'oldlace',
+    textAlign: 'center',
+    width: '100%',
+    color: '#dd571c',
+  },
+  nav: {
+    backgroundColor: '#dd571c',
+    padding: 30,
+    width: '100%',
+    alignContent: 'center',
+  },
+  friends: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    width: '100%',
+  },
+  image: { width: 200, height: 200, opacity: 0.6 },
+  mainText: {
+    color: 'oldlace',
+    fontSize: 30,
+    alignSelf: 'center',
+    paddingHorizontal: 20,
+  },
+  ping: {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
@@ -60,31 +246,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#dd571c',
     paddingTop: 22,
   },
-  friendsHeader: {
-    backgroundColor: 'oldlace',
-    padding: 30,
+  topbar: {
     width: '100%',
-    alignContent: 'center',
-    color: 'oldlace',
+    paddingTop: 5,
+    // flex: 1,
+    // alignItems: 'flex-end',
+    // flexDirection: 'corightlumn',
   },
-  mainText: {
-    color: 'black',
-    fontSize: 20,
-    alignSelf: 'center',
-  },
-  sectionHeader: {
-    paddingTop: 2,
-    paddingBottom: 2,
-    paddingHorizontal: 10,
-    fontSize: 14,
-    fontWeight: 'bold',
-    backgroundColor: 'rgba(247,247,247,1.0)',
-    textAlign: 'center',
-  },
-  nav: {
-    backgroundColor: '#dd571c',
-    padding: 30,
-    width: '100%',
-    alignContent: 'center',
+  addfriend: {
+    width: 50,
+    height: 50,
+    position: 'relative',
+    left: 10,
   },
 })

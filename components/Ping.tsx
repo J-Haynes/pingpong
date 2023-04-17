@@ -7,43 +7,125 @@ import {
   TouchableOpacity,
   SafeAreaView,
   TextInput,
+  Dimensions,
 } from 'react-native'
 import Nav from './Nav'
 import * as Font from 'expo-font'
 import AutoComplete from './Autocomplete'
+import { useAppSelector, useAppDispatch } from '../hooks/redux'
+import { changePing } from '../redux/actions/userActions'
+import Swiper from 'react-native-swiper/src'
+
+const { width } = Dimensions.get('window')
 
 export default function Ping({ navigation }: any) {
-  const handlePress = () => {
-    navigation.navigate('Friends')
-  }
+  const dispatch = useAppDispatch()
 
-  const [text, onChangeText] = useState('Where?')
+  const userId = useAppSelector((state) => state.friends.auth_id)
+  const pingStatus = useAppSelector((state) => state.friends.ping_active)
+
+  const [location, onChangeText] = useState('')
+
+  const [ping, setPing] = useState(false)
+
+  const currentPage = 'Ping'
 
   return (
     <View style={styles.container}>
+      <MediumText style={styles.headerText}>
+        SEND A PING TO YOUR FRIENDS
+      </MediumText>
       <View style={styles.ping}>
-        <Image
-          style={styles.image}
-          source={require('../assets/beer.png')}
-        ></Image>
-        {/* <RegularText style={styles.buttonText}>where?</RegularText> */}
-        <SafeAreaView>
-          {/* <TextInput
-            style={[styles.input, styles.shadow]}
-            onChangeText={onChangeText}
-            value={text}
-          /> */}
-          <AutoComplete />
-        </SafeAreaView>
-        <TouchableOpacity
-          style={[styles.button, styles.shadow]}
-          onPress={() => navigation.navigate('Friends')}
-        >
-          <RegularText style={styles.buttonText}>PING</RegularText>
-        </TouchableOpacity>
+        <View style={styles.swipecontainer}>
+          <Swiper
+            style={styles.wrapper}
+            showsButtons={true}
+            loop={true}
+            // nextButton={styles.swipeButton}
+            // prevButton={styles.swipeButton}
+          >
+            <View style={styles.slide}>
+              <Image
+                style={styles.img}
+                source={require('../assets/activities/beer.png')}
+              />
+            </View>
+            <View style={styles.slide}>
+              <Image
+                style={styles.img}
+                source={require('../assets/activities/coffee.png')}
+              />
+            </View>
+            <View style={styles.slide}>
+              <Image
+                style={styles.img}
+                source={require('../assets/activities/talk.png')}
+              />
+            </View>
+            <View style={styles.slide}>
+              <Image
+                style={styles.img}
+                source={require('../assets/activities/walk.png')}
+              />
+            </View>
+          </Swiper>
+        </View>
+        {/* </View> */}
+        {!ping ? (
+          <SafeAreaView>
+            <TextInput
+              style={[styles.input, styles.shadow]}
+              onChangeText={onChangeText}
+              value={location}
+              placeholder="Where to?"
+              placeholderTextColor={'oldlace'}
+            />
+            <AutoComplete />
+          </SafeAreaView>
+        ) : location ? (
+          <SafeAreaView>
+            <Text style={[styles.input, styles.shadow]}>
+              Currently pinging at {location}
+            </Text>
+          </SafeAreaView>
+        ) : (
+          <SafeAreaView>
+            <Text style={[styles.input, styles.shadow]}>Currently pinging</Text>
+          </SafeAreaView>
+        )}
+        {ping ? (
+          <View style={styles.button}>
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(changePing(userId, false, location))
+                setPing(!ping)
+                onChangeText('')
+              }}
+            >
+              <Image
+                style={styles.button}
+                source={require('../assets/ball.png')}
+              ></Image>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View>
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(changePing(userId, true, location))
+                setPing(!ping)
+              }}
+            >
+              <Image
+                style={styles.button}
+                source={require('../assets/ball.png')}
+              ></Image>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
       <View style={styles.nav}>
-        <Nav navigation={navigation} />
+        <Nav navigation={navigation} currentPage={currentPage} />
       </View>
     </View>
   )
@@ -75,6 +157,32 @@ const RegularText = (props: any) => {
   )
 }
 
+const MediumText = (props: any) => {
+  const [fontLoaded, setFontLoaded] = useState(false)
+
+  useEffect(() => {
+    async function loadFont() {
+      await Font.loadAsync({
+        'medium-font': require('../assets/fonts/BlueScreens/Medium-Italic.ttf'),
+      })
+
+      setFontLoaded(true)
+    }
+
+    loadFont()
+  }, [])
+
+  if (!fontLoaded) {
+    return <Text>Loading...</Text>
+  }
+
+  return (
+    <Text style={{ ...props.style, fontFamily: 'medium-font' }}>
+      {props.children}
+    </Text>
+  )
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -88,23 +196,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-evenly',
     backgroundColor: '#dd571c',
-    paddingTop: 22,
+    // paddingTop: 22,
   },
-  image: { width: 200, height: 200 },
+  // image: { width: 200, height: 200 },
   nav: {
     backgroundColor: '#dd571c',
     padding: 30,
     width: '100%',
     alignContent: 'center',
   },
-  buttonText: { color: '#161c20', fontSize: 70, alignSelf: 'center' },
+  text: { color: 'oldlace', fontSize: 60, alignSelf: 'center' },
   button: {
-    backgroundColor: 'oldlace',
-    borderRadius: 100,
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
     justifyContent: 'center',
     alignItems: 'center',
+    marginVertical: 20,
   },
   shadow: {
     shadowColor: '#b34e24',
@@ -114,11 +221,39 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 50,
-    // margin: 12,
-    // borderWidth: 1,
     paddingVertical: 10,
-    paddingHorizontal: 80,
-    backgroundColor: 'oldlace',
+    paddingHorizontal: 70,
+    backgroundColor: '#b34e24',
     borderRadius: 50,
+    marginVertical: 20,
+  },
+  wrapper: {
+    flex: 1,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+  },
+  swipecontainer: {
+    flex: 1,
+    width,
+    // height: 50,
+  },
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  img: {
+    width: 150,
+    height: 150,
+  },
+  swipeButton: {
+    color: 'oldlace',
+  },
+  headerText: {
+    marginTop: 20,
+    color: 'oldlace',
+    fontSize: 50,
   },
 })

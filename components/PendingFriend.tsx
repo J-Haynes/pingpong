@@ -1,24 +1,62 @@
 import React, { useEffect, useState } from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import {
+  Image,
+  StyleSheet,
+  Text,
+  Touchable,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import { UserData } from '../common/User'
 import { capitalise, firstLetter } from './helpers'
 import * as Font from 'expo-font'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
+import {
+  confirmFriend,
+  // Uncomment all code when Ryan's finished
+  //  denyFriend
+} from '../redux/actions/userActions'
 
 interface Props {
   friend: UserData
 }
 
-export default function ActiveFriend({ friend }: Props) {
+export default function PendingFriend({ friend }: Props) {
+  const userId = useAppSelector((state) => state.friends.auth_id)
+
+  const dispatch = useAppDispatch()
+
+  const handleConfirm = () => {
+    dispatch(confirmFriend(userId, friend.auth_id))
+  }
+
+  const handleCancel = () => {
+    console.log('denied!')
+    dispatch(denyFriend(userId, friend.auth_id))
+  }
+
   return (
-    <View style={styles.user}>
-      <RegularText style={styles.name}>
-        {capitalise(friend.name)} {firstLetter(friend.surname)}
-      </RegularText>
-      <Image
-        style={styles.image}
-        source={require('../assets/user-icon.png')}
-      ></Image>
-    </View>
+    <>
+      <View style={styles.user}>
+        <RegularText style={styles.name}>
+          {capitalise(friend.name)} {firstLetter(friend.surname)}
+        </RegularText>
+        <View style={styles.container}>
+          <TouchableOpacity onPress={handleConfirm}>
+            <Image
+              style={styles.image}
+              source={require('../assets/check.png')}
+            ></Image>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleCancel}>
+            <Image
+              style={styles.image}
+              source={require('../assets/cross.png')}
+            ></Image>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </>
   )
 }
 
@@ -94,5 +132,12 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     alignSelf: 'center',
+    marginHorizontal: 6,
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    alignItems: 'flex-end',
   },
 })
