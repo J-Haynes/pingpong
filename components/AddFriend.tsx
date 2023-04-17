@@ -16,6 +16,8 @@ import { useState } from 'react'
 import Nav from './Nav'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 
+import { addFriendThunk } from '../redux/actions/userActions'
+
 export default function AddFriend({ navigation }: any) {
   const dispatch = useAppDispatch()
 
@@ -24,7 +26,7 @@ export default function AddFriend({ navigation }: any) {
   const [searchName, setSearchName] = useState('')
 
   const handlePress = () => {
-    // dispatch(addFriendThunk(userId, searchName))
+    dispatch(addFriendThunk(userId, searchName))
   }
 
   const userId = useAppSelector((state) => state.friends.auth_id)
@@ -36,7 +38,7 @@ export default function AddFriend({ navigation }: any) {
           <TextInput
             style={[styles.input, styles.shadow]}
             onChangeText={setSearchName}
-            value={username}
+            value={searchName}
             placeholder="Search for username"
             placeholderTextColor={'white'}
           />
