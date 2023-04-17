@@ -51,17 +51,6 @@ export function confirmFriendInState(friendId: string): Action {
   }
 }
 
-// Takes a userId, calls fetchUser to get the user from the database, and then adds it to the store
-// export function loadUser(userId: string): ThunkAction {
-//   return (dispatch) => {
-//     return fetchUser(userId)
-//       .then((user: User) => {
-//         dispatch(addUserToState(user))
-//       })
-//       .catch((err) => console.log(err))
-//   }
-// }
-
 export function loadUserWithFriends(userData: UserData): ThunkAction {
   return async (dispatch) => {
     return fetchFriends(userData)
@@ -74,26 +63,22 @@ export function loadUserWithFriends(userData: UserData): ThunkAction {
 
 // For the set ping thunk note that when false is given the route also sets the users location data to null - make sure that store location data is also wiped from the store
 
-// export function changePing(
-//   userId: string,
-//   setting: boolean,
-//   location: string
-// ): ThunkAction {
-//   return (dispatch) => {
-//     return changePingStatus(userId, setting, location).then(([user]) => {
-//       if (setting === false) {
-//         user.ping_active = false
-//       } else {
-//         user.ping_active = true
-//       }
-//       console.log(user)
-//       dispatch(togglePingInState(user.ping_active))
-//       if (user.ping_location) {
-//         dispatch(addLocationToState(user.ping_location))
-//       }
-//     })
-//   }
-// }
+export function changePing(
+  userId: string,
+  setting: boolean,
+  location: string
+): ThunkAction {
+  return (dispatch) => {
+    return changePingStatus(userId, setting, location).then((user) => {
+      if (user.ping_active) user.ping_active = true
+      else user.ping_active = false
+      dispatch(togglePingInState(user.ping_active))
+      if (user.ping_location) {
+        dispatch(addLocationToState(user.ping_location))
+      } else dispatch(addLocationToState(''))
+    })
+  }
+}
 
 export function confirmFriend(userId: string, friendId: string): ThunkAction {
   return (dispatch) => {
