@@ -28,8 +28,13 @@ export default function Ping({ navigation }: any) {
 
   const currentPage = 'Ping'
 
+  const userWithFriends = useAppSelector((state) => state.friends)
+
   return (
     <View style={StyleSheet.container}>
+      <RegularText style={StyleSheet.introText}>
+        Hey {userWithFriends.name}
+      </RegularText>
       <View style={StyleSheet.headingContainer}>
         <MediumText style={StyleSheet.headerText}> SEND A </MediumText>
         <MediumText style={StyleSheet.blueText}>PING</MediumText>

@@ -54,8 +54,13 @@ export default StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
   },
-  headerText: {
+  introText: {
+    color: '#FDF7ED',
     marginTop: 30,
+    fontSize: 40,
+    textAlign: 'center',
+  },
+  headerText: {
     color: '#FDF7ED',
     fontSize: 70,
     textAlign: 'center',
@@ -63,7 +68,6 @@ export default StyleSheet.create({
   blueText: {
     color: '#0E65A3',
     fontSize: 70,
-    marginTop: 30,
     textAlign: 'center',
   },
   containerContents: {
@@ -184,6 +188,32 @@ export default StyleSheet.create({
   image: {
     width: 20,
     height: 20,
+    alignSelf: 'center',
+  },
+
+  // nav specific
+
+  nav: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#FDF7ED',
+    borderRadius: 50,
+    height: 50,
+    width: 350,
+    elevation: 5,
+    borderWidth: 3,
+    borderColor: '#F79500',
+    alignSelf: 'center',
+  },
+  button: {
+    paddingVertical: 10,
+    paddingHorizontal: 50,
+  },
+  icon: { width: 35, height: 35 },
+  lineText: {
+    color: '#0E65A3',
+    fontSize: 20,
     alignSelf: 'center',
   },
 })
