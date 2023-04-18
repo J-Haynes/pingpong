@@ -229,11 +229,20 @@ export default StyleSheet.create({
     fontSize: 20,
     alignSelf: 'center',
   },
+  ico__col: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  ico__row: {
+    paddingTop: 40,
+    flex: 1,
+    flexDirection: 'row',
+  },
 
   // add friend specific
 
   buttonAdd: {
-    backgroundColor: '#FDF7ED',
+    backgroundColor: '#0E65A3',
     width: 350,
     height: 50,
     justifyContent: 'center',
@@ -243,9 +252,23 @@ export default StyleSheet.create({
     borderRadius: 50,
   },
   buttonAddText: {
-    color: '#0E65A3',
+    color: '#FDF7ED',
     textAlign: 'center',
     fontSize: 20,
+  },
+  usernameContainer: {
+    paddingBottom: 50,
+  },
+  usernameText: {
+    fontSize: 20,
+    alignSelf: 'center',
+    color: '#FDF7ED',
+    padding: 5,
+  },
+  friendsImg: {
+    width: 300,
+    height: 300,
+    paddingTop: 20,
   },
 
   // pending friend specific
