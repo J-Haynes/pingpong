@@ -41,11 +41,6 @@ export default function Ping({ navigation }: any) {
       <RegularText style={StyleSheet.introText}>
         Hey {userWithFriends.name}
       </RegularText>
-      <View style={StyleSheet.headingContainer}>
-        <MediumText style={StyleSheet.headerText}> SEND A </MediumText>
-        <MediumText style={StyleSheet.blueText}>PING</MediumText>
-        <MediumText style={StyleSheet.headerText}> TO YOUR FRIENDS </MediumText>
-      </View>
       <ScrollView contentContainerStyle={StyleSheet.containerContents}>
         <View style={StyleSheet.swipeContainer}>
           <Swiper

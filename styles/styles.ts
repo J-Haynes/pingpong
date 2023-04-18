@@ -36,19 +36,17 @@ export default StyleSheet.create({
     flex: 1,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    backgroundColor: '#0E65A3',
+    backgroundColor: '#FDF7ED',
     width: 350,
     alignSelf: 'center',
     height: 50,
     marginBottom: 10,
     //border
     borderRadius: 50,
-    borderWidth: 2,
-    borderColor: '#033B55',
     //text
     fontSize: 20,
     textAlign: 'center',
-    color: '#FDF7ED',
+    color: '#2F2F23',
     letterSpacing: 2,
     fontWeight: 'normal',
   },
@@ -76,18 +74,13 @@ export default StyleSheet.create({
     paddingHorizontal: 50,
     textAlign: 'center',
     borderWidth: 2,
-    borderColor: '#033B55',
+    borderColor: '#FDF7ED',
     width: '50%',
   },
   ballImg: { width: 150, height: 150, marginTop: 50 },
 
   // ping specific
 
-  headingContainer: {
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'center',
-  },
   introText: {
     color: '#FDF7ED',
     marginTop: 30,
@@ -117,12 +110,18 @@ export default StyleSheet.create({
     width: width,
   },
   slide: {
-    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    width: width,
-    marginBottom: 0,
-    paddingBottom: 0,
+    alignSelf: 'center',
+    marginTop: 50,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    borderRadius: 200,
+    borderWidth: 2,
+    borderColor: 'rgba(253, 247, 237, .2)',
+    width: '70%',
+    height: '70%',
+    shadowColor: 'rgba(253, 247, 237, .2)',
+    shadowRadius: 50,
   },
   slideText: {
     color: '#FDF7ED',
@@ -133,6 +132,7 @@ export default StyleSheet.create({
   slideImage: {
     width: 150,
     height: 150,
+    alignSelf: 'center',
   },
   submitButton: {
     width: 150,
