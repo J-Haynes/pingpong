@@ -107,32 +107,32 @@ const RegularText = (props: any) => {
   )
 }
 
-const styles = StyleSheet.create({
-  user: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    width: '100%',
-    backgroundColor: '#b34e24',
-    paddingVertical: 5,
-    marginVertical: 1,
-  },
-  name: {
-    alignSelf: 'center',
-    fontSize: 30,
-    color: 'oldlace',
-  },
-  image: {
-    width: 20,
-    height: 20,
-    alignSelf: 'center',
-    marginHorizontal: 6,
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-  },
-})
+// const styles = StyleSheet.create({
+//   user: {
+//     flex: 1,
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     paddingHorizontal: 20,
+//     width: '100%',
+//     backgroundColor: '#b34e24',
+//     paddingVertical: 5,
+//     marginVertical: 1,
+//   },
+//   name: {
+//     alignSelf: 'center',
+//     fontSize: 30,
+//     color: 'oldlace',
+//   },
+//   image: {
+//     width: 20,
+//     height: 20,
+//     alignSelf: 'center',
+//     marginHorizontal: 6,
+//   },
+//   container: {
+//     flex: 1,
+//     justifyContent: 'flex-end',
+//     flexDirection: 'row',
+//     alignItems: 'flex-end',
+//   },
+// })
