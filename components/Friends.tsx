@@ -6,8 +6,9 @@ import {
   SectionList,
   Image,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native'
-import { useAppSelector } from '../hooks/redux'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import ActiveFriend from './ActiveFriend'
 import BasicFriend from './BasicFriend'
 import PendingFriend from './PendingFriend'
@@ -18,6 +19,7 @@ import * as Font from 'expo-font'
 export default function Friends({ navigation }: any) {
   const userWithFriends = useAppSelector((state) => state.friends)
   const friends = userWithFriends.friend_data
+  const dispatch = useAppDispatch
 
   console.log('userwithfriends', userWithFriends)
 
@@ -102,7 +104,7 @@ export default function Friends({ navigation }: any) {
       </View>
       {friends.length != 0 ? (
         <>
-          <View style={styles.friends}>
+          <ScrollView style={styles.friends} refreshControl={() => }>
             <SectionList
               sections={[
                 {
@@ -124,7 +126,7 @@ export default function Friends({ navigation }: any) {
               )}
               keyExtractor={(item) => `basicListEntry-${item.id}`}
             />
-          </View>
+          </ScrollView>
           <View style={styles.nav}>
             <Nav navigation={navigation} currentPage={currentPage} />
           </View>
