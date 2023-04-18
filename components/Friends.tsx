@@ -263,3 +263,13 @@ const styles = StyleSheet.create({
     left: 10,
   },
 })
+
+// {
+// 	"auth_id": "108267169986314483935",
+// 	"name": "Olivia",
+// 	"surname": "Clarke-Edwards",
+// 	"username": "oliviaclarkeedwards",
+// 	"birthday": "Mon Apr 17 2023",
+// 	"ping_active": true,
+// 	"ping_location": "Heyday NoMad, Broadway, New York, NY, USA"
+// }
