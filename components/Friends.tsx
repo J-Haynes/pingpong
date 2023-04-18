@@ -7,8 +7,9 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-  RefreshControl,
 } from 'react-native'
+import { RefreshControl } from 'react-native-web-refresh-control'
+
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import ActiveFriend from './ActiveFriend'
 import BasicFriend from './BasicFriend'
@@ -17,6 +18,7 @@ import Nav from './Nav'
 import { UserData, UserWithoutFriends } from '../common/User'
 import * as Font from 'expo-font'
 import { loadUserWithFriends } from '../redux/actions/userActions'
+import { FlatList } from 'react-native'
 
 export default function Friends({ navigation }: any) {
   const userWithFriends = useAppSelector((state) => state.friends)
@@ -95,8 +97,10 @@ export default function Friends({ navigation }: any) {
   const currentPage = 'Friends'
 
   const refreshing = useAppSelector((state) => state.loading)
+  const [refresh, setRefreshing] = useState(true)
 
-  const onRefresh = React.useCallback(async () => {
+  const onRefresh = React.useCallback(() => {
+    console.log('refreshing')
     dispatch(loadUserWithFriends(userWithoutFriends))
   }, [refreshing])
 
@@ -111,56 +115,58 @@ export default function Friends({ navigation }: any) {
           ></Image>
         </TouchableOpacity>
       </View>
-      {friends.length != 0 ? (
-        <>
-          <ScrollView
-            style={styles.friends}
-            refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            }
-          >
-            <SectionList
-              sections={[
-                {
-                  title: ' F r i e n d    R e q u e s t s ',
-                  data: pendingFriendsList,
-                },
-                { title: ' A c t i v e    P i n g s ', data: pingFriendList },
-                { title: ' A l l    F r i e n d s ', data: otherFriendList },
-              ]}
-              renderItem={({ item }) => renderFriends(item)}
-              renderSectionHeader={({ section }) => (
-                <View>
-                  <Text> </Text>
-                  <MediumText style={styles.sectionHeader}>
-                    {section.title}
-                  </MediumText>
-                  <Text> </Text>
-                </View>
-              )}
-              keyExtractor={(item) => `basicListEntry-${item.id}`}
-            />
-          </ScrollView>
-          <View style={styles.nav}>
-            <Nav navigation={navigation} currentPage={currentPage} />
-          </View>
-        </>
-      ) : (
-        <>
-          <View style={styles.container}>
-            <View style={styles.ping}>
-              <Image
-                style={styles.image}
-                source={require('../assets/activities/beer.png')}
-              ></Image>
-              <Text style={styles.mainText}>Oh no! No Friends...</Text>
+      <ScrollView
+        contentContainerStyle={styles.container}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        {friends.length != 0 ? (
+          <>
+            <View>
+              <SectionList
+                sections={[
+                  {
+                    title: ' F r i e n d    R e q u e s t s ',
+                    data: pendingFriendsList,
+                  },
+                  { title: ' A c t i v e    P i n g s ', data: pingFriendList },
+                  { title: ' A l l    F r i e n d s ', data: otherFriendList },
+                ]}
+                renderItem={({ item }) => renderFriends(item)}
+                renderSectionHeader={({ section }) => (
+                  <View>
+                    <Text> </Text>
+                    <MediumText style={styles.sectionHeader}>
+                      {section.title}
+                    </MediumText>
+                    <Text> </Text>
+                  </View>
+                )}
+                keyExtractor={(item) => `basicListEntry-${item.id}`}
+              />
             </View>
-          </View>
-          <View style={styles.nav}>
-            <Nav navigation={navigation} currentPage={currentPage} />
-          </View>
-        </>
-      )}
+            <View style={styles.nav}>
+              <Nav navigation={navigation} currentPage={currentPage} />
+            </View>
+          </>
+        ) : (
+          <>
+            <View style={styles.container}>
+              <View style={styles.ping}>
+                <Image
+                  style={styles.image}
+                  source={require('../assets/activities/beer.png')}
+                ></Image>
+                <Text style={styles.mainText}>Oh no! No Friends...</Text>
+              </View>
+            </View>
+            <View style={styles.nav}>
+              <Nav navigation={navigation} currentPage={currentPage} />
+            </View>
+          </>
+        )}
+      </ScrollView>
     </View>
   )
 }
@@ -276,6 +282,9 @@ const styles = StyleSheet.create({
     height: 50,
     position: 'relative',
     left: 10,
+  },
+  scroll: {
+    height: 30,
   },
 })
 
