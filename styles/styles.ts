@@ -68,6 +68,7 @@ export default StyleSheet.create({
   },
   containerContents: {
     flex: 1,
+    width: width,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-evenly',
@@ -116,12 +117,73 @@ export default StyleSheet.create({
     fontWeight: 'normal',
   },
   pingButton: {
-    // flex: 1,
     width: 150,
     height: 150,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 30,
     marginBottom: 20,
+  },
+
+  // friends specific
+
+  listContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    width: '100%',
+  },
+  sectionHeader: {
+    fontSize: 40,
+    backgroundColor: '#E05A00',
+    textAlign: 'center',
+    width: '100%',
+    color: '#FDF7ED',
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+    borderColor: '#FDF7ED',
+  },
+  beerImage: { width: 200, height: 200, opacity: 0.6 },
+  mainText: {
+    backgroundColor: '#E05A00',
+    color: '#FDF7ED',
+    fontSize: 30,
+    alignSelf: 'center',
+    paddingHorizontal: 20,
+  },
+  topBar: {
+    width: '100%',
+    paddingVertical: 10,
+    backgroundColor: '#E05A00',
+  },
+  addFriend: {
+    width: 40,
+    height: 40,
+    position: 'relative',
+    left: 10,
+  },
+  user: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    width: '100%',
+    backgroundColor: '#FDF7ED',
+    paddingVertical: 5,
+    marginVertical: 1,
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+    borderColor: '#0E65A3',
+  },
+  name: {
+    alignSelf: 'center',
+    fontSize: 30,
+    color: '#0E65A3',
+    letterSpacing: 2,
+  },
+  image: {
+    width: 20,
+    height: 20,
+    alignSelf: 'center',
   },
 })
