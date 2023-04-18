@@ -94,7 +94,6 @@ export default function Friends({ navigation }: any) {
   const currentPage = 'Friends'
 
   const refreshing = useAppSelector((state) => state.loading)
-  const [refresh, setRefreshing] = useState(true)
 
   const onRefresh = React.useCallback(() => {
     dispatch(loadUserWithFriends(userWithoutFriends))
