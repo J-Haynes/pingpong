@@ -18,6 +18,26 @@ export default StyleSheet.create({
     width: '100%',
     alignContent: 'center',
   },
+  input: {
+    flex: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#0E65A3',
+    width: 350,
+    alignSelf: 'center',
+    height: 50,
+    marginBottom: 10,
+    //border
+    borderRadius: 50,
+    borderWidth: 2,
+    borderColor: '#033B55',
+    //text
+    fontSize: 20,
+    textAlign: 'center',
+    color: '#FDF7ED',
+    letterSpacing: 2,
+    fontWeight: 'normal',
+  },
 
   // landing specific
 
@@ -100,27 +120,7 @@ export default StyleSheet.create({
     width: 150,
     height: 150,
   },
-  locationInput: {
-    flex: 1,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    backgroundColor: '#0E65A3',
-    width: 350,
-    alignSelf: 'center',
-    height: 50,
-    marginBottom: 10,
-    //border
-    borderRadius: 50,
-    borderWidth: 2,
-    borderColor: '#033B55',
-    //text
-    fontSize: 20,
-    textAlign: 'center',
-    color: '#FDF7ED',
-    letterSpacing: 2,
-    fontWeight: 'normal',
-  },
-  pingButton: {
+  submitButton: {
     width: 150,
     height: 150,
     justifyContent: 'center',
@@ -215,5 +215,29 @@ export default StyleSheet.create({
     color: '#0E65A3',
     fontSize: 20,
     alignSelf: 'center',
+  },
+
+  // add friend specific
+
+  addContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#E05A00',
+  },
+  buttonAdd: {
+    backgroundColor: '#FDF7ED',
+    width: 350,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 30,
+    marginBottom: 20,
+    borderRadius: 50,
+  },
+  buttonAddText: {
+    color: '#0E65A3',
+    textAlign: 'center',
+    fontSize: 20,
   },
 })
