@@ -12,7 +12,7 @@ import * as Font from 'expo-font'
 import AutoComplete from './Autocomplete'
 import { useAppSelector, useAppDispatch } from '../hooks/redux'
 import { changePing } from '../redux/actions/userActions'
-import Swiper from 'react-native-swiper/src'
+import Swiper from 'react-native-web-swiper'
 import LocationDetails from '../common/Location'
 import StyleSheet from '../styles/styles'
 
@@ -23,6 +23,12 @@ export default function Ping({ navigation }: any) {
   const pingStatus = useAppSelector((state) => state.friends.ping_active)
 
   const [location, onChangeText] = useState({} as LocationDetails)
+  const emojis = ['🍺', '☕', '💬', '🚶‍♀️']
+  const [emoji, setEmoji] = useState(emojis[0])
+
+  const indexHandler = (index: number) => {
+    setEmoji(emojis[index])
+  }
 
   const [ping, setPing] = useState(false)
 
@@ -35,47 +41,45 @@ export default function Ping({ navigation }: any) {
       <RegularText style={StyleSheet.introText}>
         Hey {userWithFriends.name}
       </RegularText>
-      <View style={StyleSheet.headingContainer}>
-        <MediumText style={StyleSheet.headerText}> SEND A </MediumText>
-        <MediumText style={StyleSheet.blueText}>PING</MediumText>
-        <MediumText style={StyleSheet.headerText}> TO YOUR FRIENDS </MediumText>
-      </View>
       <ScrollView contentContainerStyle={StyleSheet.containerContents}>
-        <Swiper
-          style={StyleSheet.swipeContainer}
-          showsButtons={false}
-          showsPagination={false}
-          loop={false}
-        >
-          <View style={StyleSheet.slide}>
-            <RegularText style={StyleSheet.slideText}>b e e r</RegularText>
-            <Image
-              style={StyleSheet.slideImage}
-              source={require('../assets/activities/beer.png')}
-            />
-          </View>
-          <View style={StyleSheet.slide}>
-            <RegularText style={StyleSheet.slideText}>c o f f e e</RegularText>
-            <Image
-              style={StyleSheet.slideImage}
-              source={require('../assets/activities/coffee.png')}
-            />
-          </View>
-          <View style={StyleSheet.slide}>
-            <RegularText style={StyleSheet.slideText}>c h a t</RegularText>
-            <Image
-              style={StyleSheet.slideImage}
-              source={require('../assets/activities/talk.png')}
-            />
-          </View>
-          <View style={StyleSheet.slide}>
-            <RegularText style={StyleSheet.slideText}>w a l k</RegularText>
-            <Image
-              style={StyleSheet.slideImage}
-              source={require('../assets/activities/walk.png')}
-            />
-          </View>
-        </Swiper>
+        <View style={StyleSheet.swipeContainer}>
+          <Swiper
+            controlsEnabled={false}
+            loop={false}
+            onIndexChanged={indexHandler}
+          >
+            <View style={StyleSheet.slide}>
+              <RegularText style={StyleSheet.slideText}>b e e r</RegularText>
+              <Image
+                style={StyleSheet.slideImage}
+                source={require('../assets/activities/beer.png')}
+              />
+            </View>
+            <View style={StyleSheet.slide}>
+              <RegularText style={StyleSheet.slideText}>
+                c o f f e e
+              </RegularText>
+              <Image
+                style={StyleSheet.slideImage}
+                source={require('../assets/activities/coffee.png')}
+              />
+            </View>
+            <View style={StyleSheet.slide}>
+              <RegularText style={StyleSheet.slideText}>c h a t</RegularText>
+              <Image
+                style={StyleSheet.slideImage}
+                source={require('../assets/activities/talk.png')}
+              />
+            </View>
+            <View style={StyleSheet.slide}>
+              <RegularText style={StyleSheet.slideText}>w a l k</RegularText>
+              <Image
+                style={StyleSheet.slideImage}
+                source={require('../assets/activities/walk.png')}
+              />
+            </View>
+          </Swiper>
+        </View>
         {!ping ? (
           <SafeAreaView>
             <AutoComplete change={onChangeText} />
@@ -93,7 +97,9 @@ export default function Ping({ navigation }: any) {
           <View style={StyleSheet.submitButton}>
             <TouchableOpacity
               onPress={() => {
-                dispatch(changePing(userId, false, location.description))
+                dispatch(
+                  changePing(userId, false, emoji + location.description)
+                )
                 setPing(!ping)
                 onChangeText({} as LocationDetails)
               }}
@@ -108,7 +114,9 @@ export default function Ping({ navigation }: any) {
           <View>
             <TouchableOpacity
               onPress={() => {
-                dispatch(changePing(userId, true, location.description))
+                dispatch(
+                  changePing(userId, true, `${emoji} ` + location.description)
+                )
                 setPing(!ping)
               }}
             >

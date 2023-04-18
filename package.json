@@ -42,6 +42,7 @@
     "react-native-vector-icons": "^9.2.0",
     "react-native-web": "~0.18.10",
     "react-native-web-refresh-control": "^1.1.1",
+    "react-native-web-swiper": "^2.2.4",
     "react-navigation": "^4.4.4",
     "react-redux": "^8.0.5",
     "redux": "^4.2.1",

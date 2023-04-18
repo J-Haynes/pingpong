@@ -41,7 +41,7 @@ export default function AutoComplete({ change }: Props) {
           }}
           textInputProps={{
             style: StyleSheet.input,
-            placeholderTextColor: '#FDF7ED',
+            placeholderTextColor: '#2F2F23',
             multiline: true,
             onChangeText(text) {},
           }}
