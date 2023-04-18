@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Text,
   View,
@@ -8,10 +8,23 @@ import {
   Image,
 } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
+import { UserWithoutFriends } from '../common/User'
+import { loadUserWithFriends } from '../redux/actions/userActions'
 
 const Tab = createBottomTabNavigator()
 
 export default function Nav({ navigation, currentPage }: any) {
+  const dispatch = useAppDispatch()
+  const userWithFriends = useAppSelector((state) => state.friends)
+  let userWithoutFriends = { ...userWithFriends } as UserWithoutFriends
+  delete userWithoutFriends.friend_data
+
+  // On Navigation to friends, fetch friends from the database
+  useEffect(() => {
+    dispatch(loadUserWithFriends(userWithoutFriends))
+  }, [navigation])
+
   const handlePressPing = () => {
     navigation.navigate('Ping')
   }
