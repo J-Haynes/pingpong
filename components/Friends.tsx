@@ -97,7 +97,6 @@ export default function Friends({ navigation }: any) {
   const [refresh, setRefreshing] = useState(true)
 
   const onRefresh = React.useCallback(() => {
-    console.log('refreshing')
     dispatch(loadUserWithFriends(userWithoutFriends))
   }, [refreshing])
 
