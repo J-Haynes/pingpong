@@ -7,33 +7,17 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native'
-import { useAppDispatch, useAppSelector } from '../hooks/redux'
+import { useAppSelector } from '../hooks/redux'
 import ActiveFriend from './ActiveFriend'
 import BasicFriend from './BasicFriend'
 import PendingFriend from './PendingFriend'
 import Nav from './Nav'
-import { UserData, UserWithoutFriends } from '../common/User'
+import { UserData } from '../common/User'
 import * as Font from 'expo-font'
-import io from 'socket.io-client'
-import { loadUserWithFriends } from '../redux/actions/userActions'
 
-const socket = io('http://localhost:3000')
 export default function Friends({ navigation }: any) {
-  const dispatch = useAppDispatch()
-
   const userWithFriends = useAppSelector((state) => state.friends)
   const friends = userWithFriends.friend_data
-  let userWithoutFriends = { ...userWithFriends } as UserWithoutFriends
-  delete userWithoutFriends.friend_data
-
-  socket.on('hello', (arg) => {
-    console.log(arg) // world
-  })
-
-  // I want to dispatch(loadUserWithFriends(userWithFriends.auth_id)) on friend request or friend request confirmation
-  socket.on('friend_update', (socket: any) => {
-    dispatch(loadUserWithFriends(userWithoutFriends))
-  })
 
   console.log('userwithfriends', userWithFriends)
 
@@ -278,3 +262,13 @@ const styles = StyleSheet.create({
     left: 10,
   },
 })
+
+// {
+// 	"auth_id": "108267169986314483935",
+// 	"name": "Olivia",
+// 	"surname": "Clarke-Edwards",
+// 	"username": "oliviaclarkeedwards",
+// 	"birthday": "Mon Apr 17 2023",
+// 	"ping_active": true,
+// 	"ping_location": "Heyday NoMad, Broadway, New York, NY, USA"
+// }
