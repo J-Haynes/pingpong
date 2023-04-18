@@ -48,7 +48,6 @@ export default function Landing({ navigation }: any) {
       })
       const googleData = await response.json()
       setGoogleUser(googleData)
-      console.log(googleData)
       setUserData(translateToUserData(googleData))
     }
   }, [response, accessToken])
