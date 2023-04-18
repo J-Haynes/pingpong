@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import {
-  Image,
-  StyleSheet,
-  Text,
-  Touchable,
-  TouchableOpacity,
-  View,
-} from 'react-native'
+import { Image, Text, Touchable, TouchableOpacity, View } from 'react-native'
 import { UserData } from '../common/User'
 import { capitalise, firstLetter } from './helpers'
 import * as Font from 'expo-font'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import { confirmFriend, denyFriend } from '../redux/actions/userActions'
+import Stylesheet from '../styles/styles'
 
 interface Props {
   friend: UserData
@@ -32,20 +26,20 @@ export default function PendingFriend({ friend }: Props) {
 
   return (
     <>
-      <View style={styles.user}>
-        <RegularText style={styles.name}>
+      <View style={Stylesheet.user}>
+        <RegularText style={Stylesheet.name}>
           {capitalise(friend.name)} {firstLetter(friend.surname)}
         </RegularText>
-        <View style={styles.container}>
+        <View style={Stylesheet.pendingContainer}>
           <TouchableOpacity onPress={handleConfirm}>
             <Image
-              style={styles.image}
+              style={Stylesheet.pendingIcons}
               source={require('../assets/check.png')}
             ></Image>
           </TouchableOpacity>
           <TouchableOpacity onPress={handleCancel}>
             <Image
-              style={styles.image}
+              style={Stylesheet.pendingIcons}
               source={require('../assets/cross.png')}
             ></Image>
           </TouchableOpacity>
@@ -106,33 +100,3 @@ const RegularText = (props: any) => {
     </Text>
   )
 }
-
-// const styles = StyleSheet.create({
-//   user: {
-//     flex: 1,
-//     flexDirection: 'row',
-//     justifyContent: 'space-between',
-//     paddingHorizontal: 20,
-//     width: '100%',
-//     backgroundColor: '#b34e24',
-//     paddingVertical: 5,
-//     marginVertical: 1,
-//   },
-//   name: {
-//     alignSelf: 'center',
-//     fontSize: 30,
-//     color: 'oldlace',
-//   },
-//   image: {
-//     width: 20,
-//     height: 20,
-//     alignSelf: 'center',
-//     marginHorizontal: 6,
-//   },
-//   container: {
-//     flex: 1,
-//     justifyContent: 'flex-end',
-//     flexDirection: 'row',
-//     alignItems: 'flex-end',
-//   },
-// })
