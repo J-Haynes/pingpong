@@ -17,7 +17,7 @@ export default function AddFriend({ navigation }: any) {
   const userId = useAppSelector((state) => state.friends.auth_id)
 
   const [searchName, setSearchName] = useState('')
-  const [requestReply, setRequestReply] = useState('enter a username')
+  const [requestReply, setRequestReply] = useState('')
 
   const currentPage = 'AddFriend'
 
