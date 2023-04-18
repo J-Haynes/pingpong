@@ -36,13 +36,9 @@ export default function Nav({ navigation, currentPage }: any) {
             source={require('../assets/navBeerColour.png')}
           ></Image>
         )}
-        {currentPage === 'Friends' && (
-          <Image
-            style={Stylesheet.icon}
-            source={require('../assets/navBeer.png')}
-          ></Image>
-        )}
-        {currentPage === 'AddFriend' && (
+        {(currentPage === 'Friends' ||
+          currentPage === 'AddFriend' ||
+          currentPage === 'Tutorial') && (
           <Image
             style={Stylesheet.icon}
             source={require('../assets/navBeer.png')}
@@ -51,7 +47,9 @@ export default function Nav({ navigation, currentPage }: any) {
       </TouchableOpacity>
       <Text style={Stylesheet.lineText}>|</Text>
       <TouchableOpacity style={Stylesheet.button} onPress={handlePressFriends}>
-        {currentPage === 'Ping' && (
+        {(currentPage === 'Ping' ||
+          currentPage === 'AddFriend' ||
+          currentPage === 'Tutorial') && (
           <Image
             style={Stylesheet.icon}
             source={require('../assets/friends.png')}
@@ -61,12 +59,6 @@ export default function Nav({ navigation, currentPage }: any) {
           <Image
             style={Stylesheet.icon}
             source={require('../assets/friends (2).png')}
-          ></Image>
-        )}
-        {currentPage === 'AddFriend' && (
-          <Image
-            style={Stylesheet.icon}
-            source={require('../assets/friends.png')}
           ></Image>
         )}
       </TouchableOpacity>
