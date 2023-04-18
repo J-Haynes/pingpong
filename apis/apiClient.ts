@@ -8,7 +8,10 @@ export function fetchFriends(userData: UserData): Promise<UserWithFriends> {
   return request
     .post(`${externalBaseUrl}/userwithfriends`)
     .send(userData)
-    .then((res) => res.body)
+    .then((res) => {
+      console.log('api call', res.body)
+      return res.body
+    })
 }
 
 export function fetchUser(userId: string): Promise<User> {
@@ -29,10 +32,7 @@ export function requestFriend(userId: string, searchName: string) {
   return request
     .post(`${externalBaseUrl}/addfriend`)
     .send({ userId, searchName })
-    .then((res) => {
-      console.log('api', res.body)
-      return res.body
-    })
+    .then((res) => res.body)
 }
 
 export function sendFriendConfirm(
@@ -68,7 +68,3 @@ export function changePingStatus(
       return res.body[0]
     })
 }
-
-// Waiting for deployment
-
-//change /searchuser to /addfriend here & in backend
