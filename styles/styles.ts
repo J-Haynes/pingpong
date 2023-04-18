@@ -11,6 +11,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     backgroundColor: '#E05A00',
+    width: width,
   },
   navContainer: {
     backgroundColor: '#E05A00',
@@ -144,7 +145,6 @@ export default StyleSheet.create({
     width: '100%',
     color: '#FDF7ED',
     borderTopWidth: 2,
-    borderBottomWidth: 2,
     borderColor: '#FDF7ED',
   },
   beerImage: { width: 200, height: 200, opacity: 0.6 },
@@ -239,5 +239,20 @@ export default StyleSheet.create({
     color: '#0E65A3',
     textAlign: 'center',
     fontSize: 20,
+  },
+
+  // pending friend specific
+
+  pendingIcons: {
+    width: 20,
+    height: 20,
+    alignSelf: 'center',
+    marginHorizontal: 6,
+  },
+  pendingContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    alignItems: 'flex-end',
   },
 })
