@@ -127,10 +127,10 @@ export function denyFriend(userId: string, friendId: string): ThunkAction {
   }
 }
 
-export function addFriends(friendId: string) {
+export function addFriends(response: string) {
   return {
     type: 'ADD_FRIEND',
-    payload: friendId,
+    payload: response,
   }
 }
 
@@ -142,8 +142,9 @@ export function addFriendThunk(
 ): ThunkAction {
   return (dispatch) => {
     return addFriendApi(userId, searchName).then((response) => {
-      if (response > 0) {
-        dispatch(addFriends(userId))
+      console.log('response', response)
+      if (response) {
+        dispatch(addFriends(response))
       } else {
         console.log('Unexpected response from server, try another name')
       }
