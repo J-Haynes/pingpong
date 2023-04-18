@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {
-  Text,
-  View,
-  StyleSheet,
-  SectionList,
-  Image,
-  TouchableOpacity,
-} from 'react-native'
+import { Text, View, SectionList, Image, TouchableOpacity } from 'react-native'
 import { useAppSelector } from '../hooks/redux'
 import ActiveFriend from './ActiveFriend'
 import BasicFriend from './BasicFriend'
@@ -14,6 +7,7 @@ import PendingFriend from './PendingFriend'
 import Nav from './Nav'
 import { UserData } from '../common/User'
 import * as Font from 'expo-font'
+import StyleSheet from '../styles/styles'
 
 export default function Friends({ navigation }: any) {
   const userWithFriends = useAppSelector((state) => state.friends)
@@ -89,18 +83,18 @@ export default function Friends({ navigation }: any) {
 
   return (
     // one of these views should be scrollable
-    <View style={styles.container}>
-      <View style={styles.topbar}>
+    <View style={StyleSheet.container}>
+      <View style={StyleSheet.topBar}>
         <TouchableOpacity onPress={() => navigation.navigate('AddFriend')}>
           <Image
-            style={styles.addfriend}
+            style={StyleSheet.addFriend}
             source={require('../assets/addfriend.png')}
           ></Image>
         </TouchableOpacity>
       </View>
       {friends.length != 0 ? (
         <>
-          <View style={styles.friends}>
+          <View style={StyleSheet.listContainer}>
             <SectionList
               sections={[
                 {
@@ -113,36 +107,29 @@ export default function Friends({ navigation }: any) {
               renderItem={({ item }) => renderFriends(item)}
               renderSectionHeader={({ section }) => (
                 <View>
-                  <Text> </Text>
-                  <MediumText style={styles.sectionHeader}>
+                  <RegularText style={StyleSheet.sectionHeader}>
                     {section.title}
-                  </MediumText>
-                  <Text> </Text>
+                  </RegularText>
                 </View>
               )}
               keyExtractor={(item) => `basicListEntry-${item.id}`}
             />
           </View>
-          <View style={styles.nav}>
-            <Nav navigation={navigation} currentPage={currentPage} />
-          </View>
         </>
       ) : (
         <>
-          <View style={styles.container}>
-            <View style={styles.ping}>
-              <Image
-                style={styles.image}
-                source={require('../assets/activities/beer.png')}
-              ></Image>
-              <Text style={styles.mainText}>Oh no! No Friends...</Text>
-            </View>
-          </View>
-          <View style={styles.nav}>
-            <Nav navigation={navigation} currentPage={currentPage} />
+          <View style={StyleSheet.container}>
+            <Image
+              style={StyleSheet.beerImage}
+              source={require('../assets/activities/beer.png')}
+            ></Image>
+            <Text style={StyleSheet.mainText}>Oh no! No Friends...</Text>
           </View>
         </>
       )}
+      <View style={StyleSheet.navContainer}>
+        <Nav navigation={navigation} currentPage={currentPage} />
+      </View>
     </View>
   )
 }
@@ -198,68 +185,6 @@ const RegularText = (props: any) => {
     </Text>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    backgroundColor: '#dd571c',
-  },
-  friendsHeader: {
-    backgroundColor: 'oldlace',
-    width: '100%',
-    alignContent: 'center',
-    color: 'oldlace',
-  },
-  sectionHeader: {
-    fontSize: 50,
-    backgroundColor: 'oldlace',
-    textAlign: 'center',
-    width: '100%',
-    color: '#dd571c',
-  },
-  nav: {
-    backgroundColor: '#dd571c',
-    padding: 30,
-    width: '100%',
-    alignContent: 'center',
-  },
-  friends: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    width: '100%',
-  },
-  image: { width: 200, height: 200, opacity: 0.6 },
-  mainText: {
-    color: 'oldlace',
-    fontSize: 30,
-    alignSelf: 'center',
-    paddingHorizontal: 20,
-  },
-  ping: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    backgroundColor: '#dd571c',
-    paddingTop: 22,
-  },
-  topbar: {
-    width: '100%',
-    paddingTop: 5,
-    // flex: 1,
-    // alignItems: 'flex-end',
-    // flexDirection: 'corightlumn',
-  },
-  addfriend: {
-    width: 50,
-    height: 50,
-    position: 'relative',
-    left: 10,
-  },
-})
 
 // {
 // 	"auth_id": "108267169986314483935",
