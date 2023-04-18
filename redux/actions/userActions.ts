@@ -17,6 +17,8 @@ export type Action =
   | { type: 'CONFIRM_FRIEND'; payload: string }
   | { type: 'DENY_FRIEND'; payload: string }
   | { type: 'ADD_FRIEND'; payload: string }
+  | { type: 'LOADING'; payload: null }
+  | { type: 'LOADING_DONE'; payload: null }
 
 export function addUserToState(user: User): Action {
   return {
@@ -61,6 +63,21 @@ export function denyFriendInState(friendId: string): Action {
     payload: friendId,
   }
 }
+
+export function loading(): Action {
+  return {
+    type: 'LOADING',
+    payload: null,
+  }
+}
+
+export function loadingDone(): Action {
+  return {
+    type: 'LOADING_DONE',
+    payload: null,
+  }
+}
+
 // Takes a userId, calls fetchUser to get the user from the database, and then adds it to the store
 // export function loadUser(userId: string): ThunkAction {
 //   return (dispatch) => {
@@ -74,9 +91,11 @@ export function denyFriendInState(friendId: string): Action {
 
 export function loadUserWithFriends(userData: UserData): ThunkAction {
   return async (dispatch) => {
+    dispatch(loading())
     return fetchFriends(userData)
       .then((userWithFriends) => {
         dispatch(addUserWithFriendsToState(userWithFriends))
+        dispatch(loadingDone())
       })
       .catch((err) => console.log(err))
   }

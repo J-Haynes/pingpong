@@ -6,18 +6,23 @@ import {
   SectionList,
   Image,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native'
-import { useAppSelector } from '../hooks/redux'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import ActiveFriend from './ActiveFriend'
 import BasicFriend from './BasicFriend'
 import PendingFriend from './PendingFriend'
 import Nav from './Nav'
-import { UserData } from '../common/User'
+import { UserData, UserWithoutFriends } from '../common/User'
 import * as Font from 'expo-font'
+import { loadUserWithFriends } from '../redux/actions/userActions'
 
 export default function Friends({ navigation }: any) {
   const userWithFriends = useAppSelector((state) => state.friends)
   const friends = userWithFriends.friend_data
+  const dispatch = useAppDispatch
+  let userWithoutFriends = { ...userWithFriends } as UserWithoutFriends
+  delete userWithoutFriends.friend_data
 
   console.log('userwithfriends', userWithFriends)
 
@@ -86,8 +91,17 @@ export default function Friends({ navigation }: any) {
       return <BasicFriend friend={item} />
     }
   }
-
   const currentPage = 'Friends'
+
+  const [refreshing, setRefreshing] = React.useState(false)
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true)
+    const dispatchFriends = new Promise((resolve, reject) => {
+      dispatch(loadUserWithFriends(userWithoutFriends))
+      resolve()
+    })
+    setRefreshing(false)
+  }, [refreshing])
 
   return (
     // one of these views should be scrollable
@@ -102,7 +116,12 @@ export default function Friends({ navigation }: any) {
       </View>
       {friends.length != 0 ? (
         <>
-          <View style={styles.friends}>
+          <ScrollView
+            style={styles.friends}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+          >
             <SectionList
               sections={[
                 {
@@ -124,7 +143,7 @@ export default function Friends({ navigation }: any) {
               )}
               keyExtractor={(item) => `basicListEntry-${item.id}`}
             />
-          </View>
+          </ScrollView>
           <View style={styles.nav}>
             <Nav navigation={navigation} currentPage={currentPage} />
           </View>
