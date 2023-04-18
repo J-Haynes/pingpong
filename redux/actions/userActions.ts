@@ -4,7 +4,7 @@ import {
   changePingStatus,
   sendFriendConfirm,
   sendFriendDeny,
-  addFriendApi,
+  requestFriend,
 } from '../../apis/apiClient'
 import type { ThunkAction } from '../store'
 import { resolveDiscoveryAsync } from 'expo-auth-session'
@@ -141,7 +141,7 @@ export function addFriendThunk(
   searchName: string
 ): ThunkAction {
   return (dispatch) => {
-    return addFriendApi(userId, searchName).then((response) => {
+    return requestFriend(userId, searchName).then((response) => {
       console.log('response', response)
       if (response) {
         dispatch(addFriends(response))
