@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  RefreshControl,
 } from 'react-native'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import ActiveFriend from './ActiveFriend'
@@ -20,7 +21,7 @@ import { loadUserWithFriends } from '../redux/actions/userActions'
 export default function Friends({ navigation }: any) {
   const userWithFriends = useAppSelector((state) => state.friends)
   const friends = userWithFriends.friend_data
-  const dispatch = useAppDispatch
+  const dispatch = useAppDispatch()
   let userWithoutFriends = { ...userWithFriends } as UserWithoutFriends
   delete userWithoutFriends.friend_data
 
@@ -93,14 +94,10 @@ export default function Friends({ navigation }: any) {
   }
   const currentPage = 'Friends'
 
-  const [refreshing, setRefreshing] = React.useState(false)
+  const refreshing = useAppSelector((state) => state.loading)
+
   const onRefresh = React.useCallback(async () => {
-    setRefreshing(true)
-    const dispatchFriends = new Promise((resolve, reject) => {
-      dispatch(loadUserWithFriends(userWithoutFriends))
-      resolve()
-    })
-    setRefreshing(false)
+    dispatch(loadUserWithFriends(userWithoutFriends))
   }, [refreshing])
 
   return (

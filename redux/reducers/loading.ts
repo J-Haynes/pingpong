@@ -15,3 +15,5 @@ function reducer(state = initialState, action: Action): boolean {
       return state
   }
 }
+
+export default reducer
