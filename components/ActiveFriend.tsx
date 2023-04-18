@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, Text, View } from 'react-native'
 import { UserData } from '../common/User'
 import { capitalise, firstLetter } from './helpers'
 import * as Font from 'expo-font'
+import StyleSheet from '../styles/styles'
 
 interface Props {
   friend: UserData
@@ -11,13 +12,13 @@ interface Props {
 export default function ActiveFriend({ friend }: Props) {
   return (
     // display red dot and friend.ping_location
-    <View style={styles.user}>
-      <RegularText style={styles.name}>
+    <View style={StyleSheet.user}>
+      <RegularText style={StyleSheet.name}>
         {capitalise(friend.name)} {firstLetter(friend.surname)}
       </RegularText>
-      <RegularText style={styles.name}>{friend.ping_location}</RegularText>
+      <RegularText style={StyleSheet.name}>{friend.ping_location}</RegularText>
       <Image
-        style={styles.image}
+        style={StyleSheet.image}
         source={require('../assets/ball.png')}
       ></Image>
     </View>
@@ -75,26 +76,3 @@ const RegularText = (props: any) => {
     </Text>
   )
 }
-
-const styles = StyleSheet.create({
-  user: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    width: '100%',
-    backgroundColor: '#b34e24',
-    paddingVertical: 5,
-    marginVertical: 1,
-  },
-  name: {
-    alignSelf: 'center',
-    fontSize: 30,
-    color: 'oldlace',
-  },
-  image: {
-    width: 20,
-    height: 20,
-    alignSelf: 'center',
-  },
-})

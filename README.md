@@ -201,7 +201,7 @@ Clientside APIs mirror the serverside minus the Google API routes
 | Post | https://pingpong-backend.devacademy.nz/api/v1/userwithfriends | User object | A user object with a friend_data array of user objects, adding the user to the database if it doesn't exist |
 | Post | https://pingpong-backend.devacademy.nz/api/v1/getuser |  userId: auth_id | A user object |
 | Post | https://pingpong-backend.devacademy.nz/api/v1/add | UserData object  | A user object |
-| Post | https://pingpong-backend.devacademy.nz/api/v1/addfriend | userId: auth_id, friendId: auth_id | Id of new entry in the friendships table |
+| Post | https://pingpong-backend.devacademy.nz/api/v1/addfriend | userId: auth_id, searchName: username | Id of new entry in the friendships table |
 | Post | https://pingpong-backend.devacademy.nz/api/v1/confirm | userId: auth_id, friendId: auth_id | 1 if pending was set to false for the friendship |
 | Post | https://pingpong-backend.devacademy.nz/api/v1/deny | userId: auth_id, friendId: auth_id | 1 if the friendships entry was deleted |
 | Post | https://pingpong-backend.devacademy.nz/api/v1/setping | userId: auth_id, setting: boolean, location: optional location string for when setting is true | A user object |

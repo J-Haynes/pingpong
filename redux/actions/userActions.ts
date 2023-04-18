@@ -4,7 +4,7 @@ import {
   changePingStatus,
   sendFriendConfirm,
   sendFriendDeny,
-  addFriendApi,
+  requestFriend,
 } from '../../apis/apiClient'
 import type { ThunkAction } from '../store'
 import { resolveDiscoveryAsync } from 'expo-auth-session'
@@ -146,10 +146,10 @@ export function denyFriend(userId: string, friendId: string): ThunkAction {
   }
 }
 
-export function addFriends(friendId: string) {
+export function addFriends(response: string) {
   return {
     type: 'ADD_FRIEND',
-    payload: friendId,
+    payload: response,
   }
 }
 
@@ -160,9 +160,10 @@ export function addFriendThunk(
   searchName: string
 ): ThunkAction {
   return (dispatch) => {
-    return addFriendApi(userId, searchName).then((response) => {
-      if (response > 0) {
-        dispatch(addFriends(userId))
+    return requestFriend(userId, searchName).then((response) => {
+      console.log('response', response)
+      if (response) {
+        dispatch(addFriends(response))
       } else {
         console.log('Unexpected response from server, try another name')
       }

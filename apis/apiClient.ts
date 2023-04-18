@@ -25,11 +25,14 @@ export function addUser(userData: UserData): Promise<User> {
     .then((res) => res.body)
 }
 
-export function sendFriendRequest(userId: string, friendId: string) {
+export function requestFriend(userId: string, searchName: string) {
   return request
     .post(`${externalBaseUrl}/addfriend`)
-    .send({ userId, friendId })
-    .then((res) => res.body)
+    .send({ userId, searchName })
+    .then((res) => {
+      console.log('api', res.body)
+      return res.body
+    })
 }
 
 export function sendFriendConfirm(
@@ -61,16 +64,10 @@ export function changePingStatus(
     .post(`${externalBaseUrl}/setping`)
     .send({ userId, setting, location })
     .then((res) => {
-      console.log('Api client', res.body[0])
       return res.body[0]
     })
 }
 
 // Waiting for deployment
 
-export function addFriendApi(userId: string, searchName: string) {
-  return request
-    .post(`${externalBaseUrl}/searchuser`)
-    .send({ userId, searchName })
-    .then((res) => res.body)
-}
+//change /searchuser to /addfriend here & in backend

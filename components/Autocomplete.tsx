@@ -43,9 +43,7 @@ export default function AutoComplete({ change }: Props) {
             style: [StyleSheet.locationInput, StyleSheet.locationInput],
             placeholderTextColor: '#FDF7ED',
             multiline: true,
-            onChangeText(text) {
-              console.log(text)
-            },
+            onChangeText(text) {},
           }}
         />
       </ScrollView>
