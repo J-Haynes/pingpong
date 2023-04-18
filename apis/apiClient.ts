@@ -8,10 +8,7 @@ export function fetchFriends(userData: UserData): Promise<UserWithFriends> {
   return request
     .post(`${externalBaseUrl}/userwithfriends`)
     .send(userData)
-    .then((res) => {
-      console.log('api call', res.body)
-      return res.body
-    })
+    .then((res) => res.body)
 }
 
 export function fetchUser(userId: string): Promise<User> {
