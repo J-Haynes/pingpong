@@ -94,12 +94,12 @@ export default function Friends({ navigation }: any) {
           </>
         ) : (
           <>
-            <View style={StyleSheet.container}>
+            <View style={StyleSheet.smallContainer}>
               <Image
                 style={StyleSheet.beerImage}
                 source={require('../assets/activities/beer.png')}
               ></Image>
-              <Text style={StyleSheet.mainText}>Oh no! No Friends...</Text>
+              <Text style={StyleSheet.mainText}>oh no! no friends...</Text>
             </View>
           </>
         )}

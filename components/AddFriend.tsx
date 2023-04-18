@@ -17,7 +17,7 @@ export default function AddFriend({ navigation }: any) {
   const userId = useAppSelector((state) => state.friends.auth_id)
 
   const [searchName, setSearchName] = useState('')
-  const [requestReply, setRequestReply] = useState('Enter a username')
+  const [requestReply, setRequestReply] = useState('')
 
   const currentPage = 'AddFriend'
 
@@ -31,7 +31,7 @@ export default function AddFriend({ navigation }: any) {
 
   return (
     <>
-      <View style={Stylesheet.addContainer}>
+      <View style={Stylesheet.smallContainer}>
         <SafeAreaView>
           <TextInput
             style={Stylesheet.input}
@@ -40,7 +40,7 @@ export default function AddFriend({ navigation }: any) {
             placeholder="Search for a username"
             placeholderTextColor={'#FDF7ED'}
           />
-          <Text>{requestReply}</Text>
+          <Text style={Stylesheet.lineText}>{requestReply}</Text>
         </SafeAreaView>
         <View style={Stylesheet.buttonAdd}>
           <TouchableOpacity onPress={handlePress}>
