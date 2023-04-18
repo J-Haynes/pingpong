@@ -3,6 +3,13 @@ import { Dimensions, StyleSheet } from 'react-native'
 
 const { width } = Dimensions.get('window')
 
+// colours:
+// dark grey = #2F2F23
+// blue = #0E65A3
+// dark orange = #E05A00
+// light orange = #F79500
+// white-ish = #FDF7ED
+
 export default StyleSheet.create({
   // global
 
@@ -18,6 +25,12 @@ export default StyleSheet.create({
     padding: 20,
     width: '100%',
     alignContent: 'center',
+  },
+  smallContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#E05A00',
   },
   input: {
     flex: 1,
@@ -147,7 +160,7 @@ export default StyleSheet.create({
     borderTopWidth: 2,
     borderColor: '#FDF7ED',
   },
-  beerImage: { width: 200, height: 200, opacity: 0.6 },
+  beerImage: { width: 200, height: 200, opacity: 0.6, marginBottom: 20 },
   mainText: {
     backgroundColor: '#E05A00',
     color: '#FDF7ED',
@@ -219,12 +232,6 @@ export default StyleSheet.create({
 
   // add friend specific
 
-  addContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#E05A00',
-  },
   buttonAdd: {
     backgroundColor: '#FDF7ED',
     width: 350,
