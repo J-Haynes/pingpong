@@ -16,8 +16,6 @@ import { UserData } from '../common/User'
 import * as Font from 'expo-font'
 import io from 'socket.io-client'
 
-// I want to dispatch(loadUserWithFriends(userWithFriends.auth_id)) on friend request or friend request confirmation
-
 export default function Friends({ navigation }: any) {
   const userWithFriends = useAppSelector((state) => state.friends)
   const friends = userWithFriends.friend_data
