@@ -19,8 +19,6 @@ export default function Friends({ navigation }: any) {
   const userWithFriends = useAppSelector((state) => state.friends)
   const friends = userWithFriends.friend_data
 
-  console.log('userwithfriends', userWithFriends)
-
   // const pingFriendList = friends.filter((friend) => friend.ping_active)
   // const otherFriendList = friends.filter((friend) => !friend.ping_active)
 
