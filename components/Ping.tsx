@@ -23,6 +23,7 @@ export default function Ping({ navigation }: any) {
   const pingStatus = useAppSelector((state) => state.friends.ping_active)
 
   const [location, onChangeText] = useState({} as LocationDetails)
+  const [emoji, setEmoji] = useState('🍺')
 
   const [ping, setPing] = useState(false)
 
@@ -46,6 +47,9 @@ export default function Ping({ navigation }: any) {
           showsButtons={false}
           showsPagination={false}
           loop={false}
+          onIndexChanged={(index: any) => {
+            setEmoji(index)
+          }}
         >
           <View style={StyleSheet.slide}>
             <RegularText style={StyleSheet.slideText}>b e e r</RegularText>
@@ -93,7 +97,9 @@ export default function Ping({ navigation }: any) {
           <View style={StyleSheet.submitButton}>
             <TouchableOpacity
               onPress={() => {
-                dispatch(changePing(userId, false, location.description))
+                dispatch(
+                  changePing(userId, false, location.description + emoji)
+                )
                 setPing(!ping)
                 onChangeText({} as LocationDetails)
               }}
@@ -108,7 +114,7 @@ export default function Ping({ navigation }: any) {
           <View>
             <TouchableOpacity
               onPress={() => {
-                dispatch(changePing(userId, true, location.description))
+                dispatch(changePing(userId, true, location.description + emoji))
                 setPing(!ping)
               }}
             >
