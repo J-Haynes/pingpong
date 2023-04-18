@@ -5,8 +5,6 @@ import {
   StyleSheet,
   SafeAreaView,
   TextInput,
-  Touchable,
-  TouchableOpacity,
   Button,
   Alert,
 } from 'react-native'
@@ -14,22 +12,24 @@ import React from 'react'
 import { useState } from 'react'
 
 import Nav from './Nav'
-import { useAppDispatch, useAppSelector } from '../hooks/redux'
-
-import { addFriendThunk } from '../redux/actions/userActions'
+import { useAppSelector } from '../hooks/redux'
+import { requestFriend } from '../apis/apiClient'
 
 export default function AddFriend({ navigation }: any) {
-  const dispatch = useAppDispatch()
+  const userId = useAppSelector((state) => state.friends.auth_id)
+
+  const [searchName, setSearchName] = useState('')
+  const [requestReply, setRequestReply] = useState('Enter a username')
 
   const currentPage = 'AddFriend'
 
-  const [searchName, setSearchName] = useState('')
-
   const handlePress = () => {
-    dispatch(addFriendThunk(userId, searchName))
+    requestFriend(userId, searchName)
+      .then((response) => setRequestReply('Friend request sent'))
+      .catch((err) => {
+        setRequestReply(err.message)
+      })
   }
-
-  const userId = useAppSelector((state) => state.friends.auth_id)
 
   return (
     <>
@@ -42,6 +42,7 @@ export default function AddFriend({ navigation }: any) {
             placeholder="Search for username"
             placeholderTextColor={'white'}
           />
+          <Text>{requestReply}</Text>
         </SafeAreaView>
         <Button title="Add friend" onPress={handlePress} />
       </View>

@@ -3,10 +3,7 @@ import { Action } from '../actions/userActions'
 
 const initialState = {} as UserWithFriends
 
-function reducer(
-  state = initialState,
-  action: Action
-): UserWithFriends | string {
+function reducer(state = initialState, action: Action): UserWithFriends {
   const { type, payload } = action
 
   switch (type) {
@@ -29,8 +26,8 @@ function reducer(
         (friend) => friend.auth_id !== payload
       )
       return { ...state, friend_data: deniedState }
-    case 'ADD_FRIEND':
-      return { ...state }
+    // case 'ADD_FRIEND':
+    //   return { ...state } //fix this shit
     default:
       return state
   }
