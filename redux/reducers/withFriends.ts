@@ -26,8 +26,8 @@ function reducer(state = initialState, action: Action): UserWithFriends {
         (friend) => friend.auth_id !== payload
       )
       return { ...state, friend_data: deniedState }
-    case 'ADD_FRIEND':
-      return { ...state }
+    // case 'ADD_FRIEND':
+    //   return { ...state } //fix this shit
     default:
       return state
   }

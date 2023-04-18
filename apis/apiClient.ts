@@ -29,10 +29,7 @@ export function requestFriend(userId: string, searchName: string) {
   return request
     .post(`${externalBaseUrl}/addfriend`)
     .send({ userId, searchName })
-    .then((res) => {
-      console.log('api', res.body)
-      return res.body
-    })
+    .then((res) => res.body)
 }
 
 export function sendFriendConfirm(
@@ -67,7 +64,3 @@ export function changePingStatus(
       return res.body[0]
     })
 }
-
-// Waiting for deployment
-
-//change /searchuser to /addfriend here & in backend

@@ -4,10 +4,8 @@ import {
   changePingStatus,
   sendFriendConfirm,
   sendFriendDeny,
-  requestFriend,
 } from '../../apis/apiClient'
 import type { ThunkAction } from '../store'
-import { resolveDiscoveryAsync } from 'expo-auth-session'
 
 export type Action =
   | { type: 'FETCH_USER'; payload: User }
@@ -78,17 +76,6 @@ export function loadingDone(): Action {
   }
 }
 
-// Takes a userId, calls fetchUser to get the user from the database, and then adds it to the store
-// export function loadUser(userId: string): ThunkAction {
-//   return (dispatch) => {
-//     return fetchUser(userId)
-//       .then((user: User) => {
-//         dispatch(addUserToState(user))
-//       })
-//       .catch((err) => console.log(err))
-//   }
-// }
-
 export function loadUserWithFriends(userData: UserData): ThunkAction {
   return async (dispatch) => {
     dispatch(loading())
@@ -100,8 +87,6 @@ export function loadUserWithFriends(userData: UserData): ThunkAction {
       .catch((err) => console.log(err))
   }
 }
-
-// For the set ping thunk note that when false is given the route also sets the users location data to null - make sure that store location data is also wiped from the store
 
 export function changePing(
   userId: string,
@@ -146,27 +131,22 @@ export function denyFriend(userId: string, friendId: string): ThunkAction {
   }
 }
 
-export function addFriends(response: string) {
+export function addFriends() {
   return {
     type: 'ADD_FRIEND',
-    payload: response,
+    payload: null,
   }
 }
 
-// Waiting for input from Ryan
-
-export function addFriendThunk(
-  userId: string,
-  searchName: string
-): ThunkAction {
-  return (dispatch) => {
-    return requestFriend(userId, searchName).then((response) => {
-      console.log('response', response)
-      if (response) {
-        dispatch(addFriends(response))
-      } else {
-        console.log('Unexpected response from server, try another name')
-      }
-    })
-  }
-}
+// export function addFriendThunk(
+//   userId: string,
+//   searchName: string
+// ): ThunkAction<boolean> {
+//   return async (dispatch) => {
+//     return requestFriend(userId, searchName)
+//       .then(() => true)
+//       .catch((err) => {
+//         return false //send error back to frontend
+//       })
+//   }
+// }
