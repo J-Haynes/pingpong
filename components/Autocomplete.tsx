@@ -40,12 +40,10 @@ export default function AutoComplete({ change }: Props) {
             url: 'https://pingpong-backend.devacademy.nz/google',
           }}
           textInputProps={{
-            style: [StyleSheet.locationInput, StyleSheet.locationInput],
+            style: StyleSheet.input,
             placeholderTextColor: '#FDF7ED',
             multiline: true,
-            onChangeText(text) {
-              console.log(text)
-            },
+            onChangeText(text) {},
           }}
         />
       </ScrollView>

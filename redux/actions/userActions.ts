@@ -4,10 +4,8 @@ import {
   changePingStatus,
   sendFriendConfirm,
   sendFriendDeny,
-  requestFriend,
 } from '../../apis/apiClient'
 import type { ThunkAction } from '../store'
-import { resolveDiscoveryAsync } from 'expo-auth-session'
 
 export type Action =
   | { type: 'FETCH_USER'; payload: User }
@@ -16,6 +14,9 @@ export type Action =
   | { type: 'SET_LOCATION'; payload: string }
   | { type: 'CONFIRM_FRIEND'; payload: string }
   | { type: 'DENY_FRIEND'; payload: string }
+  | { type: 'ADD_FRIEND'; payload: string }
+  | { type: 'LOADING'; payload: null }
+  | { type: 'LOADING_DONE'; payload: null }
 
 export function addUserToState(user: User): Action {
   return {
@@ -61,17 +62,31 @@ export function denyFriendInState(friendId: string): Action {
   }
 }
 
+export function loading(): Action {
+  return {
+    type: 'LOADING',
+    payload: null,
+  }
+}
+
+export function loadingDone(): Action {
+  return {
+    type: 'LOADING_DONE',
+    payload: null,
+  }
+}
+
 export function loadUserWithFriends(userData: UserData): ThunkAction {
   return async (dispatch) => {
+    dispatch(loading())
     return fetchFriends(userData)
       .then((userWithFriends) => {
         dispatch(addUserWithFriendsToState(userWithFriends))
+        dispatch(loadingDone())
       })
       .catch((err) => console.log(err))
   }
 }
-
-// For the set ping thunk note that when false is given the route also sets the users location data to null - make sure that store location data is also wiped from the store
 
 export function changePing(
   userId: string,

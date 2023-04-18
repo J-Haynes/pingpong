@@ -64,7 +64,6 @@ export function changePingStatus(
     .post(`${externalBaseUrl}/setping`)
     .send({ userId, setting, location })
     .then((res) => {
-      console.log('Api client', res.body[0])
       return res.body[0]
     })
 }

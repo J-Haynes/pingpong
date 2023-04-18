@@ -1,15 +1,13 @@
 import {
   Text,
   View,
-  Image,
-  StyleSheet,
   SafeAreaView,
   TextInput,
-  Button,
-  Alert,
+  TouchableOpacity,
 } from 'react-native'
 import React from 'react'
 import { useState } from 'react'
+import Stylesheet from '../styles/styles'
 
 import Nav from './Nav'
 import { useAppSelector } from '../hooks/redux'
@@ -33,65 +31,26 @@ export default function AddFriend({ navigation }: any) {
 
   return (
     <>
-      <View style={styles.container}>
+      <View style={Stylesheet.addContainer}>
         <SafeAreaView>
           <TextInput
-            style={[styles.input, styles.shadow]}
+            style={Stylesheet.input}
             onChangeText={setSearchName}
             value={searchName}
-            placeholder="Search for username"
-            placeholderTextColor={'white'}
+            placeholder="Search for a username"
+            placeholderTextColor={'#FDF7ED'}
           />
           <Text>{requestReply}</Text>
         </SafeAreaView>
-        <Button title="Add friend" onPress={handlePress} />
+        <View style={Stylesheet.buttonAdd}>
+          <TouchableOpacity onPress={handlePress}>
+            <Text style={Stylesheet.buttonAddText}>press to add friend</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <View style={styles.nav}>
+      <View style={Stylesheet.navContainer}>
         <Nav navigation={navigation} currentPage={currentPage} />
       </View>
     </>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    backgroundColor: '#dd571c',
-  },
-  nav: {
-    backgroundColor: '#dd571c',
-    padding: 30,
-    width: '100%',
-    alignContent: 'center',
-  },
-  mainText: {
-    color: 'oldlace',
-    fontSize: 30,
-    alignSelf: 'center',
-    paddingHorizontal: 20,
-  },
-  image: { width: 200, height: 200 },
-  ping: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    backgroundColor: '#dd571c',
-    paddingTop: 20,
-  },
-  input: {
-    height: 50,
-    paddingVertical: 10,
-    paddingHorizontal: 70,
-    backgroundColor: '#b34e24',
-    borderRadius: 50,
-  },
-  shadow: {
-    shadowColor: '#b34e24',
-    shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 1,
-    shadowRadius: 10,
-  },
-})

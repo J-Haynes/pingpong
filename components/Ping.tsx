@@ -28,8 +28,13 @@ export default function Ping({ navigation }: any) {
 
   const currentPage = 'Ping'
 
+  const userWithFriends = useAppSelector((state) => state.friends)
+
   return (
     <View style={StyleSheet.container}>
+      <RegularText style={StyleSheet.introText}>
+        Hey {userWithFriends.name}
+      </RegularText>
       <View style={StyleSheet.headingContainer}>
         <MediumText style={StyleSheet.headerText}> SEND A </MediumText>
         <MediumText style={StyleSheet.blueText}>PING</MediumText>
@@ -77,17 +82,15 @@ export default function Ping({ navigation }: any) {
           </SafeAreaView>
         ) : location.description ? (
           <SafeAreaView>
-            <Text style={StyleSheet.locationInput}>
-              Pinging at {location?.name}
-            </Text>
+            <Text style={StyleSheet.input}>Pinging at {location?.name}</Text>
           </SafeAreaView>
         ) : (
           <SafeAreaView>
-            <Text style={StyleSheet.locationInput}>Currently pinging</Text>
+            <Text style={StyleSheet.input}>Currently pinging</Text>
           </SafeAreaView>
         )}
         {ping ? (
-          <View style={StyleSheet.pingButton}>
+          <View style={StyleSheet.submitButton}>
             <TouchableOpacity
               onPress={() => {
                 dispatch(changePing(userId, false, location.description))
@@ -96,7 +99,7 @@ export default function Ping({ navigation }: any) {
               }}
             >
               <Image
-                style={StyleSheet.pingButton}
+                style={StyleSheet.submitButton}
                 source={require('../assets/ball.png')}
               ></Image>
             </TouchableOpacity>
@@ -110,7 +113,7 @@ export default function Ping({ navigation }: any) {
               }}
             >
               <Image
-                style={StyleSheet.pingButton}
+                style={StyleSheet.submitButton}
                 source={require('../assets/ball.png')}
               ></Image>
             </TouchableOpacity>
