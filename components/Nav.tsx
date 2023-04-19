@@ -38,9 +38,24 @@ export default function Nav({ navigation, currentPage }: any) {
     <View style={Stylesheet.nav}>
       {/* THIS IS THE HOME / PING PAGE */}
 
-      <TouchableOpacity style={Stylesheet.button} onPress={handlePressPing}>
+      <TouchableOpacity onPress={handlePressFriends}>
+        {currentPage === 'Friends' && (
+          <Ionicons name="md-people" size={40} color="#2F2F23" />
+        )}
+        {(currentPage === 'Ping' ||
+          currentPage === 'AddFriend' ||
+          currentPage === 'Settings') && (
+          <Ionicons name="md-people-outline" size={40} color="#2F2F23" />
+        )}
+      </TouchableOpacity>
+
+      <Text style={Stylesheet.lineText}>|</Text>
+
+      {/* THIS IS THE FRIENDS / ADD FRIENDS PAGE */}
+
+      <TouchableOpacity onPress={handlePressPing}>
         {currentPage === 'Ping' && (
-          <MaterialCommunityIcons name="beer" size={40} color="#000000" />
+          <MaterialCommunityIcons name="beer" size={40} color="#2F2F23" />
         )}
         {(currentPage === 'Friends' ||
           currentPage === 'AddFriend' ||
@@ -48,22 +63,8 @@ export default function Nav({ navigation, currentPage }: any) {
           <MaterialCommunityIcons
             name="beer-outline"
             size={40}
-            color="#000000"
+            color="#2F2F23"
           />
-        )}
-      </TouchableOpacity>
-      <Text style={Stylesheet.lineText}>|</Text>
-
-      {/* THIS IS THE FRIENDS / ADD FRIENDS PAGE */}
-
-      <TouchableOpacity style={Stylesheet.button} onPress={handlePressFriends}>
-        {currentPage === 'Friends' && (
-          <Ionicons name="md-people" size={40} color="#000000" />
-        )}
-        {(currentPage === 'Ping' ||
-          currentPage === 'AddFriend' ||
-          currentPage === 'Settings') && (
-          <Ionicons name="md-people-outline" size={40} color="#000000" />
         )}
       </TouchableOpacity>
 
@@ -71,14 +72,14 @@ export default function Nav({ navigation, currentPage }: any) {
 
       {/* THIS IS THE FAKE SETTINGS PAGE */}
 
-      <TouchableOpacity style={Stylesheet.button} onPress={handlePressSettings}>
+      <TouchableOpacity onPress={handlePressSettings}>
         {currentPage === 'Settings' && (
-          <Ionicons name="settings" size={40} color="#000000" />
+          <Ionicons name="settings" size={40} color="#2F2F23" />
         )}
         {(currentPage === 'Ping' ||
           currentPage === 'AddFriend' ||
           currentPage === 'Friends') && (
-          <Ionicons name="settings-outline" size={40} color="#000000" />
+          <Ionicons name="settings-outline" size={40} color="#2F2F23" />
         )}
       </TouchableOpacity>
     </View>
