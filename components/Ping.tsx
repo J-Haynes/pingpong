@@ -114,12 +114,6 @@ export default function Ping({ navigation }: any) {
                 style={StyleSheet.submitButton}
                 source={require('../assets/ball.png')}
               ></Animatable.Image>
-              {/* <Animatable.Image
-                source={require('../assets/ball.png')}
-                animation="bounce"
-                iterationCount={Infinity}
-                direction="normal"
-              ></Animatable.Image> */}
             </TouchableOpacity>
           </View>
         ) : (
