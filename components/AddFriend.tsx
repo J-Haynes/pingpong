@@ -25,7 +25,7 @@ export default function AddFriend({ navigation }: any) {
 
   const handlePress = () => {
     requestFriend(userId, searchName)
-      .then((response) => setRequestReply('Friend request sent'))
+      .then((response) => setRequestReply('friend request sent!'))
       .catch((err) => {
         setRequestReply(err.message)
       })
