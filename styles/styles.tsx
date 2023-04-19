@@ -301,6 +301,25 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
   },
+
+  //tutorial
+
+  blueTagline: {
+    color: '#093A5D',
+    fontSize: 40,
+    textAlign: 'center',
+    paddingHorizontal: 20,
+    width: '100%',
+  },
+
+  tutorialTitle: {
+    color: '#FDF7ED',
+    fontSize: 75,
+    textAlign: 'center',
+    width: '100%',
+    paddingTop: 15,
+    fontFamily: 'italic-text',
+  },
 })
 
 // fonts
