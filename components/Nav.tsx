@@ -51,7 +51,7 @@ export default function Nav({ navigation, currentPage }: any) {
 
       <Text style={Stylesheet.lineText}>|</Text>
 
-      {/* THIS IS THE FRIENDS / ADD FRIENDS PAGE */}
+      {/* THIS IS THE FRIENDS // ADD FRIENDS PAGE */}
 
       <TouchableOpacity onPress={handlePressPing}>
         {currentPage === 'Ping' && (
