@@ -208,25 +208,25 @@ export default StyleSheet.create({
 
   nav: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: '#FDF7ED',
     borderRadius: 50,
-    height: 50,
+    height: 60,
     width: 350,
-    elevation: 5,
+    // elevation: 5,
     borderWidth: 3,
     borderColor: '#F79500',
     alignSelf: 'center',
   },
-  button: {
-    paddingVertical: 10,
-    paddingHorizontal: 50,
-  },
+  // button: {
+  //   paddingVertical: 10,
+  //   paddingHorizontal: 50,
+  // },
   icon: { width: 35, height: 35 },
   lineText: {
-    color: '#0E65A3',
-    fontSize: 20,
+    color: '#000000',
+    fontSize: 30,
     alignSelf: 'center',
   },
   ico__col: {

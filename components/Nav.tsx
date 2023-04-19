@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Text, View, TouchableOpacity, Image } from 'react-native'
+import { Text, View, TouchableOpacity } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import { UserWithoutFriends } from '../common/User'
@@ -40,14 +40,14 @@ export default function Nav({ navigation, currentPage }: any) {
 
       <TouchableOpacity style={Stylesheet.button} onPress={handlePressPing}>
         {currentPage === 'Ping' && (
-          <MaterialCommunityIcons name="beer" size={50} color="#000000" />
+          <MaterialCommunityIcons name="beer" size={40} color="#000000" />
         )}
         {(currentPage === 'Friends' ||
           currentPage === 'AddFriend' ||
           currentPage === 'Settings') && (
           <MaterialCommunityIcons
             name="beer-outline"
-            size={50}
+            size={40}
             color="#000000"
           />
         )}
@@ -58,12 +58,12 @@ export default function Nav({ navigation, currentPage }: any) {
 
       <TouchableOpacity style={Stylesheet.button} onPress={handlePressFriends}>
         {currentPage === 'Friends' && (
-          <Ionicons name="md-people" size={50} color="#000000" />
+          <Ionicons name="md-people" size={40} color="#000000" />
         )}
         {(currentPage === 'Ping' ||
           currentPage === 'AddFriend' ||
           currentPage === 'Settings') && (
-          <Ionicons name="md-people-outline" size={50} color="#000000" />
+          <Ionicons name="md-people-outline" size={40} color="#000000" />
         )}
       </TouchableOpacity>
 
@@ -73,12 +73,12 @@ export default function Nav({ navigation, currentPage }: any) {
 
       <TouchableOpacity style={Stylesheet.button} onPress={handlePressSettings}>
         {currentPage === 'Settings' && (
-          <Ionicons name="settings" size={50} color="#000000" />
+          <Ionicons name="settings" size={40} color="#000000" />
         )}
         {(currentPage === 'Ping' ||
           currentPage === 'AddFriend' ||
           currentPage === 'Friends') && (
-          <Ionicons name="settings-outline" size={50} color="#000000" />
+          <Ionicons name="settings-outline" size={40} color="#000000" />
         )}
       </TouchableOpacity>
     </View>
