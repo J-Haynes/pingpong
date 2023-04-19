@@ -40,13 +40,13 @@ export default function Nav({ navigation, currentPage }: any) {
 
       <TouchableOpacity onPress={handlePressFriends}>
         {currentPage === 'Friends' && (
-          <Ionicons name="md-people" size={40} color="#2F2F23" />
+          <Ionicons name="md-people" size={40} color="#093A5D" />
         )}
         {(currentPage === 'Ping' ||
           currentPage === 'AddFriend' ||
           currentPage === 'Tutorial' ||
           currentPage === 'Settings') && (
-          <Ionicons name="md-people-outline" size={40} color="#2F2F23" />
+          <Ionicons name="md-people-outline" size={40} color="#093A5D" />
         )}
       </TouchableOpacity>
 
@@ -56,7 +56,7 @@ export default function Nav({ navigation, currentPage }: any) {
 
       <TouchableOpacity onPress={handlePressPing}>
         {currentPage === 'Ping' && (
-          <MaterialCommunityIcons name="beer" size={40} color="#2F2F23" />
+          <MaterialCommunityIcons name="beer" size={40} color="#093A5D" />
         )}
         {(currentPage === 'Friends' ||
           currentPage === 'AddFriend' ||
@@ -65,7 +65,7 @@ export default function Nav({ navigation, currentPage }: any) {
           <MaterialCommunityIcons
             name="beer-outline"
             size={40}
-            color="#2F2F23"
+            color="#093A5D"
           />
         )}
       </TouchableOpacity>
@@ -76,13 +76,13 @@ export default function Nav({ navigation, currentPage }: any) {
 
       <TouchableOpacity onPress={handlePressSettings}>
         {currentPage === 'Settings' && (
-          <Ionicons name="settings" size={40} color="#2F2F23" />
+          <Ionicons name="settings" size={40} color="#093A5D" />
         )}
         {(currentPage === 'Ping' ||
           currentPage === 'AddFriend' ||
           currentPage === 'Tutorial' ||
           currentPage === 'Friends') && (
-          <Ionicons name="settings-outline" size={40} color="#2F2F23" />
+          <Ionicons name="settings-outline" size={40} color="#093A5D" />
         )}
       </TouchableOpacity>
     </View>
