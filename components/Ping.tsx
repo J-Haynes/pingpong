@@ -52,7 +52,8 @@ export default function Ping({ navigation }: any) {
           >
             <View style={StyleSheet.slide}>
               <RegularText style={StyleSheet.slideText}>b e e r</RegularText>
-              <Image
+              <Animatable.Image
+                animation="bounceIn"
                 style={StyleSheet.slideImage}
                 source={require('../assets/activities/beer.png')}
               />
@@ -106,10 +107,13 @@ export default function Ping({ navigation }: any) {
                 onChangeText({} as LocationDetails)
               }}
             >
-              <Image
+              <Animatable.Image
+                animation="pulse"
+                easing="ease-in-out-sine"
+                iterationCount="infinite"
                 style={StyleSheet.submitButton}
                 source={require('../assets/ball.png')}
-              ></Image>
+              ></Animatable.Image>
               {/* <Animatable.Image
                 source={require('../assets/ball.png')}
                 animation="bounce"
