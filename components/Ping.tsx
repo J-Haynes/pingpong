@@ -98,7 +98,7 @@ export default function Ping({ navigation }: any) {
                         changePing(
                           userId,
                           true,
-                          `${location.map_url}*${emoji} ${location.description}`
+                          `${location.map_url}☭${emoji} ${location.description}`
                         )
                       )
                     : dispatch(changePing(userId, true, `${emoji}`))

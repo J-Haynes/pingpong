@@ -10,15 +10,26 @@ interface Props {
 }
 
 export default function ActiveFriend({ friend }: Props) {
-  const [map_url, ping_location] = friend && friend.ping_location.split('*')
-
+  let map_url = ''
+  let location = ''
+  let emoji = ''
+  if (friend.ping_location.includes('☭')) {
+    ;[map_url, location] = friend.ping_location.split('☭')
+  } else {
+    emoji = friend.ping_location
+  }
   return (
-    // display red dot and friend.ping_location
     <View style={StyleSheet.user}>
       <RegularText style={StyleSheet.name}>
         {capitalise(friend.name)} {firstLetter(friend.surname)}
       </RegularText>
-      <RegularText style={StyleSheet.name}>{friend.ping_location}</RegularText>
+      {map_url ? (
+        <RegularText style={StyleSheet.name}>{location}</RegularText>
+      ) : (
+        //make into a link using map_url
+        <RegularText style={StyleSheet.name}>{emoji}</RegularText>
+      )}
+      //map_url provided for link
       <Image
         style={StyleSheet.image}
         source={require('../assets/ball.png')}
