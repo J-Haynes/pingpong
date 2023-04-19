@@ -125,7 +125,7 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignSelf: 'center',
-    marginTop: 50,
+    marginTop: 48,
     paddingHorizontal: 10,
     paddingVertical: 10,
     width: '70%',
@@ -133,7 +133,7 @@ export default StyleSheet.create({
     borderRadius: 200,
     shadowColor: 'rgba(255, 157, 92, .5)',
     shadowRadius: 50,
-    marginBottom: 60,
+    marginBottom: 128,
   },
   slideText: {
     color: '#FDF7ED',
