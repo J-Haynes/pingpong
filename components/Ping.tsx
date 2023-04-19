@@ -32,11 +32,12 @@ export default function Ping({ navigation }: any) {
     setEmoji(emojis[index])
   }
 
-  const [ping, setPing] = useState(false)
-
   const currentPage = 'Ping'
 
   const userWithFriends = useAppSelector((state) => state.friends)
+  console.log(userWithFriends)
+
+  const [ping, setPing] = useState(userWithFriends.ping_active)
 
   return (
     <View style={StyleSheet.container}>
@@ -82,62 +83,91 @@ export default function Ping({ navigation }: any) {
             </View>
           </Swiper>
         </View>
-        {!ping ? (
-          <SafeAreaView>
-            <AutoComplete change={onChangeText} />
-          </SafeAreaView>
+        {!userWithFriends.ping_active ? (
+          //ping is not active show autocomplete
+          <>
+            <SafeAreaView>
+              <AutoComplete change={onChangeText} />
+            </SafeAreaView>
+            <View>
+              <TouchableOpacity
+                onPress={() => {
+                  typeof location.map_url !== 'undefined' &&
+                  location.description !== 'undefined'
+                    ? dispatch(
+                        changePing(
+                          userId,
+                          true,
+                          `${location.map_url}*${emoji} ${location.description}`
+                        )
+                      )
+                    : dispatch(changePing(userId, true, `${emoji}`))
+                  setPing(!ping)
+                }}
+              >
+                <Image
+                  style={StyleSheet.submitButton}
+                  source={require('../assets/ball.png')}
+                ></Image>
+              </TouchableOpacity>
+            </View>
+          </>
         ) : location.description ? (
-          <SafeAreaView>
-            <Text style={StyleSheet.input}>Pinging at {location?.name}</Text>
-          </SafeAreaView>
-        ) : (
-          <SafeAreaView>
-            <Text style={StyleSheet.input}>Currently pinging</Text>
-          </SafeAreaView>
-        )}
-        {ping ? (
-          <View style={StyleSheet.submitButton}>
-            <TouchableOpacity
-              onPress={() => {
-                dispatch(
-                  changePing(userId, false, emoji + location.description)
-                )
-                setPing(!ping)
-                onChangeText({} as LocationDetails)
-              }}
-            >
-              <Image
-                style={StyleSheet.submitButton}
-                source={require('../assets/ball.png')}
-              ></Image>
-              {/* <Animatable.Image
-                source={require('../assets/ball.png')}
-                animation="bounce"
-                iterationCount={Infinity}
-                direction="normal"
-              ></Animatable.Image> */}
-            </TouchableOpacity>
-          </View>
-        ) : (
-          <View>
-            <TouchableOpacity
-              onPress={() => {
-                dispatch(
-                  changePing(
-                    userId,
-                    true,
-                    `${location.map_url}*${emoji} ${location.description}`
+          <>
+            <SafeAreaView>
+              <Text style={StyleSheet.input}>Pinging at {location?.name}</Text>
+            </SafeAreaView>
+            <View style={StyleSheet.submitButton}>
+              <TouchableOpacity
+                onPress={() => {
+                  dispatch(
+                    changePing(userId, false, emoji + location.description)
                   )
-                )
-                setPing(!ping)
-              }}
-            >
-              <Image
-                style={StyleSheet.submitButton}
-                source={require('../assets/ball.png')}
-              ></Image>
-            </TouchableOpacity>
-          </View>
+                  setPing(!ping)
+                  onChangeText({} as LocationDetails)
+                }}
+              >
+                <Image
+                  style={StyleSheet.submitButton}
+                  source={require('../assets/ball.png')}
+                ></Image>
+                {/* <Animatable.Image
+              source={require('../assets/ball.png')}
+              animation="bounce"
+              iterationCount={Infinity}
+              direction="normal"
+            ></Animatable.Image> */}
+              </TouchableOpacity>
+            </View>
+          </>
+        ) : (
+          <>
+            <SafeAreaView>
+              <Text style={StyleSheet.input}>Currently pinging</Text>
+            </SafeAreaView>
+            <View style={StyleSheet.submitButton}>
+              <TouchableOpacity
+                onPress={() => {
+                  dispatch(
+                    changePing(userId, false, emoji + location.description)
+                  )
+                  setPing(!ping)
+                  onChangeText({} as LocationDetails)
+                }}
+              >
+                <Image
+                  style={StyleSheet.submitButton}
+                  source={require('../assets/ball.png')}
+                ></Image>
+                {/* <Animatable.Image
+              source={require('../assets/ball.png')}
+              animation="bounce"
+              iterationCount={Infinity}
+              direction="normal"
+            ></Animatable.Image> */}
+              </TouchableOpacity>
+            </View>
+          </>
         )}
       </ScrollView>
       <View style={StyleSheet.navContainer}>

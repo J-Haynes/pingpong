@@ -10,6 +10,8 @@ interface Props {
 }
 
 export default function ActiveFriend({ friend }: Props) {
+  const [map_url, ping_location] = friend && friend.ping_location.split('*')
+
   return (
     // display red dot and friend.ping_location
     <View style={StyleSheet.user}>
