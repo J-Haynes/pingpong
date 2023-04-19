@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Image, Text, Touchable, TouchableOpacity, View } from 'react-native'
+import {
+  Image,
+  Text,
+  Touchable,
+  TouchableOpacity,
+  View,
+  ScrollView,
+} from 'react-native'
 import { UserData } from '../common/User'
 import { capitalise, firstLetter } from './helpers'
 import * as Font from 'expo-font'
@@ -30,24 +37,32 @@ export default function PendingFriend({ friend }: Props) {
 
   return (
     <>
-      <View style={StyleSheet.userName}>
-        <CondensedText style={StyleSheet.name}>
-          {capitalise(friend.name)} {firstLetter(friend.surname)}
-        </CondensedText>
-        <View style={StyleSheet.pendingContainer}>
-          <TouchableOpacity onPress={handleConfirm}>
-            <Image
-              style={StyleSheet.pendingIcons}
-              source={require('../assets/check.png')}
-            ></Image>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleCancel}>
-            <Image
-              style={StyleSheet.pendingIcons}
-              source={require('../assets/cross.png')}
-            ></Image>
-          </TouchableOpacity>
-        </View>
+      <View style={StyleSheet.size}>
+        <ScrollView>
+          <View style={StyleSheet.friendbox}>
+            <View style={StyleSheet.addfriend_title}>
+              <Text style={StyleSheet.friendbox_title}>
+                <CondensedText style={StyleSheet.name}>
+                  {capitalise(friend.name)} {firstLetter(friend.surname)}
+                </CondensedText>
+              </Text>
+            </View>
+            <View style={StyleSheet.pendingContainer}>
+              <TouchableOpacity onPress={handleConfirm}>
+                <Image
+                  style={StyleSheet.pendingIcons}
+                  source={require('../assets/check.png')}
+                ></Image>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={handleCancel}>
+                <Image
+                  style={StyleSheet.pendingIcons}
+                  source={require('../assets/cross.png')}
+                ></Image>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>
       </View>
     </>
   )

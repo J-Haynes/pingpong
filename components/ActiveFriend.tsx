@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Image, Text, View } from 'react-native'
+import { Image, ScrollView, Text, View } from 'react-native'
 import { UserData } from '../common/User'
 import { capitalise, firstLetter } from './helpers'
 import StyleSheet, { CondensedText } from '../styles/styles'
@@ -23,25 +23,37 @@ export default function ActiveFriend({ friend }: Props) {
     emoji = emoji.replace('undefined', '')
   }
   return (
-    <View style={StyleSheet.user}>
-      <View style={StyleSheet.userName}>
-        <CondensedText style={StyleSheet.name}>
-          {capitalise(friend.name)} {firstLetter(friend.surname)}
-        </CondensedText>
-        <Image
-          style={StyleSheet.image}
-          source={require('../assets/ball.png')}
-        ></Image>
-      </View>
-      {map_url ? (
-        <CondensedText style={StyleSheet.name}>{location}</CondensedText> //map_url, emoji and location available
-      ) : (
-        <CondensedText style={StyleSheet.name}>{emoji}</CondensedText> //only emoji available
-      )}
-      <Image
-        style={StyleSheet.image}
-        source={require('../assets/ball.png')}
-      ></Image>
+    <View style={StyleSheet.size}>
+      <ScrollView>
+        {map_url ? (
+          <View style={StyleSheet.friendbox}>
+            <CondensedText style={StyleSheet.emoji}>{emoji}</CondensedText>
+            <View>
+              {/* <View style={StyleSheet.userName}> */}
+              <Text style={StyleSheet.friendbox_title}>
+                <CondensedText style={StyleSheet.name}>
+                  {capitalise(friend.name)} {firstLetter(friend.surname)}
+                </CondensedText>
+              </Text>
+              {/* </View> */}
+              <CondensedText style={StyleSheet.address}>
+                {location}
+              </CondensedText>
+            </View>
+          </View>
+        ) : (
+          <View style={StyleSheet.friendbox}>
+            <CondensedText style={StyleSheet.emoji}>{emoji}</CondensedText>
+            <View style={StyleSheet.userName}>
+              <Text style={StyleSheet.friendbox_title}>
+                <CondensedText style={StyleSheet.name}>
+                  {capitalise(friend.name)} {firstLetter(friend.surname)}
+                </CondensedText>
+              </Text>
+            </View>
+          </View>
+        )}
+      </ScrollView>
     </View>
   )
 }
