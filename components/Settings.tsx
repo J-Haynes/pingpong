@@ -8,12 +8,13 @@ export default function Settings({ navigation }: any) {
   const currentPage = 'Settings'
 
   return (
-    <View style={StyleSheet.container}>
-      <Text>Settings!</Text>
-
+    <>
+      <View style={StyleSheet.container}>
+        <Text>Settings!</Text>
+      </View>
       <View style={StyleSheet.navContainer}>
         <Nav navigation={navigation} currentPage={currentPage} />
       </View>
-    </View>
+    </>
   )
 }

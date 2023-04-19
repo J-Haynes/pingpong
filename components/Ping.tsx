@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {
   Text,
   View,
@@ -14,11 +14,7 @@ import { useAppSelector, useAppDispatch } from '../hooks/redux'
 import { changePing } from '../redux/actions/userActions'
 import Swiper from 'react-native-web-swiper'
 import LocationDetails from '../common/Location'
-import StyleSheet, {
-  CondensedText,
-  ItalicText,
-  RegText,
-} from '../styles/styles'
+import StyleSheet, { RegText } from '../styles/styles'
 
 import * as Animatable from 'react-native-animatable'
 
@@ -55,7 +51,8 @@ export default function Ping({ navigation }: any) {
           >
             <View style={StyleSheet.slide}>
               <RegText style={StyleSheet.slideText}>beer</RegText>
-              <Image
+              <Animatable.Image
+                animation="bounceIn"
                 style={StyleSheet.slideImage}
                 source={require('../assets/activities/beer.png')}
               />
@@ -154,16 +151,13 @@ export default function Ping({ navigation }: any) {
                   onChangeText({} as LocationDetails)
                 }}
               >
-                <Image
+                <Animatable.Image
+                  animation="pulse"
+                  easing="ease-in-out-sine"
+                  iterationCount="infinite"
                   style={StyleSheet.submitButton}
                   source={require('../assets/ball.png')}
-                ></Image>
-                {/* <Animatable.Image
-              source={require('../assets/ball.png')}
-              animation="bounce"
-              iterationCount={Infinity}
-              direction="normal"
-            ></Animatable.Image> */}
+                ></Animatable.Image>
               </TouchableOpacity>
             </View>
           </>

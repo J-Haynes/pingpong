@@ -40,22 +40,22 @@ export default function Nav({ navigation, currentPage }: any) {
 
       <TouchableOpacity onPress={handlePressFriends}>
         {currentPage === 'Friends' && (
-          <Ionicons name="md-people" size={40} color="#2F2F23" />
+          <Ionicons name="md-people" size={40} color="#093A5D" />
         )}
         {(currentPage === 'Ping' ||
           currentPage === 'AddFriend' ||
           currentPage === 'Settings') && (
-          <Ionicons name="md-people-outline" size={40} color="#2F2F23" />
+          <Ionicons name="md-people-outline" size={40} color="#093A5D" />
         )}
       </TouchableOpacity>
 
       <Text style={Stylesheet.lineText}>|</Text>
 
-      {/* THIS IS THE FRIENDS / ADD FRIENDS PAGE */}
+      {/* THIS IS THE FRIENDS // ADD FRIENDS PAGE */}
 
       <TouchableOpacity onPress={handlePressPing}>
         {currentPage === 'Ping' && (
-          <MaterialCommunityIcons name="beer" size={40} color="#2F2F23" />
+          <MaterialCommunityIcons name="beer" size={40} color="#093A5D" />
         )}
         {(currentPage === 'Friends' ||
           currentPage === 'AddFriend' ||
@@ -63,7 +63,7 @@ export default function Nav({ navigation, currentPage }: any) {
           <MaterialCommunityIcons
             name="beer-outline"
             size={40}
-            color="#2F2F23"
+            color="#093A5D"
           />
         )}
       </TouchableOpacity>
@@ -74,12 +74,12 @@ export default function Nav({ navigation, currentPage }: any) {
 
       <TouchableOpacity onPress={handlePressSettings}>
         {currentPage === 'Settings' && (
-          <Ionicons name="settings" size={40} color="#2F2F23" />
+          <Ionicons name="settings" size={40} color="#093A5D" />
         )}
         {(currentPage === 'Ping' ||
           currentPage === 'AddFriend' ||
           currentPage === 'Friends') && (
-          <Ionicons name="settings-outline" size={40} color="#2F2F23" />
+          <Ionicons name="settings-outline" size={40} color="#093A5D" />
         )}
       </TouchableOpacity>
     </View>
