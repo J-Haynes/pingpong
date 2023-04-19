@@ -38,7 +38,7 @@ export default StyleSheet.create({
     flex: 1,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    backgroundColor: '#0E65A3',
+    backgroundColor: '#FDF7ED',
     width: 350,
     alignSelf: 'center',
     height: 50,
@@ -88,16 +88,6 @@ export default StyleSheet.create({
 
   // ping specific
 
-  ico__col: {
-    flex: 1,
-    flexDirection: 'column',
-  },
-  ico__row: {
-    paddingTop: 40,
-    flex: 1,
-    flexDirection: 'row',
-  },
-
   headingContainer: {
     flexDirection: 'row',
     width: '100%',
@@ -143,6 +133,7 @@ export default StyleSheet.create({
     borderRadius: 200,
     shadowColor: 'rgba(255, 169, 112, .5)',
     shadowRadius: 50,
+    marginBottom: 50,
   },
   slideText: {
     color: '#FDF7ED',
@@ -153,6 +144,7 @@ export default StyleSheet.create({
   slideImage: {
     width: 150,
     height: 150,
+    alignSelf: 'center',
   },
   submitButton: {
     width: 150,
