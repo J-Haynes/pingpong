@@ -14,7 +14,11 @@ import { useAppSelector, useAppDispatch } from '../hooks/redux'
 import { changePing } from '../redux/actions/userActions'
 import Swiper from 'react-native-web-swiper'
 import LocationDetails from '../common/Location'
-import StyleSheet from '../styles/styles'
+import StyleSheet, {
+  CondensedText,
+  ItalicText,
+  RegText,
+} from '../styles/styles'
 
 import * as Animatable from 'react-native-animatable'
 
@@ -40,10 +44,8 @@ export default function Ping({ navigation }: any) {
 
   return (
     <View style={StyleSheet.container}>
-      <RegularText style={StyleSheet.introText}>
-        Hey {userWithFriends.name}
-      </RegularText>
-      <ScrollView contentContainerStyle={StyleSheet.containerContents}>
+      <RegText style={StyleSheet.introText}>Hey {userWithFriends.name}</RegText>
+      <View style={StyleSheet.containerContents}>
         <View style={StyleSheet.swipeContainer}>
           <Swiper
             controlsEnabled={false}
@@ -51,30 +53,28 @@ export default function Ping({ navigation }: any) {
             onIndexChanged={indexHandler}
           >
             <View style={StyleSheet.slide}>
-              <RegularText style={StyleSheet.slideText}>b e e r</RegularText>
+              <RegText style={StyleSheet.slideText}>beer</RegText>
               <Image
                 style={StyleSheet.slideImage}
                 source={require('../assets/activities/beer.png')}
               />
             </View>
             <View style={StyleSheet.slide}>
-              <RegularText style={StyleSheet.slideText}>
-                c o f f e e
-              </RegularText>
+              <RegText style={StyleSheet.slideText}>coffee</RegText>
               <Image
                 style={StyleSheet.slideImage}
                 source={require('../assets/activities/coffee.png')}
               />
             </View>
             <View style={StyleSheet.slide}>
-              <RegularText style={StyleSheet.slideText}>c h a t</RegularText>
+              <RegText style={StyleSheet.slideText}>chat</RegText>
               <Image
                 style={StyleSheet.slideImage}
                 source={require('../assets/activities/talk.png')}
               />
             </View>
             <View style={StyleSheet.slide}>
-              <RegularText style={StyleSheet.slideText}>w a l k</RegularText>
+              <RegText style={StyleSheet.slideText}>walk</RegText>
               <Image
                 style={StyleSheet.slideImage}
                 source={require('../assets/activities/walk.png')}
@@ -135,62 +135,10 @@ export default function Ping({ navigation }: any) {
             </TouchableOpacity>
           </View>
         )}
-      </ScrollView>
+      </View>
       <View style={StyleSheet.navContainer}>
         <Nav navigation={navigation} currentPage={currentPage} />
       </View>
     </View>
-  )
-}
-
-const RegularText = (props: any) => {
-  const [fontLoaded, setFontLoaded] = useState(false)
-
-  useEffect(() => {
-    async function loadFont() {
-      await Font.loadAsync({
-        'reg-font': require('../assets/fonts/BlueScreens/Regular.ttf'),
-      })
-
-      setFontLoaded(true)
-    }
-
-    loadFont()
-  }, [])
-
-  if (!fontLoaded) {
-    return <Text>Loading...</Text>
-  }
-
-  return (
-    <Text style={{ ...props.style, fontFamily: 'reg-font' }}>
-      {props.children}
-    </Text>
-  )
-}
-
-const MediumText = (props: any) => {
-  const [fontLoaded, setFontLoaded] = useState(false)
-
-  useEffect(() => {
-    async function loadFont() {
-      await Font.loadAsync({
-        'medium-font': require('../assets/fonts/BlueScreens/Medium-Italic.ttf'),
-      })
-
-      setFontLoaded(true)
-    }
-
-    loadFont()
-  }, [])
-
-  if (!fontLoaded) {
-    return <Text>Loading...</Text>
-  }
-
-  return (
-    <Text style={{ ...props.style, fontFamily: 'medium-font' }}>
-      {props.children}
-    </Text>
   )
 }

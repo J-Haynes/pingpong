@@ -17,7 +17,11 @@ import Nav from './Nav'
 import { UserData, UserWithoutFriends } from '../common/User'
 import * as Font from 'expo-font'
 import { loadUserWithFriends } from '../redux/actions/userActions'
-import StyleSheet from '../styles/styles'
+import StyleSheet, {
+  CondensedText,
+  ItalicText,
+  RegText,
+} from '../styles/styles'
 
 export default function Friends({ navigation }: any) {
   const userWithFriends = useAppSelector((state) => state.friends)
@@ -83,9 +87,9 @@ export default function Friends({ navigation }: any) {
                 renderItem={({ item }) => renderFriends(item)}
                 renderSectionHeader={({ section }) => (
                   <View>
-                    <RegularText style={StyleSheet.sectionHeader}>
+                    <ItalicText style={StyleSheet.sectionHeader}>
                       {section.title}
-                    </RegularText>
+                    </ItalicText>
                   </View>
                 )}
                 keyExtractor={(item) => `basicListEntry-${item.id}`}
@@ -108,57 +112,5 @@ export default function Friends({ navigation }: any) {
         </View>
       </ScrollView>
     </View>
-  )
-}
-
-const MediumText = (props: any) => {
-  const [fontLoaded, setFontLoaded] = useState(false)
-
-  useEffect(() => {
-    async function loadFont() {
-      await Font.loadAsync({
-        'medium-font': require('../assets/fonts/BlueScreens/Medium-Italic.ttf'),
-      })
-
-      setFontLoaded(true)
-    }
-
-    loadFont()
-  }, [])
-
-  if (!fontLoaded) {
-    return <Text>Loading...</Text>
-  }
-
-  return (
-    <Text style={{ ...props.style, fontFamily: 'medium-font' }}>
-      {props.children}
-    </Text>
-  )
-}
-
-const RegularText = (props: any) => {
-  const [fontLoaded, setFontLoaded] = useState(false)
-
-  useEffect(() => {
-    async function loadFont() {
-      await Font.loadAsync({
-        'reg-font': require('../assets/fonts/BlueScreens/Regular.ttf'),
-      })
-
-      setFontLoaded(true)
-    }
-
-    loadFont()
-  }, [])
-
-  if (!fontLoaded) {
-    return <Text>Loading...</Text>
-  }
-
-  return (
-    <Text style={{ ...props.style, fontFamily: 'reg-font' }}>
-      {props.children}
-    </Text>
   )
 }
