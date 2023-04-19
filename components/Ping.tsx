@@ -20,6 +20,8 @@ import StyleSheet, {
   RegText,
 } from '../styles/styles'
 
+import * as Animatable from 'react-native-animatable'
+
 export default function Ping({ navigation }: any) {
   const dispatch = useAppDispatch()
 
@@ -108,6 +110,12 @@ export default function Ping({ navigation }: any) {
                 style={StyleSheet.submitButton}
                 source={require('../assets/ball.png')}
               ></Image>
+              {/* <Animatable.Image
+                source={require('../assets/ball.png')}
+                animation="bounce"
+                iterationCount={Infinity}
+                direction="normal"
+              ></Animatable.Image> */}
             </TouchableOpacity>
           </View>
         ) : (
