@@ -15,7 +15,7 @@ interface Props {
 
 export default function ActiveFriend({ friend }: Props) {
   return (
-    <View style={StyleSheet.user}>
+    <View style={StyleSheet.userName}>
       <CondensedText style={StyleSheet.name}>
         {capitalise(friend.name)} {firstLetter(friend.surname)}
       </CondensedText>

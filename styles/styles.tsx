@@ -46,11 +46,11 @@ export default StyleSheet.create({
     //border
     borderRadius: 50,
     borderWidth: 2,
-    borderColor: '#033B55',
+    borderColor: '#0E65A3',
     //text
     fontSize: 20,
     textAlign: 'center',
-    color: '#FDF7ED',
+    color: '#2F2F23',
     letterSpacing: 2,
     fontWeight: 'normal',
     fontFamily: 'reg-font',
@@ -131,9 +131,9 @@ export default StyleSheet.create({
     width: '70%',
     height: '70%',
     borderRadius: 200,
-    shadowColor: 'rgba(255, 169, 112, .5)',
+    shadowColor: 'rgba(255, 157, 92, .5)',
     shadowRadius: 50,
-    marginBottom: 50,
+    marginBottom: 60,
   },
   slideText: {
     color: '#FDF7ED',
@@ -233,7 +233,7 @@ export default StyleSheet.create({
     width: 350,
     elevation: 5,
     borderWidth: 3,
-    borderColor: '#F79500',
+    borderColor: '#0E65A3',
     alignSelf: 'center',
   },
   button: {
@@ -250,7 +250,7 @@ export default StyleSheet.create({
   // add friend specific
 
   buttonAdd: {
-    backgroundColor: '#FDF7ED',
+    backgroundColor: '#0E65A3',
     width: 350,
     height: 50,
     justifyContent: 'center',
@@ -260,9 +260,10 @@ export default StyleSheet.create({
     borderRadius: 50,
   },
   buttonAddText: {
-    color: '#0E65A3',
+    color: '#FDF7ED',
     textAlign: 'center',
     fontSize: 20,
+    fontFamily: 'reg-font',
   },
 
   // pending friend specific

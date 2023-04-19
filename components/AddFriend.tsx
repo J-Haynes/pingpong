@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import React from 'react'
 import { useState } from 'react'
-import Stylesheet from '../styles/styles'
+import Stylesheet, { CondensedText } from '../styles/styles'
 
 import Nav from './Nav'
 import { useAppSelector } from '../hooks/redux'
@@ -36,12 +36,12 @@ export default function AddFriend({ navigation }: any) {
       <View style={Stylesheet.smallContainer}>
         <SafeAreaView>
           <View style={Stylesheet.usernameContainer}>
-            <Text style={Stylesheet.usernameText}>
+            <CondensedText style={Stylesheet.usernameText}>
               Your username to share with friends:
-            </Text>
-            <Text style={Stylesheet.usernameText}>
+            </CondensedText>
+            <CondensedText style={Stylesheet.usernameText}>
               {userWithFriends.username}
-            </Text>
+            </CondensedText>
           </View>
           <TextInput
             style={Stylesheet.input}
