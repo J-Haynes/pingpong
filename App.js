@@ -6,6 +6,7 @@ import Ping from './components/Ping'
 import Friends from './components/Friends'
 import AddFriend from './components/AddFriend'
 import Tutorial from './components/Tutorial'
+import Settings from './components/Settings'
 import { Provider } from 'react-redux'
 import store from './redux/store'
 
@@ -29,6 +30,11 @@ export default function App() {
           <Stack.Screen
             name="Friends"
             component={Friends}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Settings"
+            component={Settings}
             options={{ headerShown: false }}
           />
           <Stack.Screen
