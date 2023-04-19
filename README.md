@@ -130,6 +130,7 @@ We will be using a blank repo, here are some helpful readings:
 * [depcheck](https://www.npmjs.com/package/depcheck)
 
 The mobile responsiveness is built in as we are using React Native.
+
 ## User Stories
 
 I want to spontaneously celebrate with friends.
@@ -260,6 +261,9 @@ npm npx depcheck
 
 TBD
 
+### General notes for later
+
+code-quality-back branch contains tests and restructuring of files.
 
 
 
