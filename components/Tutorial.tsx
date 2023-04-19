@@ -30,17 +30,17 @@ export default function Tutorial({ navigation }: any) {
         <RegText style={StyleSheet.tagline}>
           The app designed to kill your groupchat
         </RegText>
-        <RegText style={StyleSheet.introText}>
+        <RegText style={StyleSheet.buttonAddText}>
           1 - add your friends on the friends page
         </RegText>
-        <RegText style={StyleSheet.introText}>
+        <RegText style={StyleSheet.buttonAddText}>
           2 - select a emoji and location, click the ball to send a ping to your
           friends!
         </RegText>
-        <RegText style={StyleSheet.introText}>
+        <RegText style={StyleSheet.buttonAddText}>
           3 - see your friends pings on the friends page
         </RegText>
-        <RegText style={StyleSheet.introText}>4 - meet up irl</RegText>
+        <RegText style={StyleSheet.buttonAddText}>4 - meet up irl</RegText>
       </View>
       <View style={StyleSheet.navContainer}>
         <Nav navigation={navigation} currentPage={currentPage} />
