@@ -73,9 +73,9 @@ export default StyleSheet.create({
     paddingHorizontal: 20,
     width: '100%',
   },
-  logInButtonText: { color: '#FDF7ED', fontSize: 30 },
+  logInButtonText: { color: '#033B55', fontSize: 30 },
   logInButton: {
-    backgroundColor: '#093A5D',
+    backgroundColor: '#FDF7ED',
     padding: 10,
     borderRadius: 50,
     paddingHorizontal: 50,
@@ -294,6 +294,59 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
   },
+
+  //Active friends
+
+  size: {
+    width: '90%',
+    alignSelf: 'center',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+
+  friendbox: {
+    color: '#093A5D',
+    backgroundColor: '#FDF7ED',
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: '#093A5D',
+  },
+
+  emoji: {
+    fontSize: 50,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+
+  friendbox_title: {
+    color: '#093A5D',
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+
+  address: {
+    fontSize: 20,
+    width: '70%',
+    color: '#093A5D',
+    paddingBottom: 4,
+  },
+
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    color: '#093A5D',
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+
+  addfriend_title: {
+    paddingLeft: 15,
+  },
 })
 
 // fonts
@@ -375,3 +428,60 @@ export const RegText = (props: any) => {
     </Text>
   )
 }
+
+//
+
+{
+  /* <View style={StyleSheet.size}>
+            <ScrollView>
+              <View style={StyleSheet.friendbox}>
+                <Text style={StyleSheet.emoji}>🍺</Text>
+                <View>
+                  <Text style={StyleSheet.friendbox_title}>Louis</Text>
+                  <Text style={StyleSheet.address}>123, Fake Address</Text>
+                </View>
+              </View>
+              <View style={StyleSheet.friendbox}>
+                <Text style={StyleSheet.emoji}>🍺</Text>
+                <View>
+                  <Text style={StyleSheet.friendbox_title}>Louis</Text>
+                  <Text style={StyleSheet.address}>
+                    123, Fake Address longer fake address wow so long, USA, WGTN
+                  </Text>
+                </View>
+              </View>
+            </ScrollView>
+          </View> */
+}
+
+// size: {
+//   width: '80%',
+// },
+
+// friendbox: {
+//   color: '#093A5D',
+//   margin: 10,
+//   padding: 10,
+//   backgroundColor: '#FDF7ED',
+//   flex: 1,
+//   flexDirection: 'row',
+//   alignItems: 'center',
+//   borderRadius: 10,
+//   borderWidth: 2,
+//   borderColor: '#093A5D',
+// },
+
+// emoji: {
+//   fontSize: 50,
+//   paddingRight: 20,
+// },
+
+// friendbox_title: {
+//   color: '#093A5D',
+//   fontSize: 20,
+//   fontWeight: 'bold',
+// },
+
+// address: {
+//   color: '#093A5D',
+// },
