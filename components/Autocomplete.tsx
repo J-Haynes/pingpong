@@ -35,6 +35,7 @@ export default function AutoComplete({ change }: Props) {
           onFail={(error) => console.error(error)}
           query={{
             language: 'en',
+            country: 'nz',
           }}
           requestUrl={{
             useOnPlatform: 'web',
