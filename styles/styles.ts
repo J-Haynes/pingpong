@@ -77,7 +77,7 @@ export default StyleSheet.create({
     borderColor: '#FDF7ED',
     width: '50%',
   },
-  ballImg: { width: 150, height: 150, marginTop: 50 },
+  ballImg: { width: 180, height: 180, marginTop: 50 },
 
   // ping specific
 
