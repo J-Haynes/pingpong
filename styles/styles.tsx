@@ -7,7 +7,7 @@ const { width } = Dimensions.get('window')
 
 // colours:
 // dark grey = #2F2F23
-// blue = #0E65A3
+// blue = #093A5D
 // dark orange = #E05A00
 // light orange = #F79500
 // white-ish = #FDF7ED
@@ -46,7 +46,7 @@ export default StyleSheet.create({
     //border
     borderRadius: 50,
     borderWidth: 2,
-    borderColor: '#0E65A3',
+    borderColor: '#093A5D',
     //text
     fontSize: 20,
     textAlign: 'center',
@@ -75,7 +75,7 @@ export default StyleSheet.create({
   },
   logInButtonText: { color: '#FDF7ED', fontSize: 30 },
   logInButton: {
-    backgroundColor: '#0E65A3',
+    backgroundColor: '#093A5D',
     padding: 10,
     borderRadius: 50,
     paddingHorizontal: 50,
@@ -105,7 +105,7 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   blueText: {
-    color: '#0E65A3',
+    color: '#093A5D',
     fontSize: 70,
     textAlign: 'center',
   },
@@ -195,7 +195,7 @@ export default StyleSheet.create({
     flex: 1,
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    borderColor: '#0E65A3',
+    borderColor: '#093A5D',
     backgroundColor: '#FDF7ED',
     paddingBottom: 5,
   },
@@ -212,7 +212,7 @@ export default StyleSheet.create({
   name: {
     textAlign: 'center',
     fontSize: 30,
-    color: '#0E65A3',
+    color: '#093A5D',
     letterSpacing: 2,
   },
   image: {
@@ -233,7 +233,7 @@ export default StyleSheet.create({
     width: 350,
     elevation: 5,
     borderWidth: 3,
-    borderColor: '#0E65A3',
+    borderColor: '#093A5D',
     alignSelf: 'center',
   },
   button: {
@@ -242,7 +242,7 @@ export default StyleSheet.create({
   },
   icon: { width: 35, height: 35 },
   lineText: {
-    color: '#2F2F23',
+    color: '#093A5D',
     fontSize: 30,
     alignSelf: 'center',
   },
@@ -250,7 +250,7 @@ export default StyleSheet.create({
   // add friend specific
 
   buttonAdd: {
-    backgroundColor: '#0E65A3',
+    backgroundColor: '#093A5D',
     width: 350,
     height: 50,
     justifyContent: 'center',
@@ -264,6 +264,20 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     fontFamily: 'reg-font',
+  },
+  usernameText: {
+    fontSize: 20,
+    textAlign: 'center',
+
+    paddingBottom: 10,
+    color: '#FDF7ED',
+  },
+  usernameContainer: {
+    paddingBottom: 50,
+  },
+  friendsImg: {
+    width: 300,
+    height: 300,
   },
 
   // pending friend specific

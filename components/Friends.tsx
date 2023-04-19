@@ -17,11 +17,7 @@ import Nav from './Nav'
 import { UserData, UserWithoutFriends } from '../common/User'
 import * as Font from 'expo-font'
 import { loadUserWithFriends } from '../redux/actions/userActions'
-import StyleSheet, {
-  CondensedText,
-  ItalicText,
-  RegText,
-} from '../styles/styles'
+import StyleSheet, { ItalicText } from '../styles/styles'
 
 export default function Friends({ navigation }: any) {
   const userWithFriends = useAppSelector((state) => state.friends)

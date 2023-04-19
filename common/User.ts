@@ -4,8 +4,8 @@ export interface UserData {
   surname: string
   username: string
   birthday: string
-  ping_active: boolean | number
-  ping_location?: string | null
+  ping_active: boolean
+  ping_location: string
   pending?: boolean
 }
 
@@ -23,8 +23,8 @@ export interface UserWithoutFriends {
   surname: string
   username: string
   birthday: string
-  ping_active: boolean | number
-  ping_location?: string | null
+  ping_active: boolean
+  ping_location: string
   pending?: boolean
   friend_data?: User[]
 }

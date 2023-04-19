@@ -19,7 +19,8 @@ export default function AutoComplete({ change }: Props) {
     const description = data.description
     const address = details?.formatted_address
     const name = details?.name
-    change({ description, name, address })
+    const map_url = details?.url
+    change({ description, name, address, map_url })
   }
 
   return (
@@ -42,6 +43,7 @@ export default function AutoComplete({ change }: Props) {
           onFail={(error) => console.error(error)}
           query={{
             language: 'en',
+            country: 'nz',
           }}
           requestUrl={{
             useOnPlatform: 'web',

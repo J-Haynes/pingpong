@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import React from 'react'
 import { useState } from 'react'
-import Stylesheet, { CondensedText } from '../styles/styles'
+import Stylesheet, { CondensedText, RegText } from '../styles/styles'
 
 import Nav from './Nav'
 import { useAppSelector } from '../hooks/redux'
@@ -25,7 +25,7 @@ export default function AddFriend({ navigation }: any) {
 
   const handlePress = () => {
     requestFriend(userId, searchName)
-      .then((response) => setRequestReply('Friend request sent'))
+      .then((response) => setRequestReply('friend request sent!'))
       .catch((err) => {
         setRequestReply(err.message)
       })
@@ -36,12 +36,12 @@ export default function AddFriend({ navigation }: any) {
       <View style={Stylesheet.smallContainer}>
         <SafeAreaView>
           <View style={Stylesheet.usernameContainer}>
-            <CondensedText style={Stylesheet.usernameText}>
+            <RegText style={Stylesheet.usernameText}>
               Your username to share with friends:
-            </CondensedText>
-            <CondensedText style={Stylesheet.usernameText}>
+            </RegText>
+            <RegText style={Stylesheet.usernameText}>
               {userWithFriends.username}
-            </CondensedText>
+            </RegText>
           </View>
           <TextInput
             style={Stylesheet.input}
