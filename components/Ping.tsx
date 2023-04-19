@@ -17,6 +17,7 @@ import LocationDetails from '../common/Location'
 import StyleSheet, { RegText } from '../styles/styles'
 
 import * as Animatable from 'react-native-animatable'
+import { setStatusBarHidden } from 'expo-status-bar'
 
 export default function Ping({ navigation }: any) {
   const dispatch = useAppDispatch()
@@ -139,7 +140,9 @@ export default function Ping({ navigation }: any) {
         ) : (
           <>
             <SafeAreaView>
-              <Text style={StyleSheet.input}>Currently pinging</Text>
+              <View style={StyleSheet.absolutecont}>
+                <Text style={StyleSheet.input}>Currently pinging</Text>
+              </View>
             </SafeAreaView>
             <View style={StyleSheet.submitButton}>
               <TouchableOpacity

@@ -25,15 +25,7 @@ export default function AutoComplete({ change }: Props) {
 
   return (
     <View>
-      <ScrollView
-        style={{
-          position: 'absolute',
-          zIndex: 10,
-          left: -175,
-          bottom: 0,
-          width: 350,
-        }}
-      >
+      <ScrollView style={StyleSheet.absolutecont}>
         <GooglePlacesAutocomplete
           placeholder="Where to?"
           onPress={(data, details = null) => {

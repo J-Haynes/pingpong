@@ -22,6 +22,13 @@ export default StyleSheet.create({
     backgroundColor: '#E05A00',
     width: width,
   },
+  absolutecont: {
+    position: 'absolute',
+    zIndex: 10,
+    left: -175,
+    bottom: 0,
+    width: 350,
+  },
   navContainer: {
     backgroundColor: '#E05A00',
     padding: 20,
