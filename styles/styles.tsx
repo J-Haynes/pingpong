@@ -7,7 +7,7 @@ const { width } = Dimensions.get('window')
 
 // colours:
 // dark grey = #2F2F23
-// blue = #0E65A3
+// blue = #093A5D
 // dark orange = #E05A00
 // light orange = #F79500
 // white-ish = #FDF7ED
@@ -264,6 +264,20 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     fontFamily: 'reg-font',
+  },
+  usernameText: {
+    fontSize: 20,
+    textAlign: 'center',
+
+    paddingBottom: 10,
+    color: '#FDF7ED',
+  },
+  usernameContainer: {
+    paddingBottom: 50,
+  },
+  friendsImg: {
+    width: 150,
+    height: 150,
   },
 
   // pending friend specific
