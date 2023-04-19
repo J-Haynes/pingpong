@@ -1,7 +1,16 @@
 'use strict'
-import { Dimensions, StyleSheet } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Dimensions, StyleSheet, Text } from 'react-native'
+import * as Font from 'expo-font'
 
 const { width } = Dimensions.get('window')
+
+// colours:
+// dark grey = #2F2F23
+// blue = #0E65A3
+// dark orange = #E05A00
+// light orange = #F79500
+// white-ish = #FDF7ED
 
 export default StyleSheet.create({
   // global
@@ -19,11 +28,17 @@ export default StyleSheet.create({
     width: '100%',
     alignContent: 'center',
   },
+  smallContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#E05A00',
+  },
   input: {
     flex: 1,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    backgroundColor: '#0E65A3',
+    backgroundColor: '#FDF7ED',
     width: 350,
     alignSelf: 'center',
     height: 50,
@@ -31,31 +46,34 @@ export default StyleSheet.create({
     //border
     borderRadius: 50,
     borderWidth: 2,
-    borderColor: '#033B55',
+    borderColor: '#0E65A3',
     //text
     fontSize: 20,
     textAlign: 'center',
-    color: '#FDF7ED',
+    color: '#2F2F23',
     letterSpacing: 2,
     fontWeight: 'normal',
+    fontFamily: 'reg-font',
   },
 
   // landing specific
 
   landingTitle: {
     color: '#FDF7ED',
-    fontSize: 150,
-    alignSelf: 'center',
+    fontSize: 75,
+    textAlign: 'center',
     width: '100%',
+    fontFamily: 'italic-text',
+    paddingBottom: 20,
   },
   tagline: {
     color: '#FDF7ED',
-    fontSize: 50,
+    fontSize: 40,
     textAlign: 'center',
     paddingHorizontal: 20,
     width: '100%',
   },
-  logInButtonText: { color: '#FDF7ED', fontSize: 50 },
+  logInButtonText: { color: '#FDF7ED', fontSize: 30 },
   logInButton: {
     backgroundColor: '#0E65A3',
     padding: 10,
@@ -66,7 +84,7 @@ export default StyleSheet.create({
     borderColor: '#033B55',
     width: '50%',
   },
-  ballImg: { width: 150, height: 150, marginTop: 50 },
+  ballImg: { width: 180, height: 180, marginTop: 50 },
 
   // ping specific
 
@@ -106,10 +124,16 @@ export default StyleSheet.create({
   slide: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    width: width,
-    marginBottom: 0,
-    paddingBottom: 0,
+    alignSelf: 'center',
+    marginTop: 50,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    width: '70%',
+    height: '70%',
+    borderRadius: 200,
+    shadowColor: 'rgba(255, 157, 92, .5)',
+    shadowRadius: 50,
+    marginBottom: 60,
   },
   slideText: {
     color: '#FDF7ED',
@@ -120,6 +144,7 @@ export default StyleSheet.create({
   slideImage: {
     width: 150,
     height: 150,
+    alignSelf: 'center',
   },
   submitButton: {
     width: 150,
@@ -139,7 +164,7 @@ export default StyleSheet.create({
     width: '100%',
   },
   sectionHeader: {
-    fontSize: 40,
+    fontSize: 30,
     backgroundColor: '#E05A00',
     textAlign: 'center',
     width: '100%',
@@ -147,7 +172,7 @@ export default StyleSheet.create({
     borderTopWidth: 2,
     borderColor: '#FDF7ED',
   },
-  beerImage: { width: 200, height: 200, opacity: 0.6 },
+  beerImage: { width: 200, height: 200, opacity: 0.6, marginBottom: 20 },
   mainText: {
     backgroundColor: '#E05A00',
     color: '#FDF7ED',
@@ -168,6 +193,14 @@ export default StyleSheet.create({
   },
   user: {
     flex: 1,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: '#0E65A3',
+    backgroundColor: '#FDF7ED',
+    paddingBottom: 5,
+  },
+  userName: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
@@ -175,12 +208,9 @@ export default StyleSheet.create({
     backgroundColor: '#FDF7ED',
     paddingVertical: 5,
     marginVertical: 1,
-    borderTopWidth: 2,
-    borderBottomWidth: 2,
-    borderColor: '#0E65A3',
   },
   name: {
-    alignSelf: 'center',
+    textAlign: 'center',
     fontSize: 30,
     color: '#0E65A3',
     letterSpacing: 2,
@@ -195,15 +225,15 @@ export default StyleSheet.create({
 
   nav: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: '#FDF7ED',
     borderRadius: 50,
-    height: 50,
+    height: 60,
     width: 350,
     elevation: 5,
     borderWidth: 3,
-    borderColor: '#F79500',
+    borderColor: '#0E65A3',
     alignSelf: 'center',
   },
   button: {
@@ -212,21 +242,15 @@ export default StyleSheet.create({
   },
   icon: { width: 35, height: 35 },
   lineText: {
-    color: '#0E65A3',
-    fontSize: 20,
+    color: '#2F2F23',
+    fontSize: 30,
     alignSelf: 'center',
   },
 
   // add friend specific
 
-  addContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#E05A00',
-  },
   buttonAdd: {
-    backgroundColor: '#FDF7ED',
+    backgroundColor: '#0E65A3',
     width: 350,
     height: 50,
     justifyContent: 'center',
@@ -236,9 +260,10 @@ export default StyleSheet.create({
     borderRadius: 50,
   },
   buttonAddText: {
-    color: '#0E65A3',
+    color: '#FDF7ED',
     textAlign: 'center',
     fontSize: 20,
+    fontFamily: 'reg-font',
   },
 
   // pending friend specific
@@ -256,3 +281,83 @@ export default StyleSheet.create({
     alignItems: 'flex-end',
   },
 })
+
+// fonts
+
+export const CondensedText = (props: any) => {
+  const [fontLoaded, setFontLoaded] = useState(false)
+
+  useEffect(() => {
+    async function loadFont() {
+      await Font.loadAsync({
+        'condensed-font': require('../assets/fonts/condensed.otf'),
+      })
+
+      setFontLoaded(true)
+    }
+
+    loadFont()
+  }, [])
+
+  if (!fontLoaded) {
+    return <Text>Loading...</Text>
+  }
+
+  return (
+    <Text style={{ ...props.style, fontFamily: 'condensed-font' }}>
+      {props.children}
+    </Text>
+  )
+}
+
+export const ItalicText = (props: any) => {
+  const [fontLoaded, setFontLoaded] = useState(false)
+
+  useEffect(() => {
+    async function loadFont() {
+      await Font.loadAsync({
+        'italic-font': require('../assets/fonts/italic.otf'),
+      })
+
+      setFontLoaded(true)
+    }
+
+    loadFont()
+  }, [])
+
+  if (!fontLoaded) {
+    return <Text>Loading...</Text>
+  }
+
+  return (
+    <Text style={{ ...props.style, fontFamily: 'italic-font' }}>
+      {props.children}
+    </Text>
+  )
+}
+
+export const RegText = (props: any) => {
+  const [fontLoaded, setFontLoaded] = useState(false)
+
+  useEffect(() => {
+    async function loadFont() {
+      await Font.loadAsync({
+        'reg-font': require('../assets/fonts/reg.otf'),
+      })
+
+      setFontLoaded(true)
+    }
+
+    loadFont()
+  }, [])
+
+  if (!fontLoaded) {
+    return <Text>Loading...</Text>
+  }
+
+  return (
+    <Text style={{ ...props.style, fontFamily: 'reg-font' }}>
+      {props.children}
+    </Text>
+  )
+}

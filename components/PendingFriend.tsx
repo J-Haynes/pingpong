@@ -5,7 +5,11 @@ import { capitalise, firstLetter } from './helpers'
 import * as Font from 'expo-font'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import { confirmFriend, denyFriend } from '../redux/actions/userActions'
-import Stylesheet from '../styles/styles'
+import StyleSheet, {
+  CondensedText,
+  ItalicText,
+  RegText,
+} from '../styles/styles'
 
 interface Props {
   friend: UserData
@@ -26,77 +30,25 @@ export default function PendingFriend({ friend }: Props) {
 
   return (
     <>
-      <View style={Stylesheet.user}>
-        <RegularText style={Stylesheet.name}>
+      <View style={StyleSheet.userName}>
+        <CondensedText style={StyleSheet.name}>
           {capitalise(friend.name)} {firstLetter(friend.surname)}
-        </RegularText>
-        <View style={Stylesheet.pendingContainer}>
+        </CondensedText>
+        <View style={StyleSheet.pendingContainer}>
           <TouchableOpacity onPress={handleConfirm}>
             <Image
-              style={Stylesheet.pendingIcons}
+              style={StyleSheet.pendingIcons}
               source={require('../assets/check.png')}
             ></Image>
           </TouchableOpacity>
           <TouchableOpacity onPress={handleCancel}>
             <Image
-              style={Stylesheet.pendingIcons}
+              style={StyleSheet.pendingIcons}
               source={require('../assets/cross.png')}
             ></Image>
           </TouchableOpacity>
         </View>
       </View>
     </>
-  )
-}
-
-const MediumText = (props: any) => {
-  const [fontLoaded, setFontLoaded] = useState(false)
-
-  useEffect(() => {
-    async function loadFont() {
-      await Font.loadAsync({
-        'medium-font': require('../assets/fonts/BlueScreens/Medium-Italic.ttf'),
-      })
-
-      setFontLoaded(true)
-    }
-
-    loadFont()
-  }, [])
-
-  if (!fontLoaded) {
-    return <Text>Loading...</Text>
-  }
-
-  return (
-    <Text style={{ ...props.style, fontFamily: 'medium-font' }}>
-      {props.children}
-    </Text>
-  )
-}
-
-const RegularText = (props: any) => {
-  const [fontLoaded, setFontLoaded] = useState(false)
-
-  useEffect(() => {
-    async function loadFont() {
-      await Font.loadAsync({
-        'reg-font': require('../assets/fonts/BlueScreens/Regular.ttf'),
-      })
-
-      setFontLoaded(true)
-    }
-
-    loadFont()
-  }, [])
-
-  if (!fontLoaded) {
-    return <Text>Loading...</Text>
-  }
-
-  return (
-    <Text style={{ ...props.style, fontFamily: 'reg-font' }}>
-      {props.children}
-    </Text>
   )
 }

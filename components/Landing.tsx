@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
 import { Image, Text, View, TouchableOpacity } from 'react-native'
-import * as Font from 'expo-font'
 import { useAppDispatch } from '../hooks/redux'
 import { loadUserWithFriends } from '../redux/actions/userActions'
-import StyleSheet from '../styles/styles'
+import StyleSheet, {
+  CondensedText,
+  ItalicText,
+  RegText,
+} from '../styles/styles'
 
 import * as WebBrowser from 'expo-web-browser'
 import * as Google from 'expo-auth-session/providers/google'
@@ -69,13 +72,8 @@ export default function Landing({ navigation }: any) {
             source={require('../assets/ball.png')}
           ></Image>
           <View>
-            <MediumText style={StyleSheet.landingTitle}>
-              {' '}
-              P I N G P O N G{' '}
-            </MediumText>
-            <RegularText style={StyleSheet.tagline}>
-              kill your groupchat
-            </RegularText>
+            <ItalicText style={StyleSheet.landingTitle}> PINGPONG </ItalicText>
+            <RegText style={StyleSheet.tagline}>kill your groupchat</RegText>
           </View>
           <TouchableOpacity
             style={StyleSheet.logInButton}
@@ -84,62 +82,10 @@ export default function Landing({ navigation }: any) {
               promptAsync()
             }}
           >
-            <RegularText style={StyleSheet.logInButtonText}>LOG IN</RegularText>
+            <RegText style={StyleSheet.logInButtonText}>LOG IN</RegText>
           </TouchableOpacity>
         </>
       )}
     </View>
-  )
-}
-
-const MediumText = (props: any) => {
-  const [fontLoaded, setFontLoaded] = useState(false)
-
-  useEffect(() => {
-    async function loadFont() {
-      await Font.loadAsync({
-        'medium-font': require('../assets/fonts/BlueScreens/Medium-Italic.ttf'),
-      })
-
-      setFontLoaded(true)
-    }
-
-    loadFont()
-  }, [])
-
-  if (!fontLoaded) {
-    return <Text>Loading...</Text>
-  }
-
-  return (
-    <Text style={{ ...props.style, fontFamily: 'medium-font' }}>
-      {props.children}
-    </Text>
-  )
-}
-
-const RegularText = (props: any) => {
-  const [fontLoaded, setFontLoaded] = useState(false)
-
-  useEffect(() => {
-    async function loadFont() {
-      await Font.loadAsync({
-        'reg-font': require('../assets/fonts/BlueScreens/Regular.ttf'),
-      })
-
-      setFontLoaded(true)
-    }
-
-    loadFont()
-  }, [])
-
-  if (!fontLoaded) {
-    return <Text>Loading...</Text>
-  }
-
-  return (
-    <Text style={{ ...props.style, fontFamily: 'reg-font' }}>
-      {props.children}
-    </Text>
   )
 }

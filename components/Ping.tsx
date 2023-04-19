@@ -12,9 +12,15 @@ import * as Font from 'expo-font'
 import AutoComplete from './Autocomplete'
 import { useAppSelector, useAppDispatch } from '../hooks/redux'
 import { changePing } from '../redux/actions/userActions'
-import Swiper from 'react-native-swiper/src'
+import Swiper from 'react-native-web-swiper'
 import LocationDetails from '../common/Location'
-import StyleSheet from '../styles/styles'
+import StyleSheet, {
+  CondensedText,
+  ItalicText,
+  RegText,
+} from '../styles/styles'
+
+import * as Animatable from 'react-native-animatable'
 
 export default function Ping({ navigation }: any) {
   const dispatch = useAppDispatch()
@@ -23,6 +29,12 @@ export default function Ping({ navigation }: any) {
   const pingStatus = useAppSelector((state) => state.friends.ping_active)
 
   const [location, onChangeText] = useState({} as LocationDetails)
+  const emojis = ['🍺', '☕', '💬', '🚶‍♀️']
+  const [emoji, setEmoji] = useState(emojis[0])
+
+  const indexHandler = (index: number) => {
+    setEmoji(emojis[index])
+  }
 
   const [ping, setPing] = useState(false)
 
@@ -32,50 +44,45 @@ export default function Ping({ navigation }: any) {
 
   return (
     <View style={StyleSheet.container}>
-      <RegularText style={StyleSheet.introText}>
-        Hey {userWithFriends.name}
-      </RegularText>
-      <View style={StyleSheet.headingContainer}>
-        <MediumText style={StyleSheet.headerText}> SEND A </MediumText>
-        <MediumText style={StyleSheet.blueText}>PING</MediumText>
-        <MediumText style={StyleSheet.headerText}> TO YOUR FRIENDS </MediumText>
-      </View>
-      <ScrollView contentContainerStyle={StyleSheet.containerContents}>
-        <Swiper
-          style={StyleSheet.swipeContainer}
-          showsButtons={false}
-          showsPagination={false}
-          loop={false}
-        >
-          <View style={StyleSheet.slide}>
-            <RegularText style={StyleSheet.slideText}>b e e r</RegularText>
-            <Image
-              style={StyleSheet.slideImage}
-              source={require('../assets/activities/beer.png')}
-            />
-          </View>
-          <View style={StyleSheet.slide}>
-            <RegularText style={StyleSheet.slideText}>c o f f e e</RegularText>
-            <Image
-              style={StyleSheet.slideImage}
-              source={require('../assets/activities/coffee.png')}
-            />
-          </View>
-          <View style={StyleSheet.slide}>
-            <RegularText style={StyleSheet.slideText}>c h a t</RegularText>
-            <Image
-              style={StyleSheet.slideImage}
-              source={require('../assets/activities/talk.png')}
-            />
-          </View>
-          <View style={StyleSheet.slide}>
-            <RegularText style={StyleSheet.slideText}>w a l k</RegularText>
-            <Image
-              style={StyleSheet.slideImage}
-              source={require('../assets/activities/walk.png')}
-            />
-          </View>
-        </Swiper>
+      <RegText style={StyleSheet.introText}>Hey {userWithFriends.name}</RegText>
+      <View style={StyleSheet.containerContents}>
+        <View style={StyleSheet.swipeContainer}>
+          <Swiper
+            controlsEnabled={false}
+            loop={false}
+            onIndexChanged={indexHandler}
+          >
+            <View style={StyleSheet.slide}>
+              <RegText style={StyleSheet.slideText}>beer</RegText>
+              <Animatable.Image
+                animation="bounceIn"
+                style={StyleSheet.slideImage}
+                source={require('../assets/activities/beer.png')}
+              />
+            </View>
+            <View style={StyleSheet.slide}>
+              <RegText style={StyleSheet.slideText}>coffee</RegText>
+              <Image
+                style={StyleSheet.slideImage}
+                source={require('../assets/activities/coffee.png')}
+              />
+            </View>
+            <View style={StyleSheet.slide}>
+              <RegText style={StyleSheet.slideText}>chat</RegText>
+              <Image
+                style={StyleSheet.slideImage}
+                source={require('../assets/activities/talk.png')}
+              />
+            </View>
+            <View style={StyleSheet.slide}>
+              <RegText style={StyleSheet.slideText}>walk</RegText>
+              <Image
+                style={StyleSheet.slideImage}
+                source={require('../assets/activities/walk.png')}
+              />
+            </View>
+          </Swiper>
+        </View>
         {!ping ? (
           <SafeAreaView>
             <AutoComplete change={onChangeText} />
@@ -93,22 +100,29 @@ export default function Ping({ navigation }: any) {
           <View style={StyleSheet.submitButton}>
             <TouchableOpacity
               onPress={() => {
-                dispatch(changePing(userId, false, location.description))
+                dispatch(
+                  changePing(userId, false, emoji + location.description)
+                )
                 setPing(!ping)
                 onChangeText({} as LocationDetails)
               }}
             >
-              <Image
+              <Animatable.Image
+                animation="pulse"
+                easing="ease-in-out-sine"
+                iterationCount="infinite"
                 style={StyleSheet.submitButton}
                 source={require('../assets/ball.png')}
-              ></Image>
+              ></Animatable.Image>
             </TouchableOpacity>
           </View>
         ) : (
           <View>
             <TouchableOpacity
               onPress={() => {
-                dispatch(changePing(userId, true, location.description))
+                dispatch(
+                  changePing(userId, true, `${emoji} ` + location.description)
+                )
                 setPing(!ping)
               }}
             >
@@ -119,62 +133,10 @@ export default function Ping({ navigation }: any) {
             </TouchableOpacity>
           </View>
         )}
-      </ScrollView>
+      </View>
       <View style={StyleSheet.navContainer}>
         <Nav navigation={navigation} currentPage={currentPage} />
       </View>
     </View>
-  )
-}
-
-const RegularText = (props: any) => {
-  const [fontLoaded, setFontLoaded] = useState(false)
-
-  useEffect(() => {
-    async function loadFont() {
-      await Font.loadAsync({
-        'reg-font': require('../assets/fonts/BlueScreens/Regular.ttf'),
-      })
-
-      setFontLoaded(true)
-    }
-
-    loadFont()
-  }, [])
-
-  if (!fontLoaded) {
-    return <Text>Loading...</Text>
-  }
-
-  return (
-    <Text style={{ ...props.style, fontFamily: 'reg-font' }}>
-      {props.children}
-    </Text>
-  )
-}
-
-const MediumText = (props: any) => {
-  const [fontLoaded, setFontLoaded] = useState(false)
-
-  useEffect(() => {
-    async function loadFont() {
-      await Font.loadAsync({
-        'medium-font': require('../assets/fonts/BlueScreens/Medium-Italic.ttf'),
-      })
-
-      setFontLoaded(true)
-    }
-
-    loadFont()
-  }, [])
-
-  if (!fontLoaded) {
-    return <Text>Loading...</Text>
-  }
-
-  return (
-    <Text style={{ ...props.style, fontFamily: 'medium-font' }}>
-      {props.children}
-    </Text>
   )
 }

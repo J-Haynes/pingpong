@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react'
-import { Text, View, SectionList, TouchableOpacity, Image } from 'react-native'
+import { Text, View, TouchableOpacity } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import { UserWithoutFriends } from '../common/User'
 import { loadUserWithFriends } from '../redux/actions/userActions'
 import Stylesheet from '../styles/styles'
+
+import Ionicons from '@expo/vector-icons/Ionicons'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 const Tab = createBottomTabNavigator()
 
@@ -27,47 +30,56 @@ export default function Nav({ navigation, currentPage }: any) {
     navigation.navigate('Friends')
   }
 
+  const handlePressSettings = () => {
+    navigation.navigate('Settings')
+  }
+
   return (
     <View style={Stylesheet.nav}>
-      <TouchableOpacity style={Stylesheet.button} onPress={handlePressPing}>
-        {currentPage === 'Ping' && (
-          <Image
-            style={Stylesheet.icon}
-            source={require('../assets/navBeerColour.png')}
-          ></Image>
-        )}
+      {/* THIS IS THE HOME / PING PAGE */}
+
+      <TouchableOpacity onPress={handlePressFriends}>
         {currentPage === 'Friends' && (
-          <Image
-            style={Stylesheet.icon}
-            source={require('../assets/navBeer.png')}
-          ></Image>
+          <Ionicons name="md-people" size={40} color="#2F2F23" />
         )}
-        {currentPage === 'AddFriend' && (
-          <Image
-            style={Stylesheet.icon}
-            source={require('../assets/navBeer.png')}
-          ></Image>
+        {(currentPage === 'Ping' ||
+          currentPage === 'AddFriend' ||
+          currentPage === 'Settings') && (
+          <Ionicons name="md-people-outline" size={40} color="#2F2F23" />
         )}
       </TouchableOpacity>
+
       <Text style={Stylesheet.lineText}>|</Text>
-      <TouchableOpacity style={Stylesheet.button} onPress={handlePressFriends}>
+
+      {/* THIS IS THE FRIENDS // ADD FRIENDS PAGE */}
+
+      <TouchableOpacity onPress={handlePressPing}>
         {currentPage === 'Ping' && (
-          <Image
-            style={Stylesheet.icon}
-            source={require('../assets/friends.png')}
-          ></Image>
+          <MaterialCommunityIcons name="beer" size={40} color="#2F2F23" />
         )}
-        {currentPage === 'Friends' && (
-          <Image
-            style={Stylesheet.icon}
-            source={require('../assets/friends (2).png')}
-          ></Image>
+        {(currentPage === 'Friends' ||
+          currentPage === 'AddFriend' ||
+          currentPage === 'Settings') && (
+          <MaterialCommunityIcons
+            name="beer-outline"
+            size={40}
+            color="#2F2F23"
+          />
         )}
-        {currentPage === 'AddFriend' && (
-          <Image
-            style={Stylesheet.icon}
-            source={require('../assets/friends.png')}
-          ></Image>
+      </TouchableOpacity>
+
+      <Text style={Stylesheet.lineText}>|</Text>
+
+      {/* THIS IS THE FAKE SETTINGS PAGE */}
+
+      <TouchableOpacity onPress={handlePressSettings}>
+        {currentPage === 'Settings' && (
+          <Ionicons name="settings" size={40} color="#2F2F23" />
+        )}
+        {(currentPage === 'Ping' ||
+          currentPage === 'AddFriend' ||
+          currentPage === 'Friends') && (
+          <Ionicons name="settings-outline" size={40} color="#2F2F23" />
         )}
       </TouchableOpacity>
     </View>
