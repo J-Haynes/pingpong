@@ -23,10 +23,6 @@ export default function Settings({ navigation }: any) {
         <RegText style={StyleSheet.name}>
           Hello {userWithFriends.name}! 🙋‍♂️
         </RegText>
-        <RegText style={StyleSheet.name}>Birthday:</RegText>
-        <RegText style={StyleSheet.name}>
-          🫡 {userWithFriends.birthday} 🫡
-        </RegText>
         <TouchableOpacity
           style={StyleSheet.logInButton}
           onPress={() => {
