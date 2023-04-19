@@ -353,24 +353,24 @@ export default StyleSheet.create({
 
   addfriend_title: {
     paddingLeft: 15,
-    //tutorial
+  },
+  //tutorial
 
-    blueTagline: {
-      color: '#093A5D',
-      fontSize: 40,
-      textAlign: 'center',
-      paddingHorizontal: 20,
-      width: '100%',
-    },
+  blueTagline: {
+    color: '#093A5D',
+    fontSize: 40,
+    textAlign: 'center',
+    paddingHorizontal: 20,
+    width: '100%',
+  },
 
-    tutorialTitle: {
-      color: '#FDF7ED',
-      fontSize: 75,
-      textAlign: 'center',
-      width: '100%',
-      paddingTop: 15,
-      fontFamily: 'italic-text',
-    },
+  tutorialTitle: {
+    color: '#FDF7ED',
+    fontSize: 75,
+    textAlign: 'center',
+    width: '100%',
+    paddingTop: 15,
+    fontFamily: 'italic-text',
   },
 })
 
