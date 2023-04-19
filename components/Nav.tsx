@@ -44,6 +44,7 @@ export default function Nav({ navigation, currentPage }: any) {
         )}
         {(currentPage === 'Ping' ||
           currentPage === 'AddFriend' ||
+          currentPage === 'Tutorial' ||
           currentPage === 'Settings') && (
           <Ionicons name="md-people-outline" size={40} color="#2F2F23" />
         )}
@@ -59,6 +60,7 @@ export default function Nav({ navigation, currentPage }: any) {
         )}
         {(currentPage === 'Friends' ||
           currentPage === 'AddFriend' ||
+          currentPage === 'Tutorial' ||
           currentPage === 'Settings') && (
           <MaterialCommunityIcons
             name="beer-outline"
@@ -78,6 +80,7 @@ export default function Nav({ navigation, currentPage }: any) {
         )}
         {(currentPage === 'Ping' ||
           currentPage === 'AddFriend' ||
+          currentPage === 'Tutorial' ||
           currentPage === 'Friends') && (
           <Ionicons name="settings-outline" size={40} color="#2F2F23" />
         )}
