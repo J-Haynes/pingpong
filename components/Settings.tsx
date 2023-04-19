@@ -20,9 +20,13 @@ export default function Settings({ navigation }: any) {
     <>
       <View style={StyleSheet.container}>
         <RegText style={StyleSheet.introText}>Settings</RegText>
-        <RegText style={StyleSheet.name}>Hello {userWithFriends.name}!</RegText>
+        <RegText style={StyleSheet.name}>
+          Hello {userWithFriends.name}! 🙋‍♂️
+        </RegText>
         <RegText style={StyleSheet.name}>Birthday:</RegText>
-        <RegText style={StyleSheet.name}>{userWithFriends.birthday}</RegText>
+        <RegText style={StyleSheet.name}>
+          🫡 {userWithFriends.birthday} 🫡
+        </RegText>
         <TouchableOpacity
           style={StyleSheet.logInButton}
           onPress={() => {
