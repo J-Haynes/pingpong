@@ -123,7 +123,11 @@ export default function Ping({ navigation }: any) {
             <TouchableOpacity
               onPress={() => {
                 dispatch(
-                  changePing(userId, true, `${emoji} ` + location.description)
+                  changePing(
+                    userId,
+                    true,
+                    `${location.map_url}*${emoji} ${location.description}`
+                  )
                 )
                 setPing(!ping)
               }}
