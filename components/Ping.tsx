@@ -36,7 +36,6 @@ export default function Ping({ navigation }: any) {
   const currentPage = 'Ping'
 
   const userWithFriends = useAppSelector((state) => state.friends)
-  console.log(userWithFriends)
 
   const [ping, setPing] = useState(userWithFriends.ping_active)
 
@@ -112,8 +111,13 @@ export default function Ping({ navigation }: any) {
         ) : location.description ? (
           <>
             <SafeAreaView>
-              <Text style={StyleSheet.input}>Pinging at {location?.name}</Text>
+              <View style={StyleSheet.absolutecont}>
+                <Text style={StyleSheet.input}>
+                  Pinging at {location?.name}
+                </Text>
+              </View>
             </SafeAreaView>
+
             <View style={StyleSheet.submitButton}>
               <TouchableOpacity
                 onPress={() => {
@@ -124,16 +128,13 @@ export default function Ping({ navigation }: any) {
                   onChangeText({} as LocationDetails)
                 }}
               >
-                <Image
+                <Animatable.Image
+                  animation="pulse"
+                  easing="ease-in-out-sine"
+                  iterationCount="infinite"
                   style={StyleSheet.submitButton}
                   source={require('../assets/ball.png')}
-                ></Image>
-                {/* <Animatable.Image
-              source={require('../assets/ball.png')}
-              animation="bounce"
-              iterationCount={Infinity}
-              direction="normal"
-            ></Animatable.Image> */}
+                ></Animatable.Image>
               </TouchableOpacity>
             </View>
           </>
